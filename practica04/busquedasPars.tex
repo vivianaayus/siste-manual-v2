@@ -145,7 +145,7 @@ la mayor parte de los programas actuales tienen esta opci\'on: inician con una \
 
 	En problemas m\'as complejos de 100 o m\'as terminales, se requiere utilizar t\'ecnicas m\'as sofisticadas para obtener resultados satisfactorios. La m\'as sencilla es el rastrillo o pi\~n\'on (\textit{ratchet}\index{B\'usqueda!Ratchet} en ingl'es) {\color{red}(Nixon,  1999; Quickle,  2001)},  la cual es una forma simple de implementar una cristalizaci\'on simulada. El m\'etodo consiste en usar un \'arbol ya elaborado (por ejemplo con Wagner + TBR),  perturbar la matriz de datos (con eliminaci\'on o repesado de caracteres), permutar las ramas del \'arbol para obtener el \'optimo de la nueva matriz,  volver la matriz a su estado original y buscar el \'arbol \'optimo con permutado de ramas (todo ese proceso es una iteraci\'on,  la cual se repite \textbf{n} veces). El rastrillo es eficiente usando solo unos pocos \'arboles por iteraci\'on y permutando una cantidad intermedia de caracteres (entre 10-25\%), en general, mejora dr\'asticamente el ajuste de los cladogramas en las primeras iteraciones (Nixon,  1999).
  
-	Para producir nuevas mejoras en el ajuste de cladogramas con n\'umeros mayores a 500 terminales,  los m\'etodos m\'as eficientes parecen ser la \''deriva de \'arboles\'',  que es una implementaci\'on m\'as expl\'icita de la cristalizaci\'on simulada (es decir aceptar soluciones ligeramente sub\'optimas con una determinada probabilidad,  y a medida que el an\'alisis avanza,  se disminuye la probabilidad de aceptaci\'on de los sub\'optimos),  y la fusi\'on de \'arboles,  que utiliza lo mejor de diferentes soluciones. Una revisi\'on completa de estos m\'etodos se puede consultar en {\color{red} Goloboff (1999)}.
+	Para producir nuevas mejoras en el ajuste de cladogramas con n\'umeros mayores a 500 terminales,  los m\'etodos m\'as eficientes parecen ser la $"$deriva de \'arboles$"$,  que es una implementaci\'on m\'as expl\'icita de la cristalizaci\'on simulada (es decir aceptar soluciones ligeramente sub\'optimas con una determinada probabilidad,  y a medida que el an\'alisis avanza,  se disminuye la probabilidad de aceptaci\'on de los sub\'optimos),  y la fusi\'on de \'arboles,  que utiliza lo mejor de diferentes soluciones. Una revisi\'on completa de estos m\'etodos se puede consultar en {\color{red} Goloboff (1999)}.
   
   
 %\subsubsection*
@@ -184,10 +184,11 @@ La funci\'on \Rfunc{read.phyDat()} permite leer diferentes tipos de caracteres c
 
 
 %\subsubsection*
-
-{Preguntas}
-
-?`Qu\'e otras funciones en otras bibliotecas permiten leer y/o escribir archivos tipo Nexus,  Fasta,  Phylip,  Clustal,  Sequential e Interleave?\\
+\pregunta{
+\begin{itemize}
+\item ?`Qu\'e otras funciones en otras bibliotecas permiten leer y/o escribir archivos tipo Nexus,  Fasta,  Phylip,  Clustal,  Sequential e Interleave?
+\end{itemize}
+}
 
 \item{Topolog\'ias iniciales}
 
@@ -209,15 +210,19 @@ Actualmente es posible estimar esta matriz bajo 11 modelos evolutivos diferentes
 
 La funci\'on  \Rfunc{random.addition()}, permite definir los \'arboles iniciales de los cuales parte el an\'alisis de parsimonia.
 
-{Preguntas}
 
-?`En que difiere cada \'arbol obtenido?
 
-?`En que consiste el m\'etodo de FICHT y el m\'etodo de SANKOFF?
 
-?`Que hacen los algoritmos de agrupamiento UPGMA,  WPGMA,  NJ y UNJ?
+%\subsubsection*
+\pregunta{
+\begin{itemize}
+\item ?`En que difiere cada \'arbol obtenido?
+\item ?`En que consiste el m\'etodo de FICHT y el m\'etodo de SANKOFF?
+\item  ?`Que hacen los algoritmos de agrupamiento UPGMA,  WPGMA,  NJ y UNJ?
+\item ?`En que consiste el m\'etodo de construcci\'on de \'arboles de random.addition?
+\end{itemize}
+}
 
-?`En que consiste el m\'etodo de construcci\'on de \'arboles de random.addition?
 
 
 \item{Parsimonia y optimizaci\'on}
@@ -259,9 +264,10 @@ La funci\'on optim.parsimony() intenta encontrar el o los \'arboles mas parsimon
 %\subsubsection*
 
 \pregunta{
-?`En que difieren los m\'etodos de rearreglos NNI,  SPR y TBR?
-
-?`Cuales  son los argumentos por omisi\'on de las funciones \Rfunc{parsimony()} y \Rfunc{optim.parsimony()}?
+\begin{itemize}
+\item ?`En que difieren los m\'etodos de rearreglos NNI,  SPR y TBR?
+\item ?`Cuales  son los argumentos por omisi\'on de las funciones \Rfunc{parsimony()} y \Rfunc{optim.parsimony()}?
+\end{itemize}
 }
 
 \item{Parsimonia usando Rachet} 
@@ -312,25 +318,27 @@ Utilice el m\'etodo Rachet en parsimonia para hacer las b\'usquedas del o los \'
 %\subsubsection*
 
 \pregunta{
-?`Hay diferencias entre las b\'usquedas con rachet en t\'erminos de costos o tiempo?
-Escriba y ejecute la l\'inea de c\'odigo que le permitir\'ia realizar una b\'usqueda con: 70 iteraciones en Rachet, Metodo SANKOFF, rearreglo SPR, Sin especificar el \'arbol inicial
+\begin{itemize}
+\item ?`Hay diferencias entre las b\'usquedas con rachet en t\'erminos de costos o tiempo?
+\item Escriba y ejecute la l\'inea de c\'odigo que le permitir\'ia realizar una b\'usqueda con: 70 iteraciones en Rachet, Metodo SANKOFF, rearreglo SPR, Sin especificar el \'arbol inicial.
+\end{itemize} 
 }
 
 \end{enumerate}
 
 %\subsubsection*
 
-\pregunta{
-De los diferentes programas usados,  ?`C\'ual estima usted que es el \'optimo? Explique las razones de su selecci\'on.
-
-?`C\'ual cree usted que ser\'ia(n) el(los) criterio(s) para seleccionar entre los diferentes programas?
-
-Elabore una tabla usando sus resultados y los de sus compa\~neros.  Para cada matriz,  ?`En qu\'e clase de b\'usqueda se obtuvo el mejor resultado?,  ?`c\'ual fue el tiempo en que se obtuvo dicho resultado?
-
-Dado que con una t\'ecnica heur\'istica existe el riesgo de no obtener el \'arbol m\'as corto ?`C\'omo justificar\'ia usted la b\'usqueda realizada?
-
-En este laboratorio solo se utilizaron algunos tipos de b\'usquedas posibles y algunos de los posibles comandos para cada programa. Trate de encontrar otros comandos de b\'usqueda en estos programas u otros par\'ametros para los comandos usados en la pr\'actica.
+\preguntaGral{
+\begin{itemize}
+\item De los diferentes programas usados,  ?`C\'ual estima usted que es el \'optimo? Explique las razones de su selecci\'on.
+\item ?`C\'ual cree usted que ser\'ia(n) el(los) criterio(s) para seleccionar entre los diferentes programas?
+\item Elabore una tabla usando sus resultados y los de sus compa\~neros.  Para cada matriz,  ?`En qu\'e clase de b\'usqueda se obtuvo el mejor resultado?,  ?`c\'ual fue el tiempo en que se obtuvo dicho resultado?
+\item Dado que con una t\'ecnica heur\'istica existe el riesgo de no obtener el \'arbol m\'as corto ?`C\'omo justificar\'ia usted la b\'usqueda realizada?
+\end{itemize} 
 }
+
+Un \'ultima recomendaci\'on, en este laboratorio solo se utilizaron algunos tipos de b\'usquedas posibles y algunos de los posibles comandos para cada programa. Trate de encontrar otros comandos de b\'usqueda en estos programas u otros par\'ametros para los comandos usados en la pr\'actica.
+
 
 \end{itemize}
 

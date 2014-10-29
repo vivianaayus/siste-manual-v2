@@ -1,0 +1,150 @@
+%
+% cambio en la estructura de los documentos
+% practica XX
+%
+% ultima modificacion en este archivo y su arbol
+%
+% 21 06 14 cambio de formato de capitulos:
+%				solo cuatro secciones
+%						intro / tecnicas / preguntas 
+%						literatura 
+%
+%
+% 23 04 09 modelos.R a model.R
+%
+
+
+\documentclass[12pt,openany]{book}
+
+%\documentclass[letter,12pt,openany]{book}
+%
+
+\usepackage{hyperref}
+
+\input{preambulo.tex}
+
+\usepackage{framed}
+\usepackage{tcolorbox}
+
+%%% macros
+\input{macros.tex}
+\input{macro-preguntas.tex}
+
+
+%%% separado de palabras
+
+\input{separar.tex}
+
+
+\includeonly{./practica04/busquedasPars}
+
+
+\begin{document}
+%
+% 
+\include{portada}
+
+
+\pagestyle{empty}
+
+%\textsf{
+
+% \maketitle
+%\Large
+%
+%\normalsize
+
+\tableofcontents
+%
+\frontmatter
+
+%\large
+% 
+%\input{intro.tex}
+
+
+%
+\mainmatter
+% 
+
+%%%%%%%%%%%%
+%%%%
+%% texto central
+%%%%
+%%%%%%%%%%%%
+
+%
+\input{formato_new.tex}
+
+% 
+\include{./practica01/caracteres}
+
+% 
+\include{./practica02/matrices}
+
+%
+\include{./practica03/arboles}
+
+%
+\include{./practica04/busquedasPars}
+
+
+% 
+%\input{./practica05/new_pesaje.tex}
+
+% 
+%
+\include{./practica06/modelos}
+
+
+%
+%\input{./practica07/soporte_new2013.tex}
+
+%
+%\input{./practica08/molecular2009.tex}
+
+%
+%\input{./practica09/likelihood2009.tex}
+
+
+
+%\input{alinear2014.tex}
+
+
+% 
+%\input{./practica10/bayesiano.tex}
+% 
+% \input{./practica11/soporte-ml-2013.tex}
+%\small
+%
+%\input{new_bibliografia.tex}
+%}
+% \backmatter
+%$
+\appendix
+%\textsf{
+%
+%
+\large
+%
+%
+\renewcommand{\chaptername}{Ap\'endice}
+
+%\input{./apendice/programas.tex}
+% 
+%
+%\input{./apendice/formatos.tex}
+
+%\input{./apendice/usoR.tex}
+
+%\input{./apendice/usoPOY.tex}
+
+
+%}
+%
+%
+%\large
+%
+\printindex
+
+\end{document}

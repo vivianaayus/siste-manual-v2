@@ -1,0 +1,18 @@
+\subsection{PAUP*}
+\noindent
+Autor: Swofford, 2002.\\
+Plataforma: MS-DOS, Windows, MacOS, Unix.\\
+Disponibilidad, el programa tiene un costo entre US 80.00 a US150.00 dependiendo del sistema operativo; es distribuido por Sinauer.\\
+http://www.sinauer.com/detail.php?id=8060.
+\\
+\paragraph*{}
+\Pname{PAUP*} es uno de los programas m'as usados en cuanto a b'usquedas mediante ML, o si el sistema operativo es Mac. Excepto para esta 'ultimo plataforma, la interfaz dominante es por l'inea de comandos; la interfaz para Windows en modo gr'afico ni siquera es un p'alido reflejo de la de Mac; como \Pname{NONA} y \Pname{TNT} tiene la opci'on de manejar un gran n'umero de parametros que permiten hacer una b'usqueda \textbf{sobre pedido}, adicionalmente realiza todos los consensos directamente sin necesitar un segundo programa. Su gran desventaja es su velocidad y la falta de un lenguaje de macros.\\
+\Cmd{set}:esta funci'on define la configuraci'on b'asica de algunos par'ametros. Son importantes \Cmd{increase=no}, para que no le pregunte si desea aumentar el n'umero de 'arboles, y \Cmd{maxtrees=N} para dar como opci'on que guarde un n'umero de 'arboles (N).\\
+\Cmd{exec}: para abrir la matriz de datos o archivos de instrucciones.\\
+\Cmd{hsearch}: es la funci'on de b'usqueda de cladogramas. Las opciones de este comando son \Cmd{addseq=random}, lo que asegura que la entrada de datos para el 'arbol de Wagner es al azar.\\
+\Cmd{swap=tbr/spr}: es el tipo de permutaci'on.\\
+\Cmd{nreps=X}: indica el n'umero de r'eplicas que se har'a en la b'usqueda.\\ 
+\Cmd{nchuck=X ckuckscore=1}: le permite usar la estrategia NONA, indicando c'uantos 'arboles desea por r'eplica. Si usted desea hacer solo permutaci'on de ramas del 'arbol previamente construido, la serie de instrucciones ser'ia \Cmd{search start=current chuckscore=no}.\\
+Para guardar los 'arboles utilice el comando \Cmd{savetre}.\\
+Con el comando \Cmd{contree} se generan los 'arboles de consenso. Estos deben ser guardados cuando se ejecuta el comado (par'ametro \Cmd{treefile=nombre}, donde nombre es el achivo.). Los m'etodos de medici'on de soporte implementados son el \textit{bootstrap} con el comando \Cmd{bootsptrap} y el \textit{jackknife} con \Cmd{jackknife}.\\
+En caso de dudas, el programa posee una ayuda en linea, cons'ultela usando \Cmd{help} o escribiendo \Cmd{help comando} para un comando espec'ifico; para ver las opciones del comando use \Cmd{comando ?}.

@@ -1,0 +1,40 @@
+\chapter{Soporte en parsimonia}
+\section*{Introducci'on}
+Luego de obtener los cladogramas, para algunos es importante saber qu'e tan fuerte es la evidencia que da soporte a un nodo. Es importante diferenciar la \textbf{''evidencia que soporta''}el nodo, es decir las transformaciones (sinapomorf'ias), de la \textbf{''fuerza del soporte''} es decir la diferencia entre las agrupaciones encontradas con posibles agrupaciones alternativas. Aqu'i se usar'a soporte en ese segundo sentido.\\
+Existen diferentes m'etodos, para medir el soporte, unos basados en remuestreo al azar de los caracteres y otros en el uso de 'arboles sub'optimos. En los m'etodos de remuestreo se toma la matriz original, se perturba, y luego se analiza. Al final, se hace un consenso de la mayor'ia donde la frecuencia de aparici'on de cada nodo (reportada como porcentaje) de cada nodo da una idea de la cantidad de evidencia favorable para este. Los m'etodos de remuestreo m'as populares (especialmente en los an'alisis moleculares), son el \textbf{Bootstrap} donde se construye una matriz del mismo tama'no de la original, usando caracteres de la matriz original tomados al azar. En el \textbf{Jackknife} y en \textbf{Permutaci'on sim'etrica} cada car'acter independientemente puede ser borrado (jac y sim) o repesado (sim). En estos dos m'etodos, la probabilidad de seleccionar cada car'acter es independiente de los dem'as y cada car'acter solo es muestreado una vez. Aunque eso permite que los caracteres no informativos y los autapom'orficos no afecten el resultado, estos se hacen dependientes de la probabilidad usada para muestrear cada car'acter.\\
+Otra forma de medir el soporte, sin usar remuestreo, es utilizar 'arboles sub'optimos (Bremer, 1994). En este m'etodo se hace un consenso estricto con esos 'arboles sub'optimos y eventualmente, entre m'as sub'optimos sean los 'arboles, m'as nodos de los encontrados en los 'arboles 'optimos desaparecer'an. La idea, entonces, es contar la diferencia de longitud necesaria para que el nodo colapse.\\
+Las medici'on del soporte con remuestreo (usando consenso de la mayor'ia) o con cladogramas sub'optimos (usando soporte de Bremer) solo tienen en cuentan la cantidad de evidencia favorable. Un nodo puede estar bien soportado (por un car'acter no contradicho) y es posible que nodos que aparecen con mejor soporte, tengan muchos caracteres a favor, pero tambi'en muchos en contra. Para solucionar este problema, en remuestreo, se ha elaborado el 'indice GC (Goloboff et al., 2003) que es una tasa de la cantidad de veces que aparece el grupo (el soporte usual) y el n'umero de veces que es contradicho. Para el soporte de Bremer relativo (Goloboff \& Farris, 2001) la idea es similar, comparando la longitud de los caracteres que favorecen el grupo y los que lo contradicen.\\
+\section*{T'ecnicas}
+La medici'on de soporte utiliza conjuntos de 'arboles, as'i que el problema en este caso es c'omo conseguir ese conjunto de 'arboles. Las perturbaciones de la matriz est'an implementadas en casi todos los programas, por lo que el proceso puede realizarse de forma autom'atica. En algunos casos los parametros de la perturbaci'on son dif'iciles de aclarar. En bootstrap, no existe problema, puesto que se toma de la matriz un car'acter al azar hasta completar una matriz del mismo tama~no de la original, as'i no existe diferencia entre las diferentes fuerzas de permutaci'on.El problema es que en las matrices hay caracteres no informativos que pueden sesgar la matriz producto de la permutaci'on. Otro inconveniente es que la mayor'ia de los datos moleculares son secuencias sucesivas de caracteres y los morfol'ogicos no es f'acil entender c'omo est'an relacionados.El m'etodo exige una distribuci'on homog'enea de la informaci'on y que el muestreo sea al azar.\\
+Con jackknife y permutaci'on sim'etrica, cada car'acter es alterado independiente de los dem'as, con lo que autapomorf'ias y caracteres no informativos no influyen en la distribuci'on final. El problema es que la fuerza de la permutaci'on afecta directamente los valores de soporte para cada grupo. Adem'as, los m'etodos basados en permutaciones exigen que los resultados de la matriz permutada sean confiables. Es decir, b'usquedas estrictas. Esto hace que los m'etodos consuman mucho tiempo.\\
+El soporte de Bremer utiliza 'arboles sub'optimos. El problema es que muchos programas no lo tienen definido expl\'icitamente, por lo que es necesario recurrir a t'ecnicas externas para poder hacer la medici'on. Adem'as, la mayor'ia de 'arboles sub'optimos se buscan usando como fuente uno de los 'arboles 'optimos y luego permutando las ramas y reteniendo los cladogramas que cumplan con la longitud m'axima especificada. Esto genera dos problemas, el primero, es que la mayor parte de los 'arboles pueden pertenecer a un mismo \textbf{''vecindario''} de 'arboles, el segundo, es que muchos de los cladogramas que pueden colapsar el nodo, en realidad se trata de cladogramas que no presentan evidencia de agrupamiento (es decir no hay sinapomorf'ias en los nodos).
+\section{Materiales}
+Matriz de datos (datos.05.dat).
+\section{M'etodos}
+\textbf{''En WinClada, PAUP* y TNT''}\\
+(1) Abra la matriz datos.05.dat, realice \textbf{''bootstrap''} y \textbf{''jackknife''}(con los valores por omisi'on y usando corte del 36\%). Haga b'usquedas simples para obtener los resultados durante la pr'actica (50 r'eplicas). Compare sus resultados con los de sus compa~neros.\\
+\textbf{''En TNT y NONA''}\\
+(2) Abra la matriz datos.05.dat, b'usque el 'arbol m'as parsimonioso.\\
+(3) Retenga 1000 'arboles y acepte sub'optimos hasta  5 pasos m'as largos. Haga 5000 r'eplicas de Wagner sin permutar ramas, reteniendo solo un 'arbol por r'eplica. Luego llene la pila de 'arboles haciendo permutaci'on de ramas.\\
+(4) Con los 'arboles obtenidos calcule el soporte de Bremer, absoluto y relativo.\\
+(5) Repita desde paso tres, pero reteniendo 'arboles 7 pasos m'as largos.\\
+\subsection{Programas}
+WinClada, PAUP* y TNT
+\subsection{Comandos}
+\section{Preguntas}
+\subsection{Pr'actica}
+Compare con sus compa'neros sus resultados de soporte basado en permutaciones y en soporte de Bremer.\\
+?`Usted sugeriri'a o no el uso de soporte relativo? explique las razones de su escogencia.\\
+?`Los nodos m'as soportados son los mismos? ?`Existe correlaci'on entre los diferentes m'etodos?\\
+\subsection{Generales}
+Escriba un peque~no ensayo con sus puntos de vista sobre los diferentes m'etodos de medici'on de soporte, tanto los puntos positivos como los negativos de cada metodolog'ia.\\
+Indique cu'ales m'etodos, y porqu'e, preferir'ia si trabaja  (1) solo con datos morfol'ogicos, (2) solo con datos de ADN, (3) una matriz combinada.\\
+¿Cree usted que pueden existir m'etodos m'as eficaces para medir el soporte?, de ser as'i, escriba un peque~no ensayo sobre las cualidades esperables teniendo en cuanta los distintos tipos de datos.\\
+¿Qu'e es lo que usted desear'ia de un m'etodo que mida el soporte?\\
+\section{Literatura Recomendada}
+Ram'irez, M.J. 2005
+[Excelente revisi'on de los diferentes m'etodos para medir el soporte, incluyendo los m'etodos m'as recientes]\\
+Grant, T. \& Kluge. A.G. 2003
+[Una cr\'itica extensa a los diferentes formas de medici'on de soporte]\\
+Goloboff, P.A. \& Farris, J.S. 2001.
+[Presentaci'on del soporte relativo de Bremer]

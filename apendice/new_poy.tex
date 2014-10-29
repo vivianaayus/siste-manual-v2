@@ -1,0 +1,39 @@
+\subsection{Poy}
+\noindent
+Autor: Var'on et al., 2007.\\
+Plataforma: Linux, MacOS y Windows.\\
+Disponibilidad: gratuito.\\
+\href{}http://research.amnh.org/scicomp/projects/poy.php
+\\
+Es el 'unico programa disponible que realiza un an'alisis simult\'aneo sin utilizar alineamiento previo de las secuencias moleculares. Tambi'en puede usarse para realizar alineamientos, o para hacer b'usquedas convencionales de datos previamente alineados o morfol'ogicos. La versi'on actual posee 'unicamente una implementaci'on de parsimonia, pero se planean versiones que tambi'en realicen b'usquedas bajo m'axima verosimilitud.\\
+\\
+El programa posee cuatro ventanas: una de salida, donde se imprimen salidas pedidas por el usuario (por ejemplo, un 'arbol, o la ayuda). Una ventana de comandos, donde se escriben las ordenes al programa, una donde muestra que clase de tarea se esta realizando y en la \'ultima donde se muestra el progreso de las b'usquedas.\\
+Las matrices y arboles son abiertos usando \Cmd{read(''archivo'')}, donde archivo es el archivo a leer. Puede leer multiples conjuntos de datos, bien sea abriendo uno por uno, o varios en la misma instrucci'on como \Cmd{read(''arch1'',''arch2'')}. Los datos se van agregando. Para limpiar la memoria se utiliza \Cmd{wipe()}.\\
+Se buscan 'arboles con \Cmd{build(x)}, que realiza x arboles de Wagner. Para mejorar dichos \'arboles hay que usar \Cmd{swap()}. Notese que las instrucciones est'an separadas. Es posible hacer b'usquedas m'as sofisticadas usando nuevas tecnolog'ias, como ratchet implementado en \Cmd{perturb(iterations: x, ratchet())}, donde se har'ian x iteraciones de rathcet, con \Cmd{swap(drift)} o \Cmd{swap(annealing)} se hace deriva de 'arboles y cristalizaci'on simulada, y \Cmd{fuse()} hace fusi'on de 'arboles.\\
+El comando para manejar costos es \Cmd{transform(tcm())}. Se puede modificar los costos de transformacion para datos ''est'aticos'' como morfolog'ia con 
+
+\Cmd{transform(static, weight:2)} 
+
+que dar'ia un peso de 2 a cada transformaci'on de datos morfol'ogicos. Con 
+
+\Cmd{transform(tcm(1,2))} 
+
+se da un peso de 1 a las sustituciones y de 2 a los gaps y caracteres est'aticos, ese es el valor que viene por omisi'on. Con 
+
+\Cmd{transform(fixedstates)} 
+
+se implementa el m'etodo de estados fijos de Wheeler.
+
+
+Es posible calcular soportes con 
+
+\Cmd{calculate\_support()} 
+
+que incluye \textit{bootstrap}, \textit{jackknife} y soporte de Bremer (por omisi'on). Las salidas se realizan con 
+
+\Cmd{report(''archivo'')} 
+
+ pueden ser cladogramas en formato parentical, dibujados en ascii, o en \textit{postscript}. Tambi'en es 'util para conocer estad'isticas de los 'arboles, las optimaciones de los nodos y la integridad de los datos.
+ 
+ 
+El programa funciona desde computadoras de escritorio hasta \textit{clusters}. Puede ejecutarse directamente en la l\'inea de comando o en procesos de lotes.

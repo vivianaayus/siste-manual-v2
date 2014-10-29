@@ -1,0 +1,41 @@
+\chapter{M'axima verosimilitud}
+\section*{Introducci'on}
+\label{ch:likelihood}
+Algunos autores han sugerido que la parsimonia es un modelo de evoluci'on que asume que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004). Independientemente de si el argumento es o no correcto (vea una posici'on en contra en Farris, 1983 y la argumentaci'on de Steel, 2002), estos autores sugieren que deben usarse modelos expl'icitos de evoluci'on como los que se vieron en la pr'actica \ref{ch:molecular} sobre selecci'on de modelos (ver p\'agina \pageref{ch:molecular}).\\
+En este caso se estima el 'arbol (la hip'otesis filogen'etica) que maximice la probabilidad de los datos actuales dado el modelo evolutivo sugerido para las secuencias a analizar (aunque ha habido intentos de generalizar los modelos de evoluci'on a datos morfol'ogicos, Lewis, 2002).\\
+Uno de los principales problemas con la estimaci'on de verosimilitud es que el valor depende de la longitud de las ramas. En la actualidad, se ignora al principio el valor de las diferentes ramas, y luego de encontrar un 'arbol espec'ifico, se calcula el mejor valor de verosimilitud para una rama a la vez. Swofford et al. (1996) ofrecen una explicaci'on extensa de c'omo se hacen los c'alculos relacionados con estos m'etodos.
+\section{T'ecnicas}
+Los m'etodos para buscar y seleccionar 'arboles usados en verosimilitud son b'asicamente los mismos usados en parsimonia: a un 'arbol inicial se lo mejora con permutaci'on de ramas. Existen diferentes formas de encontrar un 'arbol inicial en verosimilitud. Los sistem'aticos moleculares que usan modelos suelen empezar por un 'arbol de distancias (NJ: neighbor joining). El problema de este inicio es que para una configuraci'on particular, solo existe un 'arbol de NJ\footnote{tal y como lo hemos recalcado previamente para los an\'alisis de distancia el orden de entrada influye en el resultado, la topolog\'ia resultante puede cambiar si se cambia el orden de entrada a la matriz.}. Otra forma es la descomposici'on de estrella, donde se tiene una politom'ia basal y se trata de resolverla desde la ra'iz. Este m'etodo es muy lento, puesto que a diferencia de un 'arbol de Wagner, la magnitud del problema es grande desde el inicio. Una alternativa adicional es comenzar con un 'arbol al azar, pero estos suelen ser sub'optimos, con lo cual la fase de permutaci'on es muy lenta. Una 'ultima forma, es utilizar 'arboles de Wagner, pero basados en verosimilitud, o si se desea una respuesta m'as r'apida, un 'arbol obtenido por parsimonia y luego permutar las ramas usando verosimilitud.
+\section{Materiales}
+\noindent
+Matriz de datos (datos.like.dat).
+\section{M'etodos}
+\noindent
+(0) Antes que nada estime el mejor modelo para la matriz. Argumente qu'e criterio utiliz'o para seleccionar el modelo.\\
+(1) Abra la matriz de datos, busque el 'arbol m'as parsimonioso.\\
+(2) Permute las ramas de ese 'arbol, usando el modelo preferido en (0). Anote el valor de la verosimilitud (-lnL) reportado.\\
+(3) Pruebe alternativamente los siguientes modelos: JC, HKY, F81 y TRM, usando como frecuencia para las bases la estimaci'on emp'irica y sin el par'ametro $\Gamma$. Reporte los valores de verosimilitud para cada modelo.\\
+(4) Repita el ejercicio hecho en (3), pero use la estimaci'on emp'irica del par'ametro $\Gamma$ para HKY, F81 y TRM. Reporte los valores de verosimilitud para cada modelo.\\
+(5) Repita el ejercicio hecho en (3), pero use invariantes. Reporte los valores de verosimilitud para cada modelo.\\
+(6) Estime si los datos se ajustan o no al reloj molecular.
+\subsection{Programas}
+\noindent
+\Pname{PAUP*}, \Pname{PHYLIP} o \Pname{PAML}; entre otros\footnote{puede consultar 
+\href{}http://evolution.genetics.washington.edu/phylip/software.html}.
+\subsection{Comandos}
+La b'usqueda inicial en \Pname{PAUP*} h'agala bajo el criterio de parsimonia, y posteriormente pase al criterio de ML y haga una \textrm{peque~na} b'usqueda sobre los 'arboles producto del an'alisis con parsimonia; recuerde salvar los 'arboles de cada modelo (incluida la longitud de las ramas). Para las b'usquedas puede utilizar los mismos comandos que se usaron en parsimonia.\\
+Con el comando \Cmd{set criterion=likelihood} se coloca a \Pname{PAUP} en modo de verosimilitud.\\
+Con el comando \Cmd{Lset} usted puede modificar los diferentes par'ametros de los modelos (funci'on $\Gamma$, distribuci'on de bases, tipos de cambios, invariantes).\\ 
+Puede consultar el \Cmd{model.block} que acompa~na a \Pname{ModelTest} (y usado en la pr'actica sobre obtenci'on del modelo 'optimo) para que vea c'omo se implementa cada uno de los modelos. Recuerde que \Pname{ModelTest} usa expl'icitamente los 56 modelos; tambi'en puede usar la salida de \Pname{ModelTest} para cambiar el modelo. Las instrucciones generadas por \Pname{ModelTest} pueden ser incluidas \textbf{dentro} del archivo de datos, para lo cual puede usar un editor de texto, \Pname{Mesquite} o \Pname{MacClade}, pero \textbf{no} \Pname{WinClada}.
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compar'e sus resultados con los de sus compa~neros. ?`C'ual fue el mejor valor de verosimilitud, independientemente del modelo?\\
+?`C'omo considera los tiempos de ejecuci'on comparados con otros m'etodos como parsimonia? ?`Difieren los resultados con los de parsimonia?
+\subsection{Generales}
+\noindent
+Recientemente se ha propuesto que se pueden usar modelos para el an'alisis morfol'ogico. Analice los puntos favorables o desfavorables e indique su punto de vista sobre el tema. ?`Qu'e implicaciones tiene el uso de modelos en el concepto de homolog'ia y car'acter presentado anteriormente?
+\section{Literatura recomendada}
+\noindent
+Swofford et al., 1996 [Una descripci'on muy completa de la forma como se calculan las versomilitudes y los m'etodos de verosimilitud para encontrar 'arboles].\\
+Lewis, 2001 [Introduce el uso de modelos en morfolog'ia].

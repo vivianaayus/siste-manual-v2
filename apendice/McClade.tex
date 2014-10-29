@@ -1,0 +1,32 @@
+\subsection{MacClade \& Mesquite}
+\noindent
+Autores: Maddison \& Maddison, 2005.\\
+Plataforma (\Pname{McClade}): Macintosh (MacOS X, PPC y Classic 68k. Esta 'ultima funciona bien con emuladores como BasiliskII)\\
+Plataforma (\Pname{Mesquite}): Cualquiera, requiera Java virtual machine.\\
+Disponibilidad (\Pname{McClade}): Descontinuado pero puede acceder desde el sitio de los autores para el programa que funciona en OS X (hasta 10.6):\\
+http://macclade.org/index.html.
+\\
+Disponibilidad (\Pname{Mesquite}): Gratuito.\\ http://mesquiteproject.org.
+\\
+\paragraph*{}
+\Pname{MacClade} es un programa cuyas cualidades gr'aficas son impresionantes, su interfase es agradable, sencilla y no transmite miedo a los novatos. Dadas sus magnificas propiedades gr'aficas, es \textbf{muy} recomendable para la edici'on de 'arboles y matrices, pero principalmente para la optimizaci'on de caracteres, la cual permite distintos tipos de cambio de los mismos (v.g., Dollo, ACTRAN, DELTRAN) y adicionalmente tiene una caracter'istica 'unica de mapeo, el ''equivocal ciclying'' [Maddison \& Maddison, 1992].\\
+En \Pname{MacClade} la edici'on de los datos y el manejo de los 'arboles se llevan a cabo en dos interfaces separadas para 'arboles y matrices, las cuales son accesibles en la ventana \Gui{Windows}. Dado que Macclade esta dise\~nado para ser igualmente funcional con datos morfol'ogicos y moleculares,  existen m'ultiples herramientas de edici'on.\\
+\subparagraph*{Data Editor}
+En esta interfaz se construye y edita la matriz. Sus ventanas son:\\
+\Gui{Edit}: se pueden duplicar caracteres o taxa, editar bloques de comandos que corran directamente en PAUP. \\
+\Gui{Utilities}: se pueden buscar secuencias particulares dentro de la secuencia total, reemplazar caracteres por otros, reemplazar
+datos ausentes por \textit{gaps} y viceversa, importar alineamientos desde el \textit{genbank} y finalmente se puede lograr que la matriz hable por si sola !`s'i, que hable! Un lector autom'atico lee en forma descendente los taxa de su matriz facilit'andote un poco el trabajo (puede usar de hecho ingl'es brit'anico, si esto lo hace m'as feliz).\\
+\Gui{Characters}: permite adicionar caracteres, incluir los estados, ver una lista de los caracteres que se han incluido, determinar el formato de los caracteres que est'an en la matriz (si son prote'inas, nucle'otidos, o est'andar, que es el definido para simbolog'ia de n'umeros en las casillas); tambi'en permite determinar el tipo de cambio que se permitir'a para los caracteres (cuando se est'a haciendo una optimizaci'on), el peso de los caracteres.\\
+\Gui{Taxa}: permite hacer cosas semejantes a \Gui{characters}, pero para el manejo de los taxa, incluir taxa nuevos, crear listas de taxa o reordenarlos. \\
+\Gui{Display}: finalmente esta ventana maneja toda la configuraci'on gr'afica de la matriz, el tipo de letra, su tama\~no, el color de los caracteres, el ancho de columna, etc.\\
+La \'ultima ventana en el men'u es \Gui{Windows}, el cual permite moverse entre las interfaces de los datos y el 'arbol y llamar a una caja de herramientas que por omisi'on siempre est'a presente en la parte inferior izquierda de la ventana. Esta caja ofrece herramientas como llenar estados, expandir columnas, cortar, entre otras. En esta ventana \Gui{notes about trees} y \Gui{note file} permiten incluir comentarios acerca de los 'arboles y sobre la matriz.
+\subparagraph*{Tree Window}
+Esta interfaz maneja y modifica los 'arboles y posee las ventanas b'asicas del \Gui{data editor}, no obstante, incluye otras nuevas, espec'ificas para el mapeo de caracteres y manejo de los 'arboles. Solo se describen aquellas nuevas ventanas: \\
+\Gui{Trees}: Esta ventana permite cambiar, abrir archivos externos para incluir 'arboles, crear una lista de los 'arboles que esta incluidos a la matriz, guardar los 'arboles, exportarlos en formato de hennig86 o Phylip (ver anexo de formatos para m'as informaci'on) y manejar las politomias como politomias blandas o duras (Coddington \& Scharff, 1994).\\
+\Gui{$\Sigma$}: esta ventana incluye el manejo de todos los estad'isticos  del 'arbol, como la longitud, el 'indice de consistencia, 'indice de retenci'on, 'indice de consistencia escalonado, el n'umero de cambios en el 'arbol y finalmente, puede generarse el archivo de comandos para correr el indice \Gui{decay}, 'o soporte de Bremer en \Pname{PAUP*} (vea el cap'itulo sobre programas).\\
+% aqui debe ponerse una etiqueta dirigida a programas paup
+\Gui{Trace}: aqu'i se maneja todo lo relacionado con el mapeo de los caracteres; puede mapear todos los caracteres a la vez, o escoger un determinado car'acter para ser mapeado. Tambi'en se escoge el tipo de cambio de los caracteres (\Gui{resolving options}) el cual puede ser ACTRAN o DELTRAN, y escoger el tipo de mapeo para los caracteres continuos, \Pname{MacClade} y \Pname{Mesquite} son los 'unicos programas que permiten mapear tal tipo de caracteres.\\
+\Gui{Chart}: En esta ventana se pueden generar cuadros de estad'isticas de los caracteres vs pasos y 'arboles (characters states/etc.) o de los cambios de caracteres, la ocurrencia de los estados  a trav'es de todos los caracteres. Finalmente puede comparar dos 'arbolesresolviendo sus politomias o tal y como son.\\
+\Gui{Display}: finalmente en esta ventana se manejan los aspectos gr'aficos de la resentaci'on de los 'arboles tales como el tipo de letra, el tama\~no y el estilo de la letra, el estilo y forma del 'arbol, numeraci'on de las ramas, el tama\~no del 'arbol, la configuraci'on de los colores  del mapeo y la simbolog'ia del los taxa (como n'umeros o nombres).\\
+\\
+Aunque con menos capacidades que \Pname{McClade}, \Pname{Mesquite} es una herramienta poderosa, teniendo en cuenta que es gratuito. Su principal falla es que no permite ver las transformaciones en los nodos de todos los caracteres simult'aneamente. Su interfaz es muy similar a la de \Pname{McClade} y la distribuci'on de ventanas y comandos es m'as o menos equivalente.\\

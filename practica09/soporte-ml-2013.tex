@@ -1,0 +1,46 @@
+\chapter{Soporte en ML}
+\section*{Introducci'on}
+\index{Soporte!ML}
+Tal y como se hizo para el an'alisis de parsimonia (pr\'actica \ref{ch:soporte.pars}), bajo ML es importante conocer la evidencia de cada nodo, m'axime cuando en ML no hay transformaciones, por lo que los valores de soporte son indicadores de la \textbf{evidencia} del nodo. Los m'etodos para medir el soporte est'an basados en remuestreo de los caracteres; as'i, tanto \textit{bootstrap} \index{Soporte!bootstrap} como \textit{jackknife} \index{Soporte!jackknife} son aplicables a datos moleculares, aunque el m'etodo preferido es el \textit{bootstrap}; dado que no se usa una distribuci'on en particular se denomina \textbf{\textit{bootstrap} no param'etrico} en contraposici'on al \textbf{param'etrico}, que se basa en la simulaci'on de los datos dado un modelo particular. Algunas evaluaciones emp'iricas han mostrado que el an'alisis depende fuertemente del modelo calculado y del 'arbol obtenido a partir de tal modelo (Antezana, 2003; Felsenstein, 2004).\\
+\section{T'ecnicas}
+La medici'on de soporte usando \textit{boostrap} no param'etrico ya fue discutida en la secci'on de soporte en parsimonia; el \textit{boostrap} param'etrico es una prueba de simulaci'on que es dependiente del modelo encontrado como indicador de la evoluci'on de las mol'eculas, de manera similar a las pruebas jer'arquicas (Felsenstein, 2004); la prueba busca evaluar qu'e pasar'ia si obtenemos m'as datos a partir del mismo modelo, el cual es \textit{cierto}. Con esta idea se simulan datos a partir del 'arbol que se obtiene con los datos \textbf{reales}; a partir de estos datos simulados se estiman los 'arboles, los cuales en conjunto son resumidos con un consenso de la mayor'ia que sirve como estimador de los soportes de los nodos. Las secuencias simuladas se obtienen con los mismos par'ametros y con el mismo modelo que la hip'otesis inicial.
+\section{Materiales}
+\noindent
+Matriz de datos (datos.param.dat).
+\section{M'etodos}
+\noindent
+\textbf{En \Pname{Modeltest} / \Pname{PAUP*}:}\\
+(1) Para la matriz calcule el mejor modelo y obtenga el mejor 'arbol en \Pname{PAUP*}, y s'alvelo en formato Phylip con las longitudes de las ramas.\\
+(2) Calcule el soporte de boostrap para el 'arbol generado en (1); use 100 r'eplicas.\\
+\textbf{En \Pname{Seq-Gen}:}\\
+(3) Ejecute \Pname{Seq-Gen} con el 'arbol producto de ML\footnote{Tambi'en puede usar un 'arbol con constricci'on, es decir forzando la monofilia de un grupo en particular, si la pregunta est'a limitada a un grupo particular.} y el modelo calculado; simule 10 secuencias.\\
+\textbf{En \Pname{PAUP*}:}\\
+(4) Analice el archivo de simulaciones obtenido en (3), usando los mismos comandos que uso en (1)\footnote{Recuerde que tiene 10 r'eplicas, por lo que debe incluir los comandos al final de cada matriz, usando un bloque de \Pname{PAUP*}.}.\\
+(5) Obtenga el consenso de la mayor'ia para los 'arboles generados en (5).
+\subsection{Programas}
+\noindent
+\Pname{Modeltest}, \Pname{PAUP*}, \Pname{Seq-Gen}.\\
+\Pname{Seq-Gen} esta compilado para todas las plataformas.
+\subsection{Comandos}
+Revise las pr\'acticas anteriores y la secci'on de programas (p\'agina \pageref{ch:programas}). En \Pname{PAUP*} para convertir de un archivo tipo Phylip a un archivo tipo NEXUS, use la instrucci'on \Cmd{tonex}; use primero \Cmd{tonex ?} para ver las opciones requeridas. Para salvar un 'arbol en formato Phylip con las longitudes de las ramas, use la instrucci'on \Cmd{savet format=phylip brlens=yes}.\\
+Con \Pname{Seq-Gen} para obtener 10 r'eplicas \Cmd{-n10} de secuencias de 27 bases \Cmd{-l27} 
+con JC, use HKY \Cmd{-mHKY} con los par'ametros de Ts/Tv y frecuencias de base que trae por defecto el programa\footnote{En seq-gen no existe el modelo JC, por lo que debe usar HKY con Ts=tv y frecuencias iguales.},  con una distribuci'on $\Gamma$ con un valor $\alpha$ de 1,6967 \Cmd{-a1.6967} en formato NEXUS, a partir del 'arbol salvado como arbol.tre; use la l'inea de comandos\\
+
+\begin{math}
+\Cmd{seq-gen -mHKY -n10 -l27 -a1.6967 <arbol.tre >sec.nex}
+\end{math}\\ 
+
+Escoja el archivo de 'arboles que obtuvo con \Pname{PAUP*} y especifique la salida.\\
+Usted puede tener un archivo de instrucciones e insertarlo despues de cada secuencia con la instrucci\'on \Cmd{-xInstruc.txt}.
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compare con los valores obtenidos para la misma matriz usando soporte de \textit{bootstrap} param'etrico y no \textit{param'etrico}, ?`Son equivalentes los resultados?\\
+Repita la comparaci'on pero con los resultados de sus compa\~neros. Dado el n\'umero de r\'eplicas usado, ?`obtienen resultados similares de soporte? ?`Variar'a el soporte al aumentar el n'umero de r\'eplicas?
+\subsection{Generales}
+\noindent
+Dados los m'etodos de soporte usados, ?`usted qu'e tipo de soporte recomienda?
+\section{Literatura recomendada}
+\noindent
+Antezana, 2003 [Una visi'on cr'itica al uso del boostrap param'etrico].\\
+Felsenstein, 2004 [Tiene un cap'itulo descriptivo de los an'alisis de boostrap muy 'util].

@@ -1,0 +1,149 @@
+\chapter{Matrices de datos}
+
+\section*{Introducci'on} 
+\index{Caracter!Codificaci\'on} 
+
+Una de las diferencias m'as importantes entre los trabajos taxon'omicos con un enfoque \textbf{cl'asico} y los an'alisis filogen'eticos es que estos \'ultimos incluyen expl\'icitamente una matriz de datos donde se puede evidenciar los caracteres examinados, y c'omo fueron interpretados.\\
+
+B'asicamente, la matriz de datos es una lista tabulada de las observaciones realizadas de los caracteres en los distintos taxa. Para facilitar su lectura y su uso en programas de an'alisis filogen'etico, los caracteres y sus estados son codificados como n'umeros o como letras. Una vez construida, la matriz es el punto de partida para la b'usqueda de \'arboles y la manera m\'as sencilla con la que otros investigadores pueden recuperar la informaci\'on recopilada durante el \textbf{an'alisis de caracteres}\footnote{si desea puede ver nuestra visi'on ampliada en Miranda et al., 2004.}.\\
+
+Tal y como se hizo en la pr'actica sobre selecci\'on de caracteres, lo que se busca es que el investigador sea consistente en la codificaci\'on de los caracteres, lo cual es importante en el manejo de caracteres inaplicables y no observados. Algunos autores los codifican de diferentes formas en la matriz (usualmente, con \textbf {-} y \textbf {?}) para facilitar la recuperaci\'on de informaci\'on (puede encontrar una discusi\'on m\'as completa en Strong \& Lipscomb, 1999),  otros autores, y en general los programas, no reconocen diferencia entre unos y otros, mientras que programas como \Pname{TNT} o \Pname{Poy} pueden reconocer como un quinto caracter los eventos de in-del o gaps (Giribet \& Wheeler, 1999).\\
+% Molecular Phylogenetics and Evolution
+%Vol. 13, No. 1, October, pp. 132–143, 1999
+%Article ID mpev.1999.0643, available online
+%
+
+Cuando se usan caracteres con m'ultiples estados, es necesario clarificar cu'ales fueron usados como aditivos y cu'ales como no aditivos, o en el caso de haber sido recodificados, como se hizo esa codificaci'on. Si se han codificado como aditivos, se debe indicar el ?`por qu'e? de tal codificaci\'on e incluir los argumentos que muestren que los estados de car'acter se hallan anidados entre s'i.\\
+
+
+
+\section*{T\'ecnicas}
+
+Existen diferentes programas para manipular matrices de datos y \'arboles. Algunos de ellos permiten la interacci\'on matriz-\'arbol (
+\Pname{WinClada}\footnote{\url{www.cladistics.com}}, 
+\Pname{Mesquite}\footnote{\url{www.mesquite.org}}, 
+\Pname{MacClade}\footnote{el programa no corre en versiones de MacOS X superiores a 10.6 (desde Lion en adelante)}, 
+\Pname{R}\footnote{
+\Pname{R} es uno de los programas para an\'alis estad\'istico m\'as versatiles del momento, adem\'as de ser gratuito permite la implementaci\'on de m\'ultiples procesos de \'alculo, de tal manera que es posible realizar distintos tipos de operaciones y c\'alculos desde estadistica b\'asica hasta an\'alisis en evoluci\'on; sirve de plataforma para \Pname{ape} %faltan citas:
+(Paradis et al., 2008), un m\'odulo que permite distintas acciones con matrices y \'arboles 
+\url{cran.r-project.org}}  o 
+\Pname{Seaview}), 
+y otros solo utilizan matrices (\Pname{NDE}). En su mayor\'ia estos programas sirven de plataforma para manejar programas que realizan el an\'alisis filogen\'etico como tal. Muchos de los programas que manejan matrices est\'an dise\~nados b\'asicamente para alg'un tipo particular de datos (por ejemplo, ADN) y aquellos que tienen un marco amplio se quedan cortos para manejar cierta clase de informaci'on (por ejemplo, no interpretan la codificaci\'on IUPAC para polimorfismos de ADN).
+
+Los programas pueden leer uno o varios formatos de archivos, pero solo algunos programas como \Pname{Mesquite} leen todos los formatos de datos, es importante revisar la compatibilidad de los programas para el manejo de archivos. En la mayor\'ia de ellos es posible exportar entre los diferentes tipos de datos, o por lo menos entre los m\'as usados. En general, la mayor parte de los programas trabaja bien con el formato NEXUS (Maddison, et al., 1997), 
+%Maddison DR, Swofford DL, Maddison WP (1997). 
+%"NEXUS: An extensible file format for systematic information". 
+%Systematic Biology 46 (4): 590–621. doi:10.1093/sysbio/46.4.590. PMID 11975335.
+tanto para exportar como para importar, aunque el formato es en ocasiones muy diferente y algunos programas pueden no identificarlo correctamente. El otro formato importante es el de Hennig86/NONA, pero en muchos programas, especialmente moleculares, su uso no est'a implementado.
+
+Revise siempre la documentaci'on del programa que desea usar y as\'i podr\'a estar seguro si el programa que va a utilizar cumple con los requisitos que usted necesita y cual es el formato de las matrices.
+
+Existen listas de programas para an\'alisis filogen\'etico que pueden ser consultadas en internet, por ejemplo:
+
+
+\url{http://evolution.genetics.washington.edu/phylip/software.html}
+ 
+o en 
+
+\url{http://taxonomy.zoology.gla.ac.uk/software/}
+
+Abra la tabla de datos morfol\'ogicos para vertebrados \Datos{datos.vertebrados.xls} con un programa para hojas de c\'alculo y manuipule las matrices con \Pname{WinClada}, \Pname{Mesquite} o \Pname{TNT} para Windows:
+
+\begin{enumerate}
+	\item Anote cu\'ales caracteres son multiestado y cu\'ales son binarios.
+
+	\item Identifique si hay o no caracteres aditivos.
+
+	\item Construya una matriz nueva (con \Pname{TNT} para Windows use el menu \Gui{Data - edit data}). 
+
+	\item Salve la matriz.
+
+	\item Nomine los terminales y los caracteres y sus estados. Explore diferentes formas de llevar esa tarea a cabo. Salve la matriz.
+
+	\item Algunos autores consideran que las plumas son escamas modificadas. Aceptando esa informaci'on, recodifique la matriz y determine si el car'acter es aditivo o no.
+
+	\item Seleccione el \'ultimo car\'acter y col\'oquelo al principio de la matriz. 
+
+	\item Introduzca un car\'acter nuevo en la posici\'on 4.
+
+	\item Exporte la matriz en otro formato, \Fname{NEXUS} si est\'a usando \Pname{WinClada}, \Fname{Hennig86/Nona} si est'a usando \Pname{Mesquite}.
+
+	\item Verifique la compatibilidad de los datos, abriendo la matriz en el programa correspondiente.
+
+	\item Revise con un editor de texto los archivos que usted cre\'o, trate de identificar cu'ales son las partes claves del formato\footnote{Aunque en general no se usan los editores de texto, este paso es cr\'itico para despu\'es ser capaz de rastrear los problemas que pueden tener las matrices de datos.}.
+
+	\item Abra una de las matrices moleculares en cada programa y con un editor de texto y trate de identificar en qu\'e se diferencia de la matriz morfol\'ogica.
+
+	\item en R:
+	\begin{itemize}
+		\item Instale en su ordenador la versi\'on m\'as reciente de R ($\ge$ 3.00-11). 
+
+		\item Carge las bibliotecas \Rlib{ape} y \Rlib{phangorn}\footnote{La biblioteca \Rlib{phangorn} est\'a diseñada para an\'alisis filogen\'etico que tiene como objetivo estimar \'arboles filogen\'eticos y redes,  utilizando diferentes m\'etodos como m\'axima verosimilitud,  parsimonia,  distancia y conjugaci\'on de Handamard. Requiere las bibliotecas $"$ape$"$ y $"$rgl$"$,  y puede ser descargado desde \url {http://cran.r-project.org/web/packages/phangorn/index.html}}: 
+		\Cmd{library(ape)}
+		\Cmd{library(phangorn)}
+
+		\item En caso de no tenerlas disponibles primero bajelas con la instrucci\'on:
+		\Cmd{install.packages(c(''ape'',''phangorn''), dependencies=T)}\footnote{La funci\'on \Rfunc{install.packages("Nombre\_paquete")} permite hacer la descarga de los paquetes directamente del repositorio desde el entorno de R. Tambi\'en es posible hacer la descarga directamente de la pagina web e instalarlo desde cualquier directorio en el ordenador dando directamente la ruta a dicho sitio: 
+		\Cmd{install.packages ("../usuario/R/Packages/Paquete.tar.gz")}
+		
+		Tenga en cuenta que de este modo deberá descargar e instalar todas las dependencias requeridas por el paquete de manera independiente. El comando library() le permitir\'a cargar el paquete en el entorno de R para poder empezar a trabajar con todas sus utilidades.}
+
+		\item Abra la matriz de datos en formato de texto simple y asignela a un objeto de R: 
+		\Cmd{ datos $<-$ read.table(''matriz.txt'')}
+
+		\item Revise los nombres de las variables en la matriz con
+		\Cmd{names(datos)}
+
+		\item Revise los nombres de las terminales en la matriz con
+		\Cmd{row.names(datos)}
+
+		\item Abra la matriz de datos en formato \Fname{phylip} y asignela a un objeto de R: 
+		\Cmd{datosPhylip $<-$ read.phyDat(''DNA1.phy'', format=''phylip'', type=''DNA'')} 
+
+		\item Escriba en formato  \Fname{Nexus} la matriz leida anteriomente:
+		\Cmd{write.nexus.data(datosPhylip,file=''NuevaDNA1.nex'')}
+
+		\item Abra la matriz escrita con \Pname{Winclada} o \Pname{Mesquite} y revise la conversi\'on.
+	\end{itemize}
+
+	\item En el directorio de datos existen dos matrices con distintos problemas \Datos{problema1.txt} y \Datos{problema2.txt}, intente abrir las matrices, busque  y corrija el error.\footnote{tradicionalmente, las terminaciones de los archivos son .ss en \Pname{WinClada}, .nex con \Pname{Mesquite} o \Pname{MacClade}, pero \textbf{debe} recordar que el formato no es la terminaci\'on del archivo.}
+
+\end{enumerate} 
+
+
+Dependiendo de la plataforma que trabaje, usted tiene disponible distintos programas. \Pname{Mesquite} y  \Pname{R} son programas gratuitos y v'alidos para todas las plataformas pero en general las b'usquedas no son eficientes, aunque le permiten trabajar con varios tipos de datos. Sobre Windows usted cuenta con \Pname{WinClada} que funciona tanto en modo de manejo de edici'on de matrices (\Gui {windada}) como en modo de edici'on y manipulaci'on de \'arboles; adem\'as, le permite hacer b\'usquedas con NONA, tambi\'en puede usar la versi\'on de Windows de \Pname{TNT} que tiene interface gr\'afica. Si usa Mac una opci\'on es \Pname{McClade}, el cual funciona como \Pname{Mesquite} pero es m'as veloz y eficiente, aunque es muy factible que no lo pueda usar con la versi\'on actual de Mac OS X.
+
+
+Revise la secci\'on de Programas de c\'omputo para ver los comandos que utilizar\'ia con un programa distinto a \Pname{Winclada/NONA}. En todos los casos familiar\'icese con los men\'us e instrucciones para abrir/cerrar y editar tanto matrices como \'arboles, tenga en cuenta que los manuales de los programas traen informaci'on adicional, por lo tanto su lectura es una muy buena opci\'on.
+
+
+\section*{Preguntas} 
+
+\subsection*{Pr\'actica} 
+
+\begin{enumerate}
+
+	\item Si desea transformar de un formato de matriz a otro usando exclusivamente editor de texto, ?`cu\'ales son los pasos a seguir? Ensaye la lista contruida con un ejemplo.
+
+	\item Haga el listado de los aspectos comunes a todos los formatos de matrices.
+\end{enumerate}
+
+
+\subsection*{Generales} 
+
+En el laboratorio anterior se insisti\'o en la claridad de los caracteres y sus estados. A la luz de los resultados obtenidos usando \'arboles y la matriz:
+
+\begin{enumerate}
+
+	\item ?`puede usted conectar la importancia del an'alisis de caracteres con la forma como se interpretan los cladogramas?
+
+	\item Revise su bibliograf\'ia, y de ser posible compare trabajos con y sin matriz expl\'icita. ?`Puede notar alguna diferencia?
+
+	\item ?`Cree que es una ventaja incluir y publicar la matriz, o por el contrario es una desventaja?\\ 
+\end{enumerate}
+
+
+
+\section*{Literatura recomendada}  
+
+Maddison et al., 1997 [Una introducci'on al formato NEXUS]. 

@@ -1,0 +1,45 @@
+\chapter{Consensos}
+\section*{Introducci'on}
+Seguramente, por sus pr'acticas anteriores y por la literatura consultada, usted ha notado que en muchas ocasiones se produce m'as de un cladograma como respuesta. Para resumir la informaci'on contenida en los diferentes cladogramas se puede usar un consenso, el cual se puede obtener mediante varios procedimientos. Los 'arboles de consenso contienen informaci'on sobre los agrupamientos en los diferentes 'arboles obtenidos. Swofford (1991) y Nixon \& Carpenter (1996) ofrecen una discusi'on extensa sobre los 'arboles de consenso con dos visiones diferentes. Es importante recalcar que la topolog'ia del consenso es un resumen de los cladogramas y \textbf{no} es una \textbf{hip'otesis de filogenia}.\\
+En el consenso estricto, solamente los nodos compartidos por todos los cladogramas son incluidos en el resumen final. Este m'etodo es el m'as conservativo. Otros dos tipos de consensos, de Bremer y de Nelson, son muy similares al consenso estricto, s'olo difieren de este en casos muy particulares y en general no son usados.\\
+El consenso de Adams se basa en operaciones de conjuntos entre los nodos; es muy 'util para mostrar cu'ales son los taxa que producen inestabilidad en el cladograma, pero puede producir nodos que no se encuentran en ninguno de los cladogramas originales. Kearny (2002) ofrece una buena discusi'on sobre c'omo combinar los resultados del consenso estricto y el de Adams.\\
+Los consensos de la mayor'ia son muy populares, especialmente en los an'alisis moleculares, aunque su uso es \textbf{muy} discutible (Sharkey \& Leathers, 2001). En este tipo de consenso se hace un conteo de las veces que el nodo aparece en los diferentes 'arboles: si el nodo aparece en al menos la mitad de los 'arboles, este es incluido en el consenso. Es posible hacer cortes m'as estrictos. Es una convenci'on colocar en forma de porcentaje la cantidad de veces en las que el nodo apareci'o.\\
+Como se mencion'o en la introducci'on de la pr'actica de b'usquedas, los m'etodos de consenso tambi'en se est'an usando en la actualidad para respuestas parciales, como b'usquedas de \textit{jackknife}, o el doble consenso de Goloboff \& Farris (2001); o como resultados en el caso de los an'alisis bayesianos que usan el 'arbol obtenido en el consenso de la mayor'ia (Huelsenbeck et al. 2001, 2002).
+\section{T'ecnicas}
+En la mayor parte de los programas los consensos estrictos y de la mayor'ia est'an implementados (por ejemplo, \Pname{TNT}, \Pname{PAUP*}, \Pname{WinClada} o \Pname{Component}). En algunos casos, la implementaci'on del consenso de la mayor'ia es s'olo hasta el 50\%, y el usuario decide que tan estricto hace el corte, eliminando los nodos que est'en por debajo del valor de corte (un consenso estricto s'olo retendr'ia los nodos con soporte del 100\%).\\
+En otros casos, los programas pueden elaborar el consenso de la mayor'ia, pero no reportan los porcentajes de aparici'on en los nodos (por ejemplo en \Pname{TNT}), o simplemente los visualizan pero no salvan el 'arbol con los porcentajes incluidos (\Pname{TNT}). Es importante que si va a usar esta clase de consenso, eval'ue c'omo recuperar los reportes de frecuencias si usa \Pname{TNT}.\\
+Finalmente hay que alertar un poco acerca de la resoluci'on de los cladogramas usados para generar los consensos. La mayor parte de los programas usa los 'arboles perfectamente dicot'omicos, por lo que pueden incluirse ramas no soportadas; as'i, al hacer un consenso es necesario eliminar tales 'arboles con ramas no soportadas. La mayor'ia de los programas actuales incluyen opciones para controlar la salida: incluir o no incluir 'arboles con nodos de longitud cero (por ejemplo \Pname{TNT}, \Pname{NONA}, \Pname{WinClada}, \Pname{MacClade} y \Pname{PAUP*}), otros no (\Pname{Component}).
+\section{Materiales}
+\noindent
+Matriz de datos (datos.consenso.dat).
+\section{M'etodos}
+\noindent
+\textbf{En \Pname{WinClada}, \Pname{PAUP*} y \Pname{TNT}:} \\
+(1) Abra la matriz de datos, y realice una b'usqueda convencional. Guarde los 'arboles encontrados.\\
+(2) Realice y salve un consenso estricto, un consenso de la mayor'ia al 50\%, 75\% y 90\% de corte. En todos los casos reporte el n'umero de nodos presentes en el 'arbol, y compare los grupos encontrados. Recuerde anotar las frecuencias de los grupos pues \Pname{TNT} \textbf{no} las salva.\\
+\textbf{En \Pname{PAUP*}}:\\
+(3) Siga el mismo esquema que en (1) y (2), realice una b'usqueda y calcule primero el consenso por defecto y posteriormente los consensos estricto y de Adams; gu'ardelos en un archivo.\\
+\textbf{En \Pname{Component}:}\\
+(4) Abra los 'arboles encontrados en (1) o en (3). Calcule y salve el consenso estricto, de la mayor'ia y de Adams. Recuerde que \Pname{Component} no verifica si los nodos tienen longitud cero.
+\subsection{Programas}
+\noindent
+\Pname{WinClada}, \Pname{PAUP*}, \Pname{TNT}, \Pname{Component}.
+\subsection{Comandos}
+Para las instrucciones de b'usqueda revise la pr'actica correspondiente.\\
+Para \Pname{WinClada}  use los men'us correspondientes en la secci'on de \Gui{winclados}; el men'u \Gui{Trees} tiene la entrada \Gui{consensus compromise}, donde hay la posibilidad de hacer consenso estricto, consenso estricto eliminando nodos no soportados (nelsen, que no debe confundirse con el consenso de Nelson) y consenso de la mayor'ia\footnote{una vez calculado el consenso de la mayor'ia, \Pname{WinClada} tiene algunos problemas posteriores en el manejo de los 'arboles en la forma como los grafica. Por ejemplo, los \textit{Hashmarks} no se pueden activar (no son dibujados), y modificar la topolog'ia produce cambios inesperados en las frecuencias de los nodos.}. Para salvar los 'arboles siga las instrucciones previas usadas en la pr'actica de b'usquedas.\\
+En \Pname{TNT} use la instrucci'on \Cmd{nelsen} para obtener el consenso estricto, si desea que el consenso sea el 'ultimo 'arbol, use \Cmd{nelsen*}; para el consenso de la mayor'ia, use la instrucci'on \Cmd{majority} y \Cmd{majority*}, respectivamente. Tambi'en puede usar \Cmd{save \{strict\}}  o   \Cmd{save \{majority\}} para guardar los 'arboles de consenso directamente, despu'es de calculados. En todos los casos \textbf{debe} haber abierto previamente el archivo de 'arboles.\\
+\Pname{PAUP*}: use la instrucci'on \Cmd{contree}. Use en caso de duda el nombre del comando y el signo \textbf{?} [\Cmd{contree ?}] para que eval'ue las opciones del comando; si desea guardar el consenso directamente en un archivo de 'arboles \textbf{debe} hacerlo desde esta instrucci'on.
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compare las topolog'ias de los 'arboles encontrados: ?`difieren los resultados entre los programas? Revise si las frecuencias de los nodos comunes son iguales en los diferentes resultados.\\
+Al asignar las transformaciones (sinapomorf'ias) de cada nodo sobre el consenso, ?`c'omo lo har'ia usted? Compare su aseveraci'on con la implementada en los programas (recuerde la pr'actica de matrices).
+\subsection{Generales}
+\noindent
+?`Recomendar'ia usted el uso de consensos de mayor'ia como herramienta para resumir la informaci'on de los 'arboles iniciales?
+\section{Literatura recomendada}
+\noindent
+Goloboff \& Farris, 2001 [Presenta las t'ecnicas de consensos r'apidos].\\
+Miyamoto, 1985 [presenta una cr'itica hacia la interpretaci'on de los consensos en clasificaciones].\\
+Nixon \& Carpenter, 1996 [Una discusi'on cl'asica sobre consensos].\\
+Sharkey \& Leathers, 2001 [Una excelente cr'itica al uso y abuso del consenso de mayor'ia].

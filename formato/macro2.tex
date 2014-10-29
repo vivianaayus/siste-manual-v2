@@ -1,0 +1,30 @@
+\newenvironment{cframed}
+	{\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Pregunta]}
+	% [colframe=red,colback=blue]}
+	%\framebox[\textwidth][c]{
+	%\Ovalbox{
+	%}
+	%\end{framebox}
+	{\end{tcolorbox}}
+
+
+\newcommand{\pregunta}
+{
+	%	\begin{framebox}
+	%
+	\begin{framed}
+	%[colback=red!5!white,colframe=red!75!black,title=Pregunta]
+	% [colframe=red,colback=blue]}
+	%\framebox[\textwidth][c]{
+	%\Ovalbox{
+		\begin{small}
+			{\color{gray}\textbf{#1}}
+		\end{small}
+	%}
+
+	%\end{framebox}
+	%
+	\end{framed}
+}
+
+

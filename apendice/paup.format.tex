@@ -1,0 +1,41 @@
+\subsection{PAUP*}
+\noindent
+Se inicia con la clausula \Cmd{\#nexus}, y luego con el bloque \Cmd{data}. se puede definir si los caractertes son morfol'ogicos, ADN o prote'inas. Los polim'orficos se colocan entre par'entesis redondos. ADN en formato IUPAC.\\
+\\
+\noindent
+\Cmd{\#nexus\\
+begin data;\\
+dimensions ntax=4 nchar=5;\\
+format missing=? gap=- symbols="0 1 2";\\
+matrix\\
+out          00000\\
+alpha       10-20\\
+beta        1102(01)\\
+gamma    1?111\\
+lamda      11111\\
+;\\
+end;\\
+begin assumptions;\\
+typeset \*tipoUno=unord:1-3 5, ord:4;\\
+end;
+\\
+begin paup;}\\
+\Cmd{
+$[$Aqui puede colocar instrucciones espec'ificas de paup, por ejemplo b'usquedas$]$\\
+}
+\Cmd{hsearch add=random;\\
+end;\\
+\\
+\#nexus\\
+begin data;\\
+dimensions ntax=4 nchar=5;\\
+format missing=? gap=- datatype=dna;\\
+matrix\\
+out           ACGTC\\
+alpha      AT-CG\\
+beta  RTAAC\\
+gamma    CGAY-\\
+lamda      TCNCC\\
+;\\
+end;
+}

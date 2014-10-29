@@ -1,0 +1,74 @@
+%\chapter{Algunos comandos b\'asicos en R}
+
+%\small
+%\section
+{Lectura b\'asica de una matriz (ape)}
+%\noindent
+$\#\#$
+\\$\#\#$ cargamos la libreria ape
+\\$\#\#$\\
+\\
+\Cmd{library(ape)}\\
+\\
+\\$\#\#$
+\\$\#\#$ leemos datos alineados en formato tipo newick
+\\$\#\#$ el alineamiento es solo por el ejercicio de mostrar
+\\$\#\#$ lo que debe hacerse y los comandos respectivos
+\\$\#\#$\\
+\\
+\Cmd{DNA <- read.dna(''alineado.phy'')}\\
+\\
+\\$\#\#$
+\\$\#\#$ listado de tama\~no de las secuencias
+\\$\#\#$ \\
+\\
+\Cmd{table(unlist(lapply(DNA, length)))}
+
+%\section
+{Test de modelos de evoluci\'on (ape)}
+\label{sec:phytest}
+\noindent
+$\#\#$
+\\$\#\#$ R y modelos via phyml 
+\\$\#\#$
+\\$\#\#$ cargamos la libreria ape
+\\$\#\#$\\
+\\
+\Cmd{library(ape)}\\
+\\
+\\$\#\#$
+\\$\#\#$  con phymltest probamos 28 modelos en phyml
+\\$\#\#$  ape + R hacen todo el proceso
+\\$\#\#$
+\\$\#\#$  en linux cambie a
+\\$\#\#$  execname = ''./phyml'', si es local o
+\\$\#\#$
+\\$\#\#$  execname = ''phyml'', si es global
+\\$\#\#$
+\\$\#\#$ en windows
+\\$\#\#$ \\
+\\
+\Cmd{modelo<-phymltest(''alineado.phy'', format = ''sequential'', itree = NULL,exclude = NULL, execname = ''phyml.exe'', append = FALSE)}\\
+\\
+\\$\#\#$  
+\\$\#\#$  use format = ''interleaved'' si aplica a su matriz 
+\\$\#\#$
+\\$\#\#$ resumen y plot 
+\\$\#\#$ 
+\\$\#\#$ con print los valores de AIC
+\\$\#\#$ \\
+\\
+\Cmd{print(modelo)}
+\\
+\\$\#\#$ 
+\\$\#\#$  con summary los valores del test jerarquico
+\\$\#\#$ \\
+\\
+\Cmd{summary(modelo)}
+\\
+\\$\#\#$ 
+\\$\#\#$ plot los valores de AIC
+\\$\#\#$ \\
+\\
+\Cmd{plot(modelo, main = 'test de modelos para ML, usando PhyML')}
+\\

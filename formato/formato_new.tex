@@ -1,0 +1,19 @@
+\fancyfoot[CE,CO]{}
+\renewcommand{\chaptername}{Pr\'actica}
+
+
+
+%  not mine but could be usefull
+% http://merkel.zoneo.net/Latex/index.php?lang=
+
+%\usepackage{fancyheadings}
+\pagestyle{fancyplain}
+    % Remember chapter title
+\renewcommand{\chaptermark}[1]{\markboth{Pr\'actica \thechapter:\ #1}{}}
+    % section number and title
+\renewcommand{\sectionmark}[1]{\markright{Secci\'on \thesection\ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}] %
+ {\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\scshape\leftmark}] %
+ {\fancyplain{}{\bfseries\thepage}}
+ \cfoot{} 

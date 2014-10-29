@@ -1,0 +1,15 @@
+\subsection{NONA}
+\noindent
+Autor: Goloboff, 1998.\\
+Plataforma: Linux, Mac o Windows (9x o superior).
+Disponiblilidad: Gratuito en conjunto con otros programas en\\
+http://www.zmuc.dk/public/phylogeny/Nona-PeeWee.
+% \href{http://www.zmuc.dk/public/phylogeny/Nona-PeeWe}.
+\\
+\paragraph*{}
+Este programa es la mejor opci'on que existe para b'usquedas bajo parsimonia, dado que es gratuito, tiene lenguaje de macros y es veloz. Si est'a interesado en b'usquedas usando concavidad, puede usar \Pname{PIWE}; si el inter'es son las b'usquedas de Sankoff entonces \Pname{PHAST}/\Pname{SPA} son los programas requeridos. Todos estos son similares a \Pname{NONA} en cuanto a comandos se refiere, y est'an incluidos con la distribuci'on de \Pname{NONA}.
+\paragraph*{}
+B'asicamente los comandos de \Pname{NONA} son los mismos de \Pname{TNT}. Una diferencia importante (aparte de la velocidad y algoritmos implementados) es que en \Pname{NONA} los comandos son ejecutados (en vez de poder configurar sin ejecutar). A diferencia de \Pname{PAUP*}, no puede desactivar terminales.\\
+Al igual que en \Pname{TNT}, el comando simple de b'usqueda es \Cmd{mult}. Para permutar ramas se utiliza \Cmd{max}. En ambos casos debe colocarse un asterisco \Cmd{mult*; max*} para que utilice TBR como permutaci'on, en caso contrario usar\'a SPR.\\
+Para salvar el 'arbol, el comando es \Cmd{sv}. La primera vez que se llama, solo abre el archivo (Debe darse como par'ametro o el programa solicita un nombre). Con \Cmd{sv*} salva todos los 'arboles en memoria. Usando \Cmd{ksv} se guardan los 'arboles colapsados, de lo contrario siempre se guardan dicot'omicos. Para salvar el consenso es necesario usar \Cmd{inters}.\\
+El 'unico m'etodo de soporte expl'icitamente implementado es el soporte de Bremer \Cmd{bsupport}: con asterisco \Cmd{bs*} muestra los soportes relativos, 'o de lo contrario muestra el valor absoluto. Pero el programa viene acompa\~nado de varios programas y macros que permiten calcular \textit{jackknife} y \textit{bootstrap}, as'i como hacer medidas basadas en frecuencias relativas (FC).

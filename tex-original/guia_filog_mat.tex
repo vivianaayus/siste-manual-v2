@@ -1,0 +1,40 @@
+\documentclass[letterpaper,12pt,anyside,openany]{book}
+\input{preambulo.tex}
+\begin{document}
+\input{portada.tex}
+\pagestyle{empty}
+\fancyfoot{}
+\textsf{
+\maketitle
+\Large
+\tableofcontents
+\frontmatter
+\large
+\input{intro.tex}
+\mainmatter
+\input{formato.tex}
+\input{caracteres.tex}
+\input{matrices.tex}
+\input{arboles.tex}
+% DRME voy aqui en revision ortografia/texto inicial
+%  14 Sept 2005 
+%  Falta revisar la ortografia de los capitulos adicionados
+\input{parsimonia.tex}
+\input{pesaje.tex}
+\input{consensos.tex}
+\input{soporte.pars.tex}
+\input{alinear.tex}
+\input{molecular.tex}
+\input{likelihood.tex}
+\input{bayesiano.tex}
+\input{soporte.ml.tex}
+\small
+\input{bibliografia.tex}
+}
+% \backmatter
+\appendix
+\small
+\input{programas.tex}
+\input{formatos.tex}
+%\printindex
+\end{document}

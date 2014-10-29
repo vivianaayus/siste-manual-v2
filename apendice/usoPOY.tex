@@ -1,0 +1,49 @@
+\chapter{Algunos comandos b\'asicos para POY}
+\label{ch:usopoy}
+\section{An\'alisis de sensibilidad con costos diferenciales}
+\small
+\noindent
+% 
+(* tomado de http://groups.google.com/group/poy4/ *)\\
+(* dados  dos archivos de datos                   *)\\
+(* 1.fas y 3.fas                                  *)
+\Cmd{read(''1.fas'', ''3.fas'')}\\
+\Cmd{transform((names:(''1.fas''), tcm:''412.txt''),(names:(''3.fas''), tcm:''121.txt''))}
+\Cmd{store(''misdatos'')}
+\Cmd{build(5, trees:2)}
+\Cmd{select(best:1)}
+\Cmd{transform((all, static\_approx))}\\
+\\ 
+\Cmd{report(''todo13.mtr'', phastwinclad)}\\
+\\
+% 
+(* Resultados en el archivo Sensitivity\_results.txt *)
+\Cmd{echo (''412+121 Resultados'', output:''Sensitivity\_results.txt'')}
+\Cmd{report (''Sensitivity\_results.txt'', treestats)}\\
+\\
+(* Deseche los \'arboles *)
+\\
+\Cmd{select(best:0)} 
+\Cmd{use(''misdatos'')}
+\Cmd{select(characters,names:(''1.fas''))}\\ 
+\\
+\Cmd{build(5)}
+\Cmd{select()}
+\Cmd{echo(''1.fas Resultados'', output:''Sensitivity\_results.txt'')}
+\Cmd{report(''Sensitivity\_results.txt'', treestats)}\\
+\\
+(* Deseche los \'arboles *)
+\\
+\Cmd{transform((all, static\_approx))}\\
+\\ 
+\Cmd{report(''matriz1.mtr'', phastwinclad)}
+\Cmd{use(''misdatos'')}
+\Cmd{select(best:0)} 
+\Cmd{select(characters,names:(''3.fas''))}
+\Cmd{build(5)}
+\Cmd{select(best:1)}
+\Cmd{echo (''3.fas Resultados'', output:''Sensitivity\_results.txt'')}
+\Cmd{report (''Sensitivity\_results.txt'', treestats)}
+\Cmd{transform((all, static\_approx)) }
+\Cmd{report (''matriz3.mtr'', phastwinclad)}
+\Cmd{quit()}

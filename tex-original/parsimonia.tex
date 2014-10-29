@@ -1,0 +1,59 @@
+\chapter{B'usquedas mediante parsimonia}
+\section*{Introducci'on}
+Una vez se ha construido la matriz de caracteres; el  problema es la selecci'on de los cladogramas. Aunque Hennig (1968) presenta argumentos para favorecer la agrupaci'on por sinapomorf'ias, no fue muy expl'icito en c'omo obtener los cladogramas. Camin \& Sokal (1965) fueron quiz'as los primeros en sugerir el uso de parsimonia para hacer tal selecci'on; as\'i el cladograma preferido es aquel que minimiza la cantidad de transformaciones (el m\'as parsimonioso). Posteriormente, el m'etodo fue generalizado usando la optimizaci'on de Wagner y la de Fitch (Wagner, 1961; Kluge \& Farris, 1969; Farris, 1970; Farris et al., 1970; Fitch, 1971).\\
+La b'usqueda de cladogramas se complica con la adici'on de terminales (t'ecnicamente es un problema NP-completo), y por ello, soluciones exactas s'olo son posibles con pocos terminales (aprox. 20). Sin embargo, se han ideado gran cantidad de heur'isticas, que aunque no proporcionan con certeza la soluci'on 'optima, proveen resultados que son dif'iciles de superar, al menos con las tecnolog'ias actuales.\\
+La forma m'as sencilla de elaborar cladogramas es usando el algoritmo de Wagner:\index{B\'usqueda!algoritmo de Wagner} como el orden de entrada de los taxa afecta la topolog'ia, se realiza una aleatorizaci'on de tal secuencia de entrada (Dayoff, 1969),\index{B\'usqueda!RAS, random addition sequence} la cual puede estar seguida de una permutaci'on final de las ramas; sin embargo, este 'ultimo paso para matrices \textbf{muy} grandes consume gran cantidad de tiempo. Esto se debe repetir m'ultiples veces para evitar caer en ''\'optimos locales''. Con este m'etodo es posible una soluci'on 'optima incluso para matrices de 80 a 100 terminales. Problemas m'as grandes requieren nuevas estrategias, algunas de ellas derivadas de la cristalizaci'on simulada, aceptando moment'aneamente cladogramas sub'optimos para iniciar desde ellos la permutaci'on de ramas. Otros utilizan combinaciones bien sea entre b'usquedas exhaustivas o entre b'usquedas sobre reducciones de la matriz.\\
+Una nueva ventana para las matrices cada vez m\'as grandes (por ejemplo matrices moleculares con m'as de 1000 terminales), es tratar de identificar el acuerdo entre distintas r'eplicas de b'usquedas parciales, en vez de buscar la soluci'on 'optima (e.g. Farris et al., 1996; Farris, 1997; Goloboff, 1997b; Goloboff \& Farris, 2001). Dado que la cantidad de estudios con un gran n'umero de terminales es a'un muy peque~na, estos m'etodos hasta ahora simplemente se han presentado y no hay mucha discusi'on alrededor de ellos.\index{B\'usqueda!nuevas metodolog\'ias}
+\section{T'ecnicas}
+\index{B\'usqueda!t'ecnicas}
+El algoritmo de Wagner es la base para las b'usquedas actuales. Para evitar el problema del orden de entrada de los datos, estos se unen al azar. La mayor parte de los programas actuales tiene esta opci'on: inician con una \textbf{semilla} determinada para el generado de n'umero aleatorio y aseguran que la b'usqueda sea exactamente igual a otra que tenga la misma semilla. Una vez construido un cladograma, este suele ser sometido a permutaci'on de ramas para mejorar su calidad. B'asicamente se toma un nodo (sub'arbol) y es eliminado del cladograma principal, luego se prueba si al unirlo en diferentes lugares del cladograma principal disminuye la longitud con respecto al cladograma original. Se puede permutar ramas de varias formas; las m'as comunes son unir el nodo a las diversas ramas del cladograma principal (subpoda y replantado, SPR por sus siglas en ingl'es)\index{B\'usqueda!SPR}, o intentar otros puntos de uni'on dentro del sub'arbol, sin cambiar su topolog'ia (bisecci'on y reconexi'on de arboles, TBR). En general, la mayor parte de los programas utilizan TBR,\index{B\'usqueda!TBR} puesto que el tiempo de permutaci'on entre ambas t'ecnicas es casi igual y TBR es mucho m'as eficiente.\\
+Durante la permutaci'on pueden retenerse todos los 'arboles encontrados debidos a empates (''estrategia PAUP*'', Rice et al., 1997), o s'olo uno o pocos 'arboles, ignorando los empates (''estrategia NONA'', Goloboff, 1999; Nixon, 1999; Quickle et al., 2001). La estrategia NONA emp'iricamente provee los mejores resultados, al maximizar el n'umero de posibles puntos de arranque y evitar el problema de detenerse en \emph{islas} de m'ultiples (en ocasiones miles) de 'arboles. La estrategia NONA suele acompa'narse de una permutaci'on final de ramas, m'as extensa, de los mejores 'arboles encontrados.\\
+Para menos de 80-100 taxa es suficiente con  realizar m'ultiples (100 suele bastar en la mayor'ia de los casos) b'usquedas de 'arboles de Wagner con permutado de ramas y una permutaci'on final de ramas. Aunque es posible que as'i se ignoren muchos 'arboles igualmente 'optimos, pero el resultado final, expresado en un consenso estricto, es dif'icil que cambie (Farris et al., 1996; Farris, 1997, Goloboff \& Farris, 2001).\\
+En problemas m'as complejos se requiere utilizar t'ecnicas m'as sofisticadas para obtener resultados satisfactorios. La m'as sencilla es el rastrillo o pi~n'on (\textit{ratchet}\index{B\'usqueda!ratchet} en ingl'es) de Nixon (Nixon, 1999; tambi'en Quickle, 2001), la cual es una forma simple de implementar una cristalizaci'on simulada. El m'etodo consiste en usar un 'arbol ya elaborado (por ejemplo con Wagner+TBR), perturbar la matriz de datos (con eliminaci'on de caracteres o repesado), hacer permutaci'on de ramas del 'arbol para obtener el 'optimo de la nueva matriz, volver la matriz a su estado original y buscar el 'arbol 'optimo con permutado de ramas (todo ese proceso es una iteraci'on, la cual se repite \textbf{n} veces). El rastrillo es eficiente usando solo unos pocos 'arboles por iteraci'on y permutando una cantidad intermedia de caracteres (entre 10-25\%), y mejora dr'asticamente el ajuste de los cladogramas en las primeras iteraciones (v'ease Nixon, 1999).\\
+Para producir nuevas mejoras en el ajuste de cladogramas, los m'etodos m'as eficientes parecen ser la ''deriva de 'arboles'', que es una implementaci'on m'as expl'icita de la cristalizaci'on simulada (es decir aceptar soluciones ligeramente sub'optimas con una determinada probabilidad, y a medida que el an'alisis avanza, se disminuye la probabilidad de aceptaci'on de los sub'optimos), y la fusi'on de 'arboles, que utiliza lo mejor de diferentes soluciones. Una revisi'on completa de estos m'etodos est'a en Goloboff (1999).
+\section{Materiales}
+\noindent
+Matriz chica o ''normal'' (datos.chica.dat).\\
+Matriz grande (datos.ratchet.dat).\\
+Instrucciones para CREAR un archivo para ratchet en \Pname{PAUP*} usando \Pname{TNT} (pauprat.run).
+\section{M'etodos}
+\noindent
+En todos los casos, salve los cladogramas, reporte el n'umero y longitud de los cladogramas y el tiempo en que se realiz'o la b'usqueda.\\
+\textbf{En \Pname{WinClada}, \Pname{TNT} y \Pname{PAUP*}:}\\
+(1) Ejecute la matriz datos.chica.dat y haga una b'usqueda por omisi'on (tal como viene definida en el programa).\\
+(2) Repita la b'usqueda, pero ahora con 5 r'eplicas, 100 'arboles por r'eplica. Haga, una segunda b'usqueda con 10 r'eplicas, 1 'arbol por r'eplica y por 'ultimo 100 r'eplicas, 1 'arbol por r'eplica.\\
+\textbf{En \Pname{WinClada} y \Pname{TNT}:}\\
+(3) Abra la matriz datos.ratchet.dat, haga una b'usqueda con estrategia NONA (100 r\'eplicas, 1 'arbol por r'eplica).\\
+(4) Haga dos b'usquedas secuenciales (2 r'eplicas) de ratchet con 50 iteraciones.\\
+(5) Haga 20 b'usquedas secuenciales de ratchet con 5 iteraciones cada una.\\
+(6) Ejecute el archivo de macros pauprat.run usando los par'ametros 10 5 (10 r'eplicas y 5\% de corte).
+\\
+\textbf{En \Pname{PAUP*}:}\\
+(7) Haga una b'usqueda tipo ratchet, usando el archivo de instrucciones pauprat generado por TNT.\\
+(8) Cambie los valores de corte en el paso (6) a un porcentaje mayor y repita el paso (7).
+\subsection{Programas}
+\noindent
+La mejor opci'on para programas gratuitos es \Pname{NONA}; este es un programa completo de an'alisis clad'istico desarrollado para Windows/DOS y con copias disponibles para MacOSX y Linux,  es bastante r'apido, adem'as de tener implementado ratchet. Adicionalmente, el programa puede manejarse como buscador con \Pname{WinClada} (para Windows), es buena idea que el lector(a) se familiarice con \Pname{NONA}: las b'usquedas son m'as eficientes desde la l'inea de comandos.\\
+\Pname{PAUP*} y \Pname{TNT} est'an disponibles como ejecutables en varias plataformas (Windows, Mac y Linux). \Pname{PAUP*} no solo usa parsimonia sino distancias y m'axima verosimilitud, aunque para parsimonia es menos vers'atil que NONA. TNT est'a dise~nado para b'usquedas exhaustivas en matrices grandes y su velocidad y sistema de macros son sorprendentes; pero, por lo menos hasta el momento, no hace b'usquedas mediante ML.
+\subsection{Comandos}
+\noindent
+Revise el ap\'endice~\ref{ch:programas} (programas de c'omputo) para ver de forma m'as detallada los distintos comandos utilizados (p\'agina \pageref{ch:programas}). \Pname{NONA}, \Pname{TNT} y \Pname{PAUP*} cuentan con ayuda en l'inea (Comando \Cmd{help}). Para las b'usquedas con \Pname{WinClada}, recurra al men'u \Gui{Analize}, en las entradas \Gui{heuristics} y \Gui{ratchet}. Para b'usquedas con \Pname{NONA}, el comando m'as usado es \Cmd{mult*}  para las b'usquedas iniciales, \Cmd{max*} para permutar ramas (requiere 'arboles) y \Cmd{nix*}  para ratchet. En \Pname{TNT} tambi'en se puede usar \Cmd{mult}; la permutaci'on de ramas es con \Cmd{bbreak}. \Pname{PAUP*} debe estar en b'usquedas con parsimonia \Cmd{set criterion=parsimony}, y la b'usqueda se usa haciendo \Cmd{hsearch}  tanto para 'arboles de Wagner como para permutar ramas; en este 'ultimo caso use \Cmd{hsearch start=current}.\\
+Para los archivos de macros use la instrucci'on \Cmd{run} seguida del nombre del archivo; en este caso pauprat.run y los par'ametros (\Cmd{run pauprat.run 10 5}); \Pname{TNT} usa pesos de 1 y 2 en el archivo de salida, pauprat.
+
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+De los diferentes programas usados, ?`C'ual estima usted que es el 'optimo? Explique las razones de su selecci'on.\\
+?`C'ual cree usted que ser'ia(n) el(los) criterio(s) para seleccionar entre los diferentes programas?\\ 
+Elabore una tabla usando sus resultados y los de sus compa'neros. Para cada matriz, ?`en qu'e clase de b'usqueda se obtuvo el mejor resultado?, ?`c'ual fue el tiempo en que se obtuvo dicho resultado?
+\subsection{Generales}
+\noindent
+Dado que con una t\'ecnica heur\'istica existe el riesgo de no obtener el \'arbol m\'as corto ?`como justificar\'ia usted la b\'usqueda realizada?\\
+En este laboratorio solo se utilizaron algunos tipos de b'usquedas posibles y algunos de los posibles comandos para cada programa. Trate de encontrar otros comandos de b'usqueda en estos programas u otros par'ametros para los comandos usados en la pr'actica.
+\section{Literatura recomendada}
+\noindent
+deLaet, 2005 [Para quienes les gusta programar. Una introducci'on a los algoritmos usados en b'usqueda de 'arboles].\\
+Goloboff, 1999 [En este art'iculo se proponen algunos de los m'etodos implementados en \Pname{TNT}].\\
+Goloboff \& Farris, 2001 [Una implementaci'on y puntos de vista acerca de las b'usquedas r'apidas].\\
+Nixon, 1999 [Propuesta de ratchet y comparaci'on de la estrategia PAUP contra la estrategia NONA].\\
+Swofford et al., 1996 [Un cap'itulo general sobre an'alisis filogen'etico. Con una introducci'on a la b'usqueda y optimizaci'on de 'arboles].

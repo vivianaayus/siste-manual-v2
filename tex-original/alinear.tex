@@ -1,0 +1,135 @@
+\chapter{Alineamiento de ADN}
+\section*{Introducci'on}
+\label{ch:alinear}
+Aunque los datos moleculares pueden proporcionar grandes cantidades de caracteres, presentan retos 
+en la asignaci'on de homolog'ias al tratarse exactamente de las mismas bases en todas las secuencias; adem'as 
+en muchas ocasiones las secuencias tienen un tama~no desigual. \index{Alineamiento!definici\'on}
+Para resolver estos problemas se han ideado los m'etodos de alineamiento, que buscan recuperar las posibles homolog'ias 
+dentro de diferentes secuencias, al utilizar una matriz de transformaciones, entre las cuatro bases y los gaps o 
+InDels (inserci'on/eliminaci'on); as\'i, colocando gaps las dos secuencias son equivalentes en longitud y  posiciones
+ para las bases; por ejemplo, compare la secuencia 1x con cualquiera de los alineamientos 2.
+ \footnote{Ejemplo modificado de Siddall, \href{}http://research.amnh.org/~siddall/methods.}\\
+\\
+\begin{small}
+1x: \Cmd{a c t T C C g A A T T T g g c t a c T T C C g A A t T T g G c}\\
+2x: \Cmd{a c t C G A T T G C C T A C T C G A T T G C C}\\
+2a: \Cmd{a c t - - C g A - - T T g c c t a c T - C - g A - t T - g C c}\\
+2b: \Cmd{a c t - C - g A - T - T g c c t a c - T - C g A - t - T g C c}\\
+2c: \Cmd{a c t - C - g - A T T - g c c t a c - T - C g - A t - T g C c}\\
+\end{small}
+\\
+Ya que se necesitan m'as de tres secuencias para un an'alisis filogen'etico, es necesario el alineamiento simult'aneo de 
+m'ultiples secuencias. El primer m'etodo usado es el alineamiento m'ultiple que usa un 'arbol \textbf{gu'ia} con las 
+secuencias en los terminales; a partir de este 'arbol se hace el primer alineamiento para el par m'as 
+cercano\footnote{En realidad es el par m'as similar, ya que se usa una t'ecnica de distancia para obtener el 'arbol gu'ia.}, 
+luego optimiza los gaps, posteriormente se alinea con la siguiente terminal que sea la m'as cercana y el proceso se repite 
+hasta llegar a la base; la idea es parecida a la optimizaci'on en un an'alisis filogen'etico.\\
+Una nueva idea, usada principalmente por los cladistas, es el uso de optimizaci'on directa (Wheeler, 1996), donde el 
+objetivo no es construir el alineamiento, sino directamente el cladograma; en este caso, se hacen los alineamientos locales 
+(como en el alineamiento m'ultiple) y los gaps son considerados transformaciones, es decir se colocan temporalmente en 
+los nodos. Wheeler (1996) argumenta que implementa una idea de homolog'ia din'amica acorde con el an'alisis filogen'etico. 
+En la optimizaci'on de estados fijos (Wheeler, 1999) se usa la secuencia completa, y la matriz de transformaciones s'olo 
+sirve para asignar costos, pero no estados en el nodo. \index{Alineamiento!m\'ultiple} Aunque es intuitivamente muy 
+interesante, no se ha usado en la pr'actica. Cualquiera que sea la idea para realizar los an'alisis moleculares, los 
+resultados dependen de la matriz de transformaci'on inicial; Wheeler (1995) desarroll\'o una metodolog'ia para comparar 
+los par'ametros de las transformaciones, conocida como ''an'alisis de sensibilidad''.
+\index{Alineamiento!an'alisis de sensibilidad}
+Bajo esta idea, se hacen diferentes an'alisis con diferentes matrices de transformaci'on, y se selecciona aquella que 
+maximice alg'un criterio previamente seleccionado (ya sean las topolog'ias, como el costo de las transformaciones); hasta 
+ahora, esta idea solo se ha utilizado en el contexto de an'alisis con m'ultiples genes o entre genes y morfolog'ia 
+simult'aneamente.
+\section{T'ecnicas}
+Algunos programas (como \Pname{Clustal}) usan un solo 'arbol gu'ia derivado del c'alculo de la distancia entre las 
+secuencias; como todos los m'etodos basados en distancias, es dependiente del orden de entrada de los datos; otros 
+programas (como \Pname{MALIGN} o \Pname{POY}) construyen distintos 'arboles y prefieren el alineamiento que tenga el menor 
+costo. Aunque sean m'as lentos, \Pname{POY} y \Pname{MALIGN} producen mejores resultados (en cuanto a la calidad del 
+alineamiento con miras a evaluar la filogenia) que \Pname{Clustal}. Giribet et al. (2002) recomiendan que si se usa 
+\Pname{Clustal}, se prueben diferentes secuencias de entrada de los datos. Es importante recalcar que el 'arbol usado por 
+\Pname{Clustal} y por \Pname{MALIGN} es s'olo un 'arbol para optimizar las secuencias, no un 'arbol filogen'etico como tal; 
+mientras que el 'arbol generado por \Pname{POY} es un 'arbol de alineamiento y a la vez es un 'arbol filogen'etico. Giribet 
+et al. (2002) enfatizan que de usar los alineamientos, los costos usados para el alineamiento deben ser los mismos usados 
+para el an'alisis filogen'etico. Al asignar los costos, hay que tener en cuenta la desigualdad triangular. Es decir, que el 
+costo de una transformaci'on nunca puede ser mayor al de una transformaci'on equivalente, pero que tome otros estados. 
+Un ejemplo clarifica esto: si las transiciones tienen un costo de 3 y las transversiones de 1, la transformaci'on 
+A$\rightarrow$ G, tendr'ia un costo de 3, pero si se hace de la forma A$\rightarrow$ T$\rightarrow$ G, el costo ser'ia de 
+2 (dos transversiones). Esto har'ia que a los nodos se les pudiesen asignar estados no observados en los terminales.\\
+Para facilitar tanto la velocidad de alineamiento como las asignaciones de homolog'ia, al usar \Pname{POY} se pueden 
+(y preferencialmente se deben) dividir las secuencias analizadas en peque~nas secuencias o marcos; definidos mediante 
+iniciadores universales, estructura secundaria o motivos conservados. Cuando las secuencias son muy desiguales en estos 
+segmentos, muchas veces se prefiere eliminarlas a analizarlas (o se hace un an'alisis exploratorio que incluya esas 
+secuencias).
+\section{Materiales}
+\noindent
+Secuencias para:\\
+\Pname{MALIGN} (datos.malign.dat).\\
+\Pname{FASTA} (datos.fas.dat).\\
+Par'ametros para \Pname{MALIGN} (param.txt).\\
+Archivo de instrucciones para \Pname{POY} (lotes.poy).\\
+Matriz morfol'ogica (datos.ss.dat).
+\section{M'etodos}
+\noindent
+\textbf{En \Pname{MALIGN}:}\\
+(1) Abra en un editor los archivos datos.malign.dat y param.txt.\\
+(2) Eval'ue qu'e clase de b'usqueda se producir'a con esos par'ametros.\\
+(3) Ejecute \Pname{MALIGN} con los par'ametros predefinidos. ?`Cu'al es la relaci'on transici'on/ transversi'on definida?\\
+(4) Modifique el archivo de par'ametros de tal forma que: 
+ (a) Tenga una relaci'on ts/tv de 1/2,
+ (b) Tenga una relaci'on ts/tv de 1/5.\\
+(5) Ejecute nuevamente \Pname{MALIGN} con estas modificaciones en los par'ametros.\\
+(6) Cambie los par'ametros dando a los gaps un costo del doble del costo de las transversiones.\\
+(7) Modifique el archivo de par'ametros y esta vez produzca la salida para buscar el 'arbol en \Pname{PAUP}.\\
+(8) Revise la salida de cada una de las modificaciones y eval'ue el tama~no de la matriz resultante en cada caso\\
+(9) Para cada alineamiento, busque el 'arbol m'as parsimonioso con el programa de su elecci'on.\\
+ \textbf{En \Pname{POY}:}\\
+(10) Abra en un editor el archivo de procesos lotes.poy ?`Qu'e b'usqueda esta implementada en \Pname{POY}?\\
+(11) Ejecute el programa y llame al archivo de instrucciones (tambi\'en puede usar el modo interactivo y ejecutar instrucci\'on por  instrucci\'on).\\
+(12) Modifique el archivo para usar la matriz de datos morfol'ogicos y realizar un an'alisis de evidencia total.\\
+(13) Modifique el archivo para hacer un alineamiento tipo FSO y pese la matriz morfol'ogica 2 veces el valor de los datos
+ moleculares.\\
+(14) Modifique el archivo para hacer un alineamiento tipo OA.\\
+(15) Cambie los par'ametros de tal manera que los gaps valgan el doble que las sustituciones.\\
+(16) Genere los respectivos alineamientos y busque el 'arbol m'as parsimonioso.\\
+(17) Modifique el archivo de par'ametros y esta vez produzca la salida para hen86/winclada.\\
+(18) Compare el 'arbol resultado de la alineaci'on con \Pname{POY} y con \Pname{MALIGN}.
+\subsection{Programas}
+Si desea hacer un alineamiento m'ultiple r'apido use \Pname{Clustal}, pero si el objetivo es la filogenia sugerida por las 
+secuencias es mejor usar \Pname{MALIGN} o \Pname{POY}, ya que estos tienen en cuenta el 'arbol final. Puede hacer una 
+exploraci'on en \Pname{Clustal} y posteriormente llevar sus marcos como archivos separados para ser analizados con \Pname{POY}.
+\subsection{Comandos}
+\Pname{MALIGN} utiliza un archivo de par'ametros para configurar el alineamiento; algunos de los par'ametros m'as 
+importantes son \Cmd{changecost} para asignar el costo de una transformaci'on y \Cmd{gap} para asignar el costo de 
+adicionar un gap. \Cmd{matrix} asigna una matriz de costos del alineamiento. Las b'usquedas pueden ser \Cmd{quick}, 
+una b'usqueda r'apida, o \Cmd{build}, junto con \Cmd{aspr} o junto con \Cmd{atbr}, que permutan ramas, 
+mientras que \Cmd{keepalignment} indica el n\'umero de alineamientos igualmente 'optimos que se van a retener. Cuanto m'as grande 
+m'as lento ser'a su an'alisis. Con \Cmd{hennig86}, o \Cmd{nexus}, da el formato de salida para \Pname{NONA} o 
+para \Pname{PAUP*}. En \Pname{POY} los par'ametros son colocados despu\'es de la instrucci\'on y en par\'entesis; los archivo de entrada (datos o intrucciones) se llaman desde la l\'inea de comandos \Cmd{poy intrucciones} o con \Cmd{read("morph.txt")} de manera interactiva; con
+(**aqui faltan mas comandos**)
+ 
+\Cmd{-change x} se asigna el costo de las transformaciones; con \Cmd{-gap x} el costo de los gaps; tambi'en puede usar 
+una matriz expl\'icita de transformaci'on entre estados; a diferencia de la usada en \Pname{MALIGN}, la matriz de 
+\Pname{POY} usa cinco estados, donde el quinto \textit{estado} es gap; 
+\Cmd{build (100)} hace una b\'usqueda r\'apida 
+\Cmd{} hace una b'usqueda heur'istica 
+con tbr. \Cmd{} o \Cmd{} indican cuantos 'arboles se guardan en la b'usqueda.\\ 
+
+
+Una de las grandes ventajas 
+de \Pname{POY} es que puede ser usado en un \textit{cluster} (conjunto de computadoras enlazadas para realizar el mismo proceso).
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compare los 'arboles de \Pname{MALIGN}, \Pname{POY} y los obtenidos en un an'alisis clad'istico con el programa de su  preferencia. ?`Son similares los resultados?\\
+Compare sus resultados con los de sus compa~neros. ?`C'omo son las longitudes de los 'arboles (las reportadas por \Pname{POY}) y las topolog'ias?\\
+Dados los diferentes costos usados en el an'alisis simult'aneo de morfolog'ia y datos moleculares, 
+ ?`cu'al cree usted que es el resultado 'optimo y por qu'e?
+\subsection{Generales}
+\noindent
+Existe una disputa sobre una relaci'on entre los juegos de costos y el soporte. Dados sus conocimientos, escriba un 
+peque~no ensayo donde indique sus ideas, su posici'on y sus argumentos en esta discusi'on.
+\section{Literatura recomendada}
+\noindent
+Frost et al., 2001 [Un art'iculo emp'irico sobre el an'alisis de sensibilidad].\\
+Giribert, 2003 [Revisa la exploraci'on de los resultados del an'alisis de sensibilidad vs. soporte de clados].\\
+Giribet \& Wheeler, 1999 [Uno de los pocos art'iculos que discute expl'icitamente el tema de los gaps].\\
+Wheeler, 1995 [La propuesta del an'alisis de sensibilidad para la asignaci'on de par'ametros en los alineamientos].
+Wheeler etal., 2006 [Una gu\'ia completa para POY].

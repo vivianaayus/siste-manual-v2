@@ -1,0 +1,54 @@
+\chapter{Modelos de evoluci'on}
+\section*{Introducci'on}
+\label{ch:molecular}
+Los sistem'aticos moleculares se enfrentan ante un conjunto de datos distinto en algunos aspectos del que enfrentan los morf'ologos:  un mismo tipo de estados (ACGT) se encuentra repetido a lo largo de toda la matriz de datos. En general, las ideas desarrolladas para analizar los datos moleculares tienen una aproximaci'on estad'istica, dado el origen de muchos de los an'alisis moleculares en biolog'ia molecular o en gen'etica de poblaciones. Bajo la estimaci'on estad'istica se asume un modelo que genera las secuencias de ADN y con base en el modelo se estima qu'e tanto se ajustan las hip'otesis filogen'eticas a los datos. A ese procedimiento se la conoce como \textbf{m'axima verosimilitud} (\textit{maximum likelihood} en la literatura en ingl'es).\\
+Los modelos moleculares se basan en la asignaci'on de la probabilidad de transformar una base cualquiera en otra base, incluida esa misma base. El c'alculo de esas probabilidades est'a influenciado por diferentes par'ametros, que, en principio, deber'ian ser estimados de los datos, pero tambi'en se han usado par'ametros predefinidos, que quiz'as no la mejor opci'on.\\
+El modelo con le menor n\'umero de par\'ametros es conocido como JC 'o JC69, por los autores y el a~no en que fue propuesto (Jukes y Cantor, 1969); se asume que la probabilidad de una base para transformarse en otra es siempre igual y que la frecuencia de las bases es igual (al menos al inicio de la evoluci'on de los organismos). De ah'i en adelante pueden agregarse m'as par'ametros que hacen m'as complejo el modelo en diferentes direcciones. Puede asumirse diferencia entre cada tipo de base (ya sea qu'imicamente AG-CT, o cada una por separado), diferencia de las probabilidades basada en la proporci'on de cada base, tener en cuenta o no los sitios invariantes, asumir que algunos sitios son m'as propensos a cambiar que otros (funci'on $\Gamma$) y, finalmente, si existe o no un reloj molecular.\\
+Swofford et al. (1996) es una referencia b'asica para comprender el desarrollo actual de los modelos. Page \& Holmes (1998) ofrecen un cap'itulo ilustrativo sobre el tema. La idea general de modelos tambi'en se aplica para la evoluci'on prote'ica, pero dado que casi siempre se tiene tanto la secuencia de amino'acidos como la nucleot'idica, esta 'ultima es la preferida al explotar m'as directamente la informaci'on (al menos a nivel de variaci'on).\\
+Es de notar que las probabilidades de los datos (la verosimilitud) suelen ser muy peque~nas, por lo que para facilitar los c'alculos se utiliza el negativo del logaritmo natural de la verosimilitud, que es el valor reportado por los programas as'i como en la literatura.
+\section{T'ecnicas}
+Debido al aumento en el n'umero de los par'ametros,los modelos puedan explicar m'as satisfactoriamente los datos (pero esto no implica que los modelos sean \emph{\textbf{m'as} realistas}); por lo que la selecci'on de un modelo no puede basarse en que el modelo mejora la probabilidad de los datos, sino si la mejora es (o no es) estad'isticamente significativa, dado el n'umero de par'ametros usados en el modelo.\\
+Existen dos aproximaciones b'asicas para este problema. Dado que la mayor parte de los modelos son una especializaci'on de otros modelos m'as sencillos, es decir son modelos anidados, en los cuales el modelo m'as sencillo es s'olo un caso especial del modelo m'as complejo, se puede hacer una prueba jer'arquica de verosimilitud (hLRT\footnote
+{\begin{equation}
+\delta = -2 log \frac{Max[L0(modelo-nulo|datos]}{Max[L1(modelo-alternativo|datos]} 
+\end{equation}
+}) que compara la proporci'on en la que se increment'a la verosimilitud al agregar el par'ametro; se asume una distribuci'on $\chi ^2$  para la distribuci'on de esa proporci'on, tomando el n'umero de par'ametros extra como los grados de libertad. El problema de esta prueba es que no es claro si la distribuci'on $\chi ^2$ es v'alida, y solo permite comparar modelos anidados; la prueba  es un tanto conflictiva al comparar GTR con GTR+I o GTR+$\Gamma$; se asume que la forma como se agregan los par'ametros no sesga el resultado.\\
+La otra forma est'a basada en medidas de informaci'on, como el criterio de Akaike, o la cantidad de informaci'on bayesiana. En estos casos se calcula c'uanta informaci'on contiene el modelo dados la cantidad de par'ametros que posee. La ventaja es que se puede hacer la comparaci'on entre modelos sin tener que tomar una secuencia particular.
+\section{Materiales}
+\noindent
+Matriz de datos (datos.modelo.dat).
+\section{M'etodos}
+\noindent
+(1) Abra la matriz de datos y ejecute el archivo \textit{modelblock3} en \Pname{PAUP*}.\\
+(2) Use la salida producida por \Pname{PAUP*}: model.scores. como archivo de entrada para \Pname{Modeltest}.\\
+(3) Siga paso a paso el test jer'arquico presentado. Intente realizar otro test jer'arquico comenzando con otro juego de par'ametros (note que la salida de \Pname{ModelTest} incluye los ajustes de los 56 modelos explorados).\\
+(4) Calcule el valor de AIC para 4 diferentes modelos: JC, K80, GTR y uno de su elecci'on. El valor de AIC ser'a mejor cuanto m'as peque~no\footnote{AIC= -2lnL + 2N, donde lnL es el ajuste del modelo reportado por PAUP* y N el n'umero de par'ametros libres}.\\
+(5) Para los mismos modelos y el escogido por el hLRT en \Pname{ModelTest}, calcule el criterio de informaci'on bayesiano\footnote{BIC=-2lnL + Nlnn, donde lnn, es el logaritmo natural de la longitud de la secuencia}. Compare sus resultados, tanto para AIC como para BIC con el de sus compa~neros, y determine c'ual es o son los mejores modelos para esos criterios. Ordene los modelos del mejor al peor. 
+
+\subsection{Programas}
+\noindent
+En general se puede usar \Pname{Modeltest} o \Pname{MrModeltest}, que es una modificaci'on de \Pname{Modeltest} pero calcula un menor n'umero de modelos; en caso que de usar \Pname{MrModeltest}, tenga en mente que \textbf{no} ha evaluado todos los modelos.
+
+\subsection{Comandos}
+\noindent
+Modeltest es un programa que se ejecuta a trav'es de la l'inea de comandos, o usando un archivo por lotes (archivo .bat) tal y como lo hizo en la pr\'actica de alineamiento con POY (vea la p\'agina ~\pageref{ch:alinear}); la secuencia b'asica de instrucciones desde la l'inea de comandos es:\\
+
+\begin{math}
+\Cmd{modeltest  < model.scores >salida.txt}
+\end{math}\\ 
+
+donde salida.txt es su archivo de salida con la terminaci'on texto (y en formato de texto).
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+?`Es el modelo escogido por el criterio de Akaike igual al escogido en el test jer'arquico? ?`Usted esperar'ia que lo fuesen?\\
+Dada la exploraci'on en (3), ?`es igual el resultado para las dos exploraciones? ?`Usted esperar'ia que fuesen iguales 'o desiguales?\\ 
+Para las listas obtenidas en (5), ?`son iguales las listas en AIC y BIC?
+\subsection{Generales}
+\noindent
+?`C'omo se relaciona el concepto de caracteres hom'ologos usado en los primeros laboratorios, con el concepto de los modelos?\\
+?`Prefer\'ia usted usar siempre el mismo modelo (por ejemplo, JC)? Argumente su respuesta
+
+\section{Literatura recomendada}
+\noindent
+Posada \& Crandall, 2001 [presentan de manera completa c'omo seleccionar modelos bas'andose en la maximizaci'on del ajuste].

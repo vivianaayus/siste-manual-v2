@@ -1,0 +1,131 @@
+\chapter{\'Arboles}
+\section*{Introducci\'on}
+
+Una vez finalizado un an\'alisis filogen\'etico, el resultado es un agrupamiento que tradicionalmente se dibuja como un \'arbol donde los taxa usados estan como \emph{hojas} o \emph{terminales} del \'arbol. Las diferentes ramas se unen en \emph{nodos} o \emph{componentes}. As\'i, el agrupamiento ((Terminal 1, Terminal 2), Terminal 3) puede representarse con el \'arbol:
+
+\begin{center}
+%
+% http://tex.stackexchange.com/questions/2340/how-to-make-a-3-level-deep-tree-with-tikz
+%
+\begin{tikzpicture}[level distance=3cm,
+  level 1/.style={sibling distance=9cm},
+  level 2/.style={sibling distance=6cm}]
+  \node {Ra\'iz}
+    child {node {Terminal 3}}
+    child {node {Nodo interno 1}
+    	child {node {Terminal 1 = nodo (hoja)}}
+      	child {node {Terminal 2}}
+    };
+\end{tikzpicture}
+\end{center}
+
+Es importante diferenciar entre el \textbf{contenido} del nodo, que son los terminales que forman el nodo (el nodo interno 1 tiene dos terminales: 1 y 2), y la \textbf{informaci\'on} del nodo, que es c\'omo est\'an organizados estos terminales en terminos de grupos o clados anidados (Nelson, 1979). En general, para muchos autores un componente representa un grupo monofil\'etico (i.e., definici\'on \emph{topol\'ogica} de monofilia).
+
+En clad\'istica, los \'arboles son tambi\'en conocidos como \textbf{cladogramas} y el t\'ermino es usado sin distinci\'on. En clad\'istica (pero no en otras metodolog\'ias) los cladogramas deben tener transformaciones de caracteres en nodos (nodos soportados), en caso de no tener transformaciones, el nodo no est\'a soportado o es un nodo de longitud cero, es decir, es un artefacto de los programas usados para obtener los \'arboles (v\'ease Coddington \& Scharff, 1994; Goloboff, 1998). El n\'umero de transformaciones es un estad\'istico importante que hay que tener en cuenta y se usa como criterio para seleccionar entre diferentes cladogramas, se escoge la topolog\'ia que sugiere el  menor n\'umero de transformaciones. En los m\'etodos estad\'isticos generalmente es importante la longitud de las ramas, esta suele representarse como una probabilidad o frecuencia de transformaciones y suelen presentarse los \'arboles con una escala que muestra la longitud de ramas; s\'olo la dimensi\'on que va de las ramas a los terminales tiene importancia en ese caso, el ``ancho'' del \'arbol se usa para acomodar los diferentes terminales usados. En los cladogramas, las dimensiones no tienen ning\'un significado especial.
+
+
+\section*{T\'ecnicas}
+
+Una forma de expresar los \'arboles en formato de texto (por ejemplo para usar con programas o para el resumen de un art\'iculo) es la notaci\'on de par\'entesis, donde los par\'entesis limitan los nodos; dependiendo de los autores o los programas, los grupos hermanos son separados por espacios, comas o s\'imbolos de suma, por ejemplo (a (b c)), es equivalente a (a+(b+c)) y a (a, (b, c)), tenga en cuenta que en los \'arboles filogen\'eticos el orden de los terminales, sin cambiar la topolog\'ia, no altera el contenido del \'arbol, por ejemplo (a (b c)) es exactamente igual a ((c b) a) y a ((b c) a).
+
+Existen diferentes programas para manipular y generar \'arboles; la mayor\'ia de ellos permiten interacci\'on matriz-\'arbol, mientras que otros solo utilizan \'arboles. En general, los programas de an\'alisis filogen\'etico permiten manipular \'arboles en un esquema gr\'afico rudimentario. Algunos programas permiten guardar informaci\'on adicional a la topolog\'ia en el mismo \'arbol como la longitud de la rama que conduce al nodo o terminal o una etiqueta. Los programas que pueden trabajar independientemente de la matriz suelen estar dise\~nados para la impresi\'on o exportaci\'on gr\'afica de los \'arboles, soportando cambios de topolog\'ia, longitudes y etiquetas de las ramas, pero no transformaciones de caracteres.
+
+Dependiendo de la plataforma que trabaje, usted tiene disponible distintos programas: \Pname{Mesquite}, \Pname{R}\footnote{\url{cran.r-project.org}} y \Pname{Figtree}\footnote{\urlt{tree.bio.ed.ac.uk/software/figtree/}} son v\'alidos para todas las plataformas (adicionalmente son gratuitos). \Pname{Mesquite} es muy lento si su m\'aquina es lenta (requiere de la m\'aquina virtual de Java). Sobre Windows usted cuenta con \Pname{WinClada} (requiere la matriz de datos), su interfaz de impresi\'on requiere mucha pr\'actica (no es intuitiva). Otras alternativa, si usa Linux, pueden ser \Pname{NJPlot o GNUplot}. Para la impresi\'on final del \'arbol para publicaci\'on, una opci\'on puede ser \Pname{R}, que aunque es poco intuitivo al iniciar, logra resultados fianles de mejor calidad que otros programas.
+
+En general, la manipulaci\'on de arboles se activa con un men'u (en \Pname{WinClada} \Gui{Edit/Mouse}, en \Pname{FigTree} directamente como barra de herramientas en la ventana; en \Pname{Mesquite} se usa el men\'u de herramientas de la ventana de edici'on de \Pname{TreeView}). Las acciones se realizan al seleccionar con el rat\'on la rama (\Pname{WinClada}) o arrastrando las ramas (para moverlas en \Pname{Figtree}). M'as que comandos, en esta pr\'actica es importante manipular el rat\'on.}}
+
+
+\begin{enumerate}
+
+	\item Desde \Pname{WinClada+NONA}, \Pname{Mesquite} o \Pname{TNT}
+	\begin{enumerate}
+		\item Revise los archivos de datos con editor de texto y con le programa seleccionado abra una matriz de datos que contenga tanto datos como \'arboles.
+		\item Establezca la forma de obtener informaci\'on sobre los \'arboles, en un principio los costos o longitud del \'arbol.
+		\item Cambie de posici\'on algunos nodos o terminales de la topolog\'ia, y observe c\'omo cambia la longitud del cladograma y los estados asignados a los nodos o la forma como los caracteres son mapeados, pruebe tambi\'en moviendo ramas completas.
+	\end{enumerate}
+
+	\item En \Pname{Mesquite} y \Pname{TNT} (para Windows) usted puede mover ramas completas; en \Pname{TNT} (para Windows) use el menu \Gui {Trees - view} y seleccione con el bot\'on izquierdo del rat\\'on el clado a mover (el clado queda marcado en rojo), se\~nale con el rat\'on el destino usando el bot\'on derecho.
+	\item Desde \Pname{WinClada} o \Pname {TNT} (para Windows), haga una b\'usqueda de cladogramas para la matriz de vertebrados que contruy\'o en la pr\'actica de matrcies, use los par'ametros por omisi\'on (men\'u \Gui{Analize} / \Gui{heuristics}, \Gui{traditional search}).
+	\item En \Pname{Mesquite} o \Pname{Figtree}:
+	\begin{enumerate}
+		\item Cambie el orden de los terminales sin cambiar la topolog\'ia (las relaciones entre terminales) del \'arbol.
+		\item Coloque etiquetas en los nodos, y salve el \'arbol.
+		\item Revise ese archivo en un editor de texto para determinar c\'omo se colocaron tanto las etiquetas como las longitudes.
+		\item Abra el \'arbol con longitud de ramas.
+	\end{enumerate}
+
+
+	\item En \Pname{Mesquite} o \Pname{WinClada} abra el archivo \Datos{datos.conarbol.dat}:
+	\begin{enumerate}
+		\item Indique la cantidad de \'arboles presentes y la longitud de los mismos.
+		\item Examine las agrupaciones obtenidas e identifique los caracteres que soportan los nodos.
+		\item Mapee los caracteres en los \'arboles usando distintos tipos de optimizaciones: en \Pname{WinClada} ACCTRAN (=fast), DELTRAN (=slow) y no ambigua, En \Pname{TNT} (para Windows) (\Gui{Optimize $>$ Character $>$ Reconstructions} y seleccione un solo \'arbol y algunos caracteres) y en \Pname{Mesquite}: Dollo e Irreversible (C-S); revise c\'omo cambian las optimizaciones en los distintos nodos.
+		\item Revise de nuevo el efecto en la longitud de los \'arboles de las siguentes modificaciones:
+		\begin{enumerate}
+			\item Cambie la ra\'iz del \'arbol.
+			\item Cambie de posici\'on nodos y terminales.
+			\item Seleccione un nodo y colapselo.
+		\end{enumerate}
+	\end{enumerate}
+
+	
+
+	\item \En \Pname{R}:
+	\begin{enumerate}
+
+		\item Lea el archivo con \'arboles \Datos{arbol.r.tre} use las instrucciones:
+		\Cmd{library(ape); arbol <- read.tree(''arbol.r.tre'')}
+		\item Grafique el objeto \Rdatos{arbol} use las instrucciones, que por defecto dibuja el \'arbol con longitud de ramas o como un filograma:
+		\Cmd{plot(arbol)} o
+		\Cmd{plot.phylo(arbol)}
+		\item Para graficar el \'arbol sin incluir la longitud de ramas  use las instrucciones:
+		\Cmd{plot(arbol,use.edge.length=FALSE)} 
+		\item Para asignar las longitudes de las ramas como r\'otulos de los nodos y graficarlos use las instrucciones:
+		\Cmd{arbol\$node.label<-arbol\$edge.length}
+		\Cmd{plot(arbol,show.node.label=TRUE)}
+		\item Para graficar el \'arbol con t\'itulo de gr\'afica, colores de ramas y tipo cladograma use las instrucciones:
+		\Cmd{plot(arbol, type="cladogram",main="\'Arbol 1",
+		edge.col=c("red","blue","cyan"))}
+		\item Para obtener la longitud del \'arbol, lea la matriz de datos \Datos{matriz.r.phy} a un objeto que se llame \Rfunc{MatrizDatos} y use la funci\'on \Rfunc{parsimony()}:
+		\Cmd{parsimony(arbol,MatrizDatos)}
+	\end{enumerate}	
+
+
+\end{enumerate}
+
+
+\section*{Preguntas}
+
+\subsection*{Pr\'actica}
+
+\begin{enumerate}
+
+	\item Al hacer una b\'usqueda por defecto ?`Usted y sus compan\~neros obtienen las mismas topolog\'ias y los mismos caracteres que soportan los grupos?.
+
+	\item Al cambiar la aditividad/no aditividad de un caracter  ?`Cambia esto la forma como se mapean? Haga este ejercicio para varios caracteres, tanto binarios como multiestado.
+
+	\item Si cambia la ra\'iz, ?`cambia la longitud? ?`Por qu\'e cree que se presenta el resultado que obtuvo? ?`Es (y por qu\'e) una ventaja o una desventaja?
+
+	\item Examine sus caracteres y cambie su aditividad-no aditividad. ¿Cambia esto la forma como mapean? Haga este ejercicio para varios caracteres, binarios y multiestado.
+
+	\item Si cambia la ra\'iz, ¿cambia la longitud? ¿Por qu\'e cree que se presenta el resultado que obtuvo? ¿Es (y por qu\'e) una ventaja o una desventaja?
+
+	\item Dibuje el siguiente cladograma:\\ 
+	\begin{small}
+	\emph{(Lampreas (Tiburones (Esturi\'on Tele\'osteos) (Celacanto (Peces-pulmonados (Anfibios (Mam\'iferos (Tortugas (Lagartos (Cocodrilos Aves)))))))))}
+	\end{small}
+
+	\item Si la ra\'iz esta colocada entre Aves y Cocodrilos, ¿c\'omo es la topolog\'ia resultante?
+	
+	\item Convierta la topolog\'ia dibujada a notaci\'on de par\'entesis.
+\end{enumerate}
+
+\subsection*{Generales}
+
+Aparte de no tener un an'alisis expl\'icito, existe una gran diferencia entre los \'arboles filogen'eticos actuales y sus ''equivalentes'' usados por algunos tax\'onomos (por ejemplo, Haeckel, Romer, etc.) ?`Es usted capaz de descubrirla? \textbf{Clave}: intente dibujar alguno de esos \'arboles al estilo actual.
+
+\section*{Literatura recomendada}
+
+Page \& Holmes, 1998 [El cap\'itulo 2 esta dedicado a los \'arboles y presenta muy buenas ilustraciones, Tambi\'en puede consultar la p\'agina de docencia de Rod Page (\url{taxonomy.zoology.gla.ac.uk/teaching/index.html})].
+
+%% todo: revisar validez de pagina rod page docencia

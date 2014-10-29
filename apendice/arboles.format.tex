@@ -1,0 +1,40 @@
+\subsection{NONA}
+\noindent
+\Pname{NONA}, \Pname{Hennig86}, \Pname{WinClada} y \Pname{TNT} usan este formato; con \Cmd{*} indican que hay mas 'arboles y con \Cmd{;} que es el 'ultimo 'arbol. N'otese el espacio para separar los terminales. El primer taxon es 0. Al igual que en las matrices, \Cmd{p-} o \Cmd{p/} indican el final de lectura del archivo. Winclada puede incluir al incio la lista de nombres, pero no es compatible con otros programas.\\
+\\
+\noindent
+\Cmd{
+tread 'tres arboles'\\
+(0 (1 (2 (3 4 ))))*\\
+(0 (1 (2 3 4 )))*\\
+(0 ((1 2 )(3 4 )));\\
+p/;}\\
+\\
+\Cmd{
+tread 'solo un arbol'\\
+(0 (1 (2 (3 4 ))));\\
+p/;}
+\subsection{PAUP*}
+En \Pname{PAUP*} el 'arbol est'a embebido en el archivo de la matriz o en un formato aparte. Los grupos son separados por comas y  el primer taxon es 1.\\
+\\
+\noindent
+\Cmd{
+\#nexus\\
+\\
+begin trees;\\
+  translate\\
+    1 lamda,\\
+    2 alpha,\\
+    3 beta,\\
+    4 gamma,\\
+    5 out\\
+  ;\\
+  tree *primero=(5,(1,(2,(3,4))));\\
+  tree politomico=(5,(1,(2,3,4)));\\
+  tree tercero=(5,((1,2),(3,4)));\\
+end;}\\
+\\
+El orden no altera los 'arboles en los programas. As'i:\\
+\Cmd{(0,(1,(2,(3,4))))}\\
+es igual a\\
+\Cmd{((1,((3,4),2)),0)}

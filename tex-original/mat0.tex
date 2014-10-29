@@ -1,0 +1,141 @@
+\documentclass[10pt,twoside,letterpaper]{book}
+\usepackage [english,spanish,activeacute]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{pstricks,pst-tree,pst-node}
+\usepackage{synttree}
+\usepackage{amsfonts,amsmath,amsthm,amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{enumerate,multicol,array}
+\usepackage{color}
+\usepackage{pifont}
+\usepackage{makeidx}
+\usepackage[T1]{fontenc}  %Este paquete permite que en el separasilabas podamos incluir palabra que tengan acentos castellanos
+\usepackage{fancyhdr}
+\usepackage[centerlast,small,bf]{caption2}
+\usepackage{pst-all}
+%%%%%%% Definici� del color gris %%%%%%%%%%%%%%%%%%%%
+\definecolor{grisA}{cmyk}{0.0,0.0,0.0,0.8}
+%%%%%%%%  Margenes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[body={330pt,523pt}]{geometry}
+\setlength{\headsep}{2.5ex}%
+\setlength{\footskip}{1.0ex}%
+\setlength{\parindent}{0pt}    %%no indenter
+\setlength{\topmargin}{10ex} %corre hacia arriba con -
+\setlength{\parskip}{1.5ex plus 0.7ex minus 0.6ex}%%separaci� de p�rafos
+\linespread{0.925}               %%interlineado
+\renewcommand{\headrulewidth}{0.25pt} %grosor de la linea del encabezado
+\renewcommand{\footrulewidth}{0.0pt}  %grosor de la linea al pie de pagina
+
+%%%%%%%% redefiniciones utilizadas %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mano}{{\Large\ding{42}}}
+\newcommand{\flecha}{\xrightarrow{\ \ }}
+\newcommand{\igual}{\mbox{\large$\boldsymbol =$}}
+
+% mis comandos
+
+\newcommand{\Cmd}[1]   {\texttt{#1}}
+\newcommand{\Pname}[1] {\begin{Large}\texttt{#1}\end{Large}}
+\newcommand{\Gui}[1]   {\begin{small}\textbf{#1}\end{small}}
+\large
+\title{Sistem\'atica filogen\'etica\\Introducci\'on a la pr\'actica}
+\author{J. Salvador Arias,\\Ivonne J. Garz\'on-Ordu\~na y\\Daniel Rafael Miranda-Esquivel}
+\date{Marzo, 2006. Ver 1.0}
+
+
+
+\sloppy %
+\makeindex %
+
+ %%\includeonly{cap_2}
+\begin{document}
+
+ \thispagestyle{empty}
+  \null
+  \vspace{60mm}
+  \begin{center}
+  \Huge{\textbf{Sistem\'atica filogen\'etica\\Introducci\'on a la pr\'actica}}
+  \end{center}
+  \vfill
+ \pagebreak
+
+ \thispagestyle{empty}
+  \null
+  \vspace{10mm}
+  \begin{center}
+  \Large{\textbf{J. Salvador Arias,\\Ivonne J. Garz\'on-Ordu\~na y\\Daniel Rafael Miranda-Esquivel}}
+  \end{center}
+  \vspace{40mm}
+  \begin{center}
+  \Huge{\textbf{\\Marzo, 2006. Ver 1.0}}
+  \end{center}
+  \vspace{50mm}
+ \pagebreak
+ \thispagestyle{empty}
+\frontmatter
+ \thispagestyle{empty}
+ \null
+  \vfill
+  \begin{center}{\Large
+   \textit{A Jah, Jha, y Rha\\
+   a Chango\\
+   a Yemaya}}
+  \end{center}
+  \vfill
+ \pagebreak
+   \thispagestyle{empty}
+
+\setcounter{page}{0}
+ \pagestyle{fancyplain}
+  \lhead[\fancyplain{}{\thepage}]
+    {\fancyplain{}{Contenido}}%
+  \rhead[\fancyplain{}{Contenido}]%
+    {\fancyplain{}{\thepage}}
+  \cfoot[]{} %
+ \tableofcontents
+
+\include{intro}
+
+\mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagestyle{fancyplain}
+%%\addtolength{\headwidth}{0.0pt}%\marginparwidth
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter{}. #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection{}. #1}}
+\lhead[\fancyplain{}{\thepage}]
+    {\fancyplain{}{\rightmark}}%\bfseries
+\rhead[\fancyplain{}{\leftmark}]%\bfseries
+    {\fancyplain{}{\thepage}}
+\renewcommand{\baselinestretch}{0.75}
+
+%garenasd@uis.edu.co
+
+\mainmatter
+% 
+\input{formato.tex}
+\setcounter{page}{0}
+ \thispagestyle{empty}
+  \null
+\input{caracteres.tex}
+\input{matrices.tex}
+\input{arboles.tex}
+\input{parsimonia.tex}
+\input{pesaje.tex}
+\input{consensos.tex}
+\input{soporte.pars.tex}
+\input{alinear.tex}
+\input{molecular.tex}
+\input{likelihood.tex}
+\input{bayesiano.tex}
+\input{soporte.ml.tex}
+\small
+\input{bibliografia.tex}
+% \backmatter
+\appendix
+\small
+\input{programas.tex}
+\input{formatos.tex}
+%\printindex
+
+
+
+\end{document}

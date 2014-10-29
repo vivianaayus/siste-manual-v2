@@ -1,0 +1,129 @@
+\chapter{M'axima verosimilitud}
+\section*{Introducci'on}
+\label{ch:likelihood}
+Algunos autores han sugerido que la parsimonia es un modelo de evoluci'on que asume que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004). Independientemente de si el argumento es o no correcto (vea una posici'on en contra en Farris, 1983 y la argumentaci'on de Steel, 2002), estos autores sugieren que deben usarse modelos expl'icitos de evoluci'on como los que se vieron en la pr'actica \ref{ch:molecular} sobre selecci'on de modelos (ver p\'agina \pageref{ch:molecular}).\\
+En este caso se estima el 'arbol (la hip'otesis filogen'etica) que 
+maximice la probabilidad de los datos actuales dado el modelo evolutivo 
+sugerido para las secuencias a analizar (aunque han habido intentos de 
+generalizar los modelos de evoluci'on a datos morfol'ogicos, ver  
+Lewis (2002)).\\
+Uno de los principales problemas con la estimaci'on de verosimilitud es que el valor depende de la longitud de las ramas. En la actualidad, se ignora al principio el valor de las diferentes ramas, y luego de encontrar un 'arbol espec'ifico, se calcula el mejor valor de verosimilitud para una rama a la vez. Swofford et al. (1996) ofrecen una explicaci'on extensa de c'omo se hacen los c'alculos relacionados con estos m'etodos.
+\section{T'ecnicas}
+Los m'etodos para buscar y seleccionar 'arboles usados en verosimilitud son b'asicamente los mismos usados en parsimonia: a un 'arbol inicial se lo mejora con permutaci'on de ramas. Existen diferentes formas de encontrar un 'arbol inicial en verosimilitud. Los sistem'aticos moleculares que usan modelos suelen empezar por un 'arbol de distancias (NJ: neighbor joining). El problema de este inicio es que para una configuraci'on particular, solo existe un 'arbol de NJ\footnote{tal y como lo hemos recalcado previamente para los an\'alisis de distancia el orden de entrada influye en el resultado, la topolog\'ia resultante puede cambiar si se cambia el orden de entrada a la matriz.}. Otra forma es la descomposici'on de estrella, donde se tiene una politom'ia basal y se trata de resolverla desde la ra'iz. Este m'etodo es muy lento, puesto que a diferencia de un 'arbol de Wagner, la magnitud del problema es grande desde el inicio. Una alternativa adicional es comenzar con un 'arbol al azar, pero estos suelen ser sub'optimos, con lo cual la fase de permutaci'on es muy lenta. Una 'ultima forma, es utilizar 'arboles de Wagner, pero basados en verosimilitud, o si se desea una respuesta m'as r'apida, un 'arbol obtenido por parsimonia y luego permutar las ramas usando verosimilitud.
+Actualmente se puede realizar un an\'alisis de evidencia total con DNA 
+usando una evaluaci\'on del ML para un conjunto de datos particionado, donde cada partici\'on puede tener su propio modelo (en realidad variaciones de GTR).
+
+\section{Materiales}
+\noindent
+Matrices de datos (datos.like.dat, dna.phy).
+Particiones para dna.phy (simpleDNApartition.txt).
+\section{M'etodos}
+\subsection{en PAUP}
+\noindent
+\begin{enumerate}
+\item\label{itm:model} Antes que nada estime el mejor modelo para la matriz, use los procedimientos del cap\'itulo ~\ref{ch:molecular}. Argumente qu'e criterio utiliz'o para seleccionar el modelo.
+\item Abra la matriz de datos, busque el 'arbol m'as parsimonioso.
+\item Permute las ramas de ese 'arbol, usando el modelo obtenido en ~\ref{itm:model}. Anote el valor de la verosimilitud (-lnL) reportado.
+\item\label{itm:calc} Pruebe alternativamente los siguientes modelos: JC, HKY, F81 y TRM, usando como frecuencia para las bases la estimaci'on emp'irica y sin el par'ametro $\Gamma$. Reporte los valores de verosimilitud para cada modelo.
+\item Repita el ejercicio hecho en ~\ref{itm:calc}, pero use la estimaci'on emp'irica del par'ametro $\Gamma$ para HKY, F81 y TRM. Reporte los valores de verosimilitud para cada modelo.
+\item Repita el ejercicio hecho en ~\ref{itm:calc}, pero use invariantes. Reporte los valores de verosimilitud para cada modelo.
+\item Estime si los datos se ajustan o no al reloj molecular.
+\end{enumerate}
+
+\subsection{en PhyML}
+\noindent
+\begin{enumerate}
+\item Haga una corrida por defecto en \Pname{PhyML}, ?`qu\'e par\'ametros usa por defecto el programa?
+\item\label{itm:model1} Estime el mejor modelo para la matriz, use los procedimientos del cap\'itulo ~\ref{ch:molecular}. Argumente qu'e criterio utiliz'o para seleccionar el modelo.
+\item\label{itm:phyml} Busque el 'arbol de ML usando el modelo obtenido 
+en ~\ref{itm:model1}, haga una corrida con \textit{nni},  Anote el valor de la verosimilitud (-lnL) reportado y la topolog\'ia obtenida.
+\item Repita ~\ref{itm:phyml} cambiando la b\'usqueda a \textit{spr} y a 
+\textit{nni+spr}.
+\item Pruebe alternativamente los siguientes modelos: JC, HKY, y GTR, 
+para los tres modelos con y sin el par'ametro $\Gamma$. Reporte los valores de verosimilitud para cada modelo.
+\item Compare la topolog\'ia y la longitud de las ramas de los \'arboles de cada an\'alisis.
+\end{enumerate}
+
+
+\subsection{en RaxML}
+\noindent
+\begin{enumerate}
+\item Haga una corrida en \Pname{RaxML}, con 10 b\'usquedas RAS de ML.
+\item Haga una corrida en \Pname{RaxML}, con 10 b\'usquedas RAS de ML para un an\'alisis particionado.
+\end{enumerate}
+
+
+
+\subsection{Programas}
+\noindent
+\Pname{PAUP*}, \Pname{PhyML}, \Pname{PHYLIP}, \Pname{RaxML} o \Pname{PAML}; entre otros\footnote{puede consultar 
+\href{}http://evolution.genetics.washington.edu/phylip/software.html}.
+\subsection{Comandos}
+\subsubsection{PAUP*}
+La b'usqueda inicial en \Pname{PAUP*} h'agala bajo el criterio de parsimonia, y posteriormente pase al criterio de ML y haga una \textrm{peque\~na} b'usqueda sobre los 'arboles producto del an'alisis con parsimonia; recuerde salvar los 'arboles de cada modelo (incluida la longitud de las ramas). Para las b'usquedas puede utilizar los mismos comandos que se usaron en parsimonia.\\
+Con el comando \Cmd{set criterion=likelihood} se coloca a \Pname{PAUP} en modo de verosimilitud.\\
+Con el comando \Cmd{Lset} usted puede modificar los diferentes par'ametros de los modelos (funci'on $\Gamma$, distribuci'on de bases, tipos de cambios, invariantes).\\ 
+Puede consultar el \textit{model.block} que acompa\~na a \Pname{ModelTest} (y usado en la pr'actica sobre obtenci'on del modelo 'optimo) para que vea c'omo se implementa cada uno de los modelos. Recuerde que \Pname{ModelTest} usa expl'icitamente los 56 modelos; tambi'en puede usar la salida de \Pname{ModelTest} para cambiar el modelo. Las instrucciones generadas por \Pname{ModelTest} pueden ser incluidas \textbf{dentro} del archivo de datos, para lo cual puede usar un editor de texto, \Pname{Mesquite} o \Pname{MacClade}, pero \textbf{no} \Pname{WinClada}.\\
+
+\subsubsection{PhyML}
+\Pname{PhyML} es un programa mucho m\'as r\'apido que \Pname{PAUP*} y 
+por lo tanto deber\'ia ser una de sus primeras opciones, el programa 
+cuenta con dos esquemas de instrucciones: el primero por l\'inea de 
+commandos (que se usa de manera indirecta al obtener el modelo \'optimo 
+con \Pname{R+ape} o con \Pname{JModelTest}) y el segundo es una 
+interfase similar a la de \Pname{PHYLIP}, por la que puede navegar 
+entre las distintas opciones (en la forma de men\'u de texto), y donde 
+puede modificar los par\'ametros de b\'usqueda: \textit{nni}, \textit{spr} o una mezcla de \textit{nni+spr} o los par\'ametros ligados a modelo, con tipos de sustituciones y optimizaciones de invariantes o $\Gamma$.\\
+Para un archivo de entrada de los datos denominado $archivo$, el programa genera dos archivos de salida: $archivo$.phy$\_$phyml$\_$stats.txt (salida con los  estad\'isticos) y $archivo$.phy$\_$phyml$\_$tree.txt (salida con  el \'arbol en notaci\'on \Pname{Newick} o \Pname{PHYLIP}). Estos dos archivos en caso de existir pueden ser sobreescritos (R) o la salida actual puede ser a\~nadida a una salida previa (O).\\
+Inicialmente solo debe dar el nombre de la matriz de datos (en formato \Pname{PHYLIP}) y el programa le ira guiando por las decisiones a tomar. Puede avanzar al siguente men\'u con +, regresar con -, o iniciar el an\'alisis con Y.
+
+\subsubsection{RaxML}
+\Pname{RaxML} es un programa mucho m\'as r\'apido que \Pname{PhyML} y por lo tanto deber\'ia ser una de sus primeras opciones, el programa cuenta con un solo esquema de instrucciones: por l\'inea de commandos.
+
+Para usarlo debe acceder a la l\'inea de comandos y usar las instrucciones
+
+
+\Cmd{raxml -m GTRGAMMA -p 12345 -s dna.phy -\# 20 -n ML0}
+
+\\
+\noindent
+
+Para 20 b\'usquedas tipo RAS a partir de un archivo de datos dna.phy y con un prefijo de salida de ML0.
+
+Si lo que desea es un an\'alisis particionado debe usar:
+
+
+\Cmd{raxml -m GTRGAMMA -p 12345 -q simpleDNApartition.txt -s dna.phy -n ML01 }
+
+\\
+\noindent
+
+Los l\'imites de cada partici\'on se encuentran en el archivo simpleDNApartition.txt.
+
+
+si prefiere hacer el an\'alisis particionado pero estimando las frecuencias de bases para cada partici\'on de manera independiente debe usar:
+
+
+\Cmd{raxml  -M -m GTRGAMMA -p 12345 -q simpleDNApartition.txt -s dna.phy -n ML02 }
+
+\\
+\noindent
+
+
+
+
+
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compar'e sus resultados con los de sus compa\~neros. ?`C'ual fue el mejor valor de verosimilitud, independientemente del modelo?\\
+?`Influye en sus resultados la selecci\'on del mecanismo de 
+reorganizaci\'on ramas? \\
+?`C'omo considera los tiempos de ejecuci'on comparados con otros m'etodos como parsimonia? ?`Difieren los resultados con los de parsimonia?
+\subsection{Generales}
+\noindent
+Recientemente se ha propuesto que se pueden usar modelos para el an'alisis morfol'ogico. Analice los puntos favorables o desfavorables e indique su punto de vista sobre el tema. ?`Qu'e implicaciones tiene el uso de modelos en el concepto de homolog'ia y car'acter presentado anteriormente?
+\section{Literatura recomendada}
+\noindent
+Swofford et al., 1996 [Una descripci'on muy completa de la forma como se calculan las versomilitudes y los m'etodos de verosimilitud para encontrar 'arboles].\\
+Lewis, 2001 [Introduce el uso de modelos en morfolog'ia].

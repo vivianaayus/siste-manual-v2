@@ -1,0 +1,345 @@
+
+\chapter{B\'uquedas mediante parsimonia} % (fold)
+\label{cha:parsimonia}
+
+\section*{Introducci\'on} 
+
+Un discusi\'on constante en sistem\'atica es como seleccionar cladogramas, por ejemplo, {\color{red}Hennig (1968)} plantea relaciones mediante la agrupaci\'on por sinapomorfias, no es muy expl\'icito a lo que refiere la obtenci\'on del cladograma. {\color{red}Camin \& Sokal (1965)} posiblemente fueron los primeros en sugerir el uso de la \textit{parsimonia} como un posible m\'etodo para hacer esta selecci\'on; desde entonces el cladograma seleccionado es aquel que minimiza la cantidad de transformaciones, es decir \textit{el cladograma más parsimonioso}. Posteriormente, esta t\'ecnica fue generalizada usando diferentes tipos de optimizaci\'on: unas de las mas conocidas e implementadas son: \textit{la optimizaci\'on de Wagner y la optimizaci\'on de Fitch} {\color{red}(Wagner, 1961; Kluge \& Farris, 1969; Farris, 1970; Farris et al., 1970; Fitch, 1971)}.
+
+
+La b\'usqueda del cladograma mas parsimonioso es m\'as compleja a mediada que se agregan terminales,  por ello los algoritmos para b\'usquedas exactas solo son viables con pocos terminales (aprox. 20-30),  despu\'es de este n\'umero el espacio de \'arboles es tan grande que es imposible una búsqueda exacta (dado que es un problema NP-Completo). Por esta raz\'on se utilizan b\'usquedas heur\'isticas que permiten obtener respuestas generalmente cercanas al \'optimo global,  y pese a que estas soluciones no proporcionan con certeza la solución \'optima, se obtienen resultados  dif\'iciles de superar.
+%{\color{red} Cita}
+
+La forma m\'as sencilla de elaborar cladogramas es usando el algoritmo de Wagner: como el orden de entrada de los taxa afecta la topolog\'ia,  se realiza una aleatorización de tal secuencia de entrada {\color{red} (Dayo, 1969)},  la cual puede estar seguida de permutaciones de ramas. Sin embargo,  este ultimo paso para matrices muy grandes consume gran cantidad de tiempo; esto se debe repetir m\'ultiples veces para evitar caer en "\'optimos locales". Con este método es posible una solución optima incluso para matrices de 80 a 100 terminales. Problemas mas grandes requieren nuevas estrategias,  algunas de ellas derivadas de la cristalizaci\'on simulada,  aceptando moment\'aneamente cladogramas sub\'optimos para iniciar desde ellos la permutaci\'on de ramas. Otros utilizan combinaciones bien sea entre b\'usquedas exhaustivas o entre búsquedas sobre reducciones de la matriz.
+
+Una nueva ventana para las matrices cada vez m\'as grandes (por ejemplo matrices moleculares con m\'as de 1000 terminales),  es tratar de identificar el acuerdo entre distintas r\'eplicas de b\'usquedas parciales,  en vez de buscar la soluci\'on \'optima {\color{red}(e.g. Farris et al.,  1996; Farris,  1997; Goloboff,  1997b; Goloboff \& Farris,  2001)}. 
+
+En terminos de programas de computo,  la mejor opci\'on para programas gratuitos es \Pname{TNT}; este es el programa m\'as  completo para an\'alisis clad\'istico,  usted lo encuentra disponible para Windows/DOS,  MacOSX y Linux,   es bastante r\'apido,   adem\'as de tener implementado ratchet y las nuevas b\'usquedas.  \Pname{NONA} otra posible opci\'on puede manejarse como buscador con WinClada (para Windows),  es buena idea que se familiarice con estos programas y la l\'inea de comandos, las b\'usquedas son m\'as eficientes desde la l\'inea de comandos. \Pname{PAUP*}  tambien est\'a disponible como ejecutable en varias plataformas (Windows,  Mac\footnote{debe revisar la compatibilidad con las \'ultimas versiones de Mac OS X, ya que el programa no se ha actulizado en los \'ultimos a\~nos} y Linux).  \Pname{PAUP*}  no solo usa parsimonia sino distancias y m\'axima verosimilitud, aunque para parsimonia es menos vers\'atil que \Pname{TNT}.  \Pname{TNT} est\'a dice\~nado para b\'usquedas exhaustivas en matrices grandes, la velocidad y sistema de macros son sorprendentes; pero,  por lo menos hasta el momento, no hace b\'usquedas mediante ML.
+
+
+\section*{T\'ecnicas}
+
+El algoritmo de Wagner es la base para las b\'usquedas actuales. Para evitar el problema del orden de entrada de los datos,   los taxa se  seleccionan al azar (RAS\footnote{En algunos escenarios se peude comenzar con un \'arbol al azar que ser\'a mejor punto de inicio que un \'arbol de Wagner, ver Goloboff (2014).}),
+    %Hide and vanish: data sets where the most parsimonious tree is known but hard to find, and their implications for tree search methods
+    %Molecular Phylogenetics and Evolution
+la mayor parte de los programas actuales tienen esta opci\'on: inician con una \textbf{semilla} determinada para el generado de n\'umero aleatorio y aseguran que la b\'usqueda sea exactamente igual a otra que tenga el mismo de inicio (semilla del generador de n\'umeros seudo-aleatorios). Una vez construido un cladograma,  este suele ser sometido a permutaci\'on de ramas para mejorar su calidad. B\'asicamente se toma un nodo (sub\'arbol) y es eliminado del cladograma principal,   luego se prueba si al unirlo en diferentes lugares del cladograma principal disminuye la longitud con respecto al cladograma original. Se puede permutar ramas de varias formas;  las m\'as comunes son unir el nodo a las diversas ramas del cladograma principal (subpoda y replantado,  SPR por sus siglas en Ingl\'es)\index{B\'usqueda!SPR},  o intentar otros puntos de uni\'on dentro del sub\'arbol y cambiar la topolog\'ia (bisecci\'on y reconexi\'on de \'arboles,  TBR). En general,   la mayor parte de los programas utilizan TBR, \index{B\'usqueda!TBR} puesto que el tiempo de permutaci\'on entre ambas t\'ecnicas es casi igual y TBR es mucho m\'as eficiente.
+
+
+\begin{itemize}
+  \item Con \Pname{NONA/Winclada,  TNT,  POY} y \Pname{PAUP*}
+
+	Construya una tabla (Ap\'endice 1) donde pueda registrar la informaci\'on de tiempos de b\'usqueda,   n\'umero de cladogramas y costo del mejor cladograma,  para cada una de las siguientes b\'usquedas:
+ 
+
+	\begin{enumerate}
+	  \item  {B\'usquedas por omisi\'on}
+
+  		Ejecute el archivo datos.chica.dat siguiendo los comandos:
+
+  		\begin{itemize}
+  			\item  \Pname{NONA/Winclada}
+
+  				\Gui{File/File open}
+  			
+  				\Gui{Heuristic Search}
+
+  			\item  \Pname{TNT}
+  				\Cmd{proc nombre\_archivo;}
+  				\Cmd{mult;}
+
+  			\item  \Pname{POY}
+  				\Cmd{read( $'$nombre\_archivo')} 
+  				\Cmd{build()}
+  				\Cmd{swap()}
+
+
+  			\item  \Pname{PAUP*}
+  				\Cmd{set criterion=parsimony}
+  				\Cmd{exec nombre\_archivo}
+  				\Cmd{hsearch}
+
+  		\end{itemize}
+
+        \pregunta{%{Preguntas}\\
+          \begin{itemize}
+    		    \item ?`Qu\'e tipo de información puede obtener cuando carga el archivo de datos?
+    		    \item ?`C\'ual es la b\'usqueda por omisión en cada programa utilizado?
+    	   \end{itemize}
+        }
+
+
+	  \item{B\'usquedas modificadas}
+
+		Ejecute el archivo el archivo de datos "datos.chica.dat" y realice las siguientes b\'usquedas,  modificando los comandos que sean necesarios.
+ 
+
+ \begin{table}[H]
+ \centering
+ \begin{tabular}{|c|c|}
+ \hline
+  N\'umero de r\'eplicas & \'arboles retenidos/r\'eplica\\
+ \hline
+  5 & 1\\ 
+   \hline
+  5 & 100\\
+   \hline 
+  10& 1\\ 
+   \hline
+   10& 100\\
+    \hline 
+  100 & 1 \\
+   \hline
+   100 & 100 \\
+  \hline
+  
+  
+ \end{tabular}
+ 
+ \end{table}
+ 
+	El manual de cada programa especifica los comandos a modificar para hacer dichas b\'usquedas como por ejemplo: Para b\'usquedas con \Pname{NONA},  el comando m\'as usado es mult*  para las b\'usquedas iniciales,   max*  para permutar ramas (requiere \'arboles) y nix*  para ratchet. En \Pname{TNT} tambi\'en se puede usar mult; la permutaci\'on de ramas es con bbreak.  En \Pname{PAUP*} debe definir el criterio de  b\'usqueda: parsimonia usando set criterion=parsimony,  y la b\'usqueda con hsearch tanto para \'arboles de Wagner como para permutar ramas; en este \'ultimo caso use hsearch start=current.
+
+	Para los archivos de macros de \Pname{TNT} use la instrucci\'on run seguida del nombre del archivo; en este caso pauprat.run y los par\'ametros run pauprat.run 10 5; TNT usa pesos de 1 y 2 en el archivo de salida,  pauprat.
+ 
+ 
+
+	%{Preguntas}
+  \pregunta{
+    \begin{itemize}
+		  \item 	Utilice un manejador gr\'afico que le permita visualizar la tendencia en los datos obtenidos.
+		  \item  ?`Encontr\'o alguna tendencia en t\'erminos de tiempos o costos,  al aumentar el n\'umero de replicas?
+	   \end{itemize}
+  }
+
+
+
+	\item{B\'usquedas con RACHET}
+
+	Utilizando el mismo archivo.dat,  realice las siguientes b\'usquedas:
+
+ \begin{table}[H]
+ \centering
+ \resizebox{13cm}{2cm}{
+ 
+ \begin{tabular}{|c|c|c|}
+ \hline
+  N\'umero de B\'usquedas continuas & N\'umero de r\'eplicas/B\'usqueda&  N\'umero iteraciones en RACHET\\
+
+ \hline
+  1 & 5 & 50\\ 
+ \hline
+  1 & 5 & 100\\ 
+ \hline
+  1 & 10 & 50\\ 
+ \hline 
+  1 & 50 & 50\\  
+ \hline
+  5 & 1 & 5\\
+ \hline
+ 20 & 1 & 5\\
+ \hline
+
+ \end{tabular}
+ }
+ \end{table}
+
+	En problemas m\'as complejos de 100 o m\'as terminales, se requiere utilizar t\'ecnicas m\'as sofisticadas para obtener resultados satisfactorios. La m\'as sencilla es el rastrillo o pi\~n\'on (\textit{ratchet}\index{B\'usqueda!Ratchet} en ingl'es) {\color{red}(Nixon,  1999; Quickle,  2001)},  la cual es una forma simple de implementar una cristalizaci\'on simulada. El m\'etodo consiste en usar un \'arbol ya elaborado (por ejemplo con Wagner + TBR),  perturbar la matriz de datos (con eliminaci\'on o repesado de caracteres), permutar las ramas del \'arbol para obtener el \'optimo de la nueva matriz,  volver la matriz a su estado original y buscar el \'arbol \'optimo con permutado de ramas (todo ese proceso es una iteraci\'on,  la cual se repite \textbf{n} veces). El rastrillo es eficiente usando solo unos pocos \'arboles por iteraci\'on y permutando una cantidad intermedia de caracteres (entre 10-25\%), en general, mejora dr\'asticamente el ajuste de los cladogramas en las primeras iteraciones (Nixon,  1999).
+ 
+	Para producir nuevas mejoras en el ajuste de cladogramas con n\'umeros mayores a 500 terminales,  los m\'etodos m\'as eficientes parecen ser la \''deriva de \'arboles\'',  que es una implementaci\'on m\'as expl\'icita de la cristalizaci\'on simulada (es decir aceptar soluciones ligeramente sub\'optimas con una determinada probabilidad,  y a medida que el an\'alisis avanza,  se disminuye la probabilidad de aceptaci\'on de los sub\'optimos),  y la fusi\'on de \'arboles,  que utiliza lo mejor de diferentes soluciones. Una revisi\'on completa de estos m\'etodos se puede consultar en {\color{red} Goloboff (1999)}.
+  
+  
+%\subsubsection*
+
+    %{Preguntas}
+  \pregunta{
+	 \begin{itemize}
+		  \item ?`C\'ual es y que hace el comando que permite hacer b\'usquedas con la t\'ecnica RACHET en cada programa?
+		  \item ?`Cada b\'usqueda o r\'eplica es independiente de otra?
+		  \item ?`Hay algún efecto en el resultado al hacer varias b\'usquedas continuas con el mismo n\'umero de r\'eplicas o es suficiente una sola b\'usqueda con m\'ultiples replicas? Realice b\'usquedas adicionales con par\'ametros diferentes que le permitan responder estas preguntas. Utilice un manejador grafico donde pueda visualizar la tendencia de los datos obtenidos.
+	 \end{itemize}
+   }
+
+
+\end{enumerate}
+
+  
+\item An\'alisis Filogen\'etico en R, Bibliotecas y dependencias
+
+\begin{enumerate}
+  \item Instale en su ordenador la versi\'on m\'as reciente de R ($\ge$ 3.00-11). 
+  \item Carge, y de ser necesario instale,  la biblioteca \Rlib{"phangorn"}
+  \Cmd{install.packages ("phangorn", dependencies=TRUE)}
+  \Cmd{library (phangorn)}
+  \item{Lectura del alineamiento o matriz y formato de escritura}
+  \begin{enumerate}
+    \item   Cargue el alineamiento o la matriz llamada chars2.txt  y defina los argumentos requeridos para que esta pueda ser le\'ida. 
+    \item Escr\'ibala como formato NEXUS utilizando el nombre primates.nex:
+    \Cmd{primates <- read.phyDat ($"$chars2.txt$"$, format=$"$phylip$"$,  type=$"$DNA$"$)}
+    \Cmd{write.nexus.data (primates, file="primates.nex")}
+    \item Revise la matriz primates.nex con un editor de texto,  identifique las particularidades del formato en R y si este archivo es similar al generado por winclada.
+  \end{enumerate}
+
+
+La funci\'on \Rfunc{read.phyDat()} permite leer diferentes tipos de caracteres como $"$DNA$"$,  $"$AA$"$,  $"$CODON$"$ o $"$USER$"$,  este \'ultimo es definido por el usuario. Posteriormente, el vector denominado primates es escrito en otro formato diferente al formato phyDat; la función \Rfunc{write.nexus.data()} escribe un archivo formato NEXUS a partir de un vector de secuencias. Los argumentos de una función pueden ser consultados con el comando  \Rfunc{args(Nombre\_funci\'on)} o con el comando de ayuda \Rfunc{?Nombre\_funci\'on}.
+
+
+%\subsubsection*
+
+{Preguntas}
+
+?`Qu\'e otras funciones en otras bibliotecas permiten leer y/o escribir archivos tipo Nexus,  Fasta,  Phylip,  Clustal,  Sequential e Interleave?\\
+
+\item{Topolog\'ias iniciales}
+
+Estime la matriz de distancia,  realice el an\'alisis de agrupamiento y grafique para un posterior an\'alisis.
+
+\Cmd{dm <- dist.dna (as.DNAbin(primates))} 
+\Cmd{treeUPGMA <- upgma (dm)}
+\Cmd{treeNJ <- NJ(dm) }
+\Cmd{plot (treeUPGMA,  main=$"$UPGMA$"$,  cex = 0.8)}
+\Cmd{plot (treeNJ,  $"$unrooted$"$,  main=$"$NJ$"$,  cex = 0.5) }
+
+
+La funci\'on \Rfunc{dist.dna()} permite obtener una matriz de distancias por pares de secuencias de ADN,  bajo un modelo evolutivo determinado. 
+Actualmente es posible estimar esta matriz bajo 11 modelos evolutivos diferentes,  adem\'as permite estimar la varianza entre distancia y el valor de gamma. Existen varios m\'etodo de agrupamiento por distancia para obtener la topolog\'ia inicial,  entre ellos los algoritmos UPGMA (=Unweighted Pair Group Method with Arithmetic Mean),  WPGMA (=Weighted Pair Group Method with Averaging),  NJ (Neighbor Joining) y UNJ (Unweighted Neighbor Joining); en este caso las funciones \Rfunc{upgma()} y \Rfunc{NJ()} permiten construir \'arboles de distancia bajo sus caracter\'isticas especificas,  los cuales pueden ser visualizados con la funci\'on \Rfunc{plot()}.
+
+
+\Cmd{treeRAM <- random.addition(primates,  method="fitch") }
+\Cmd{plot (treeRAM,  main="UPGMA",  cex = 0.8)}
+
+Otra forma de obtener \'arboles a partir de secuencias es usando la funci\'on \Rfunc{random.addition()},  esta permite definir los \'arboles iniciales de los cuales parte el an\'alisis de parsimonia.
+
+{Preguntas}
+
+?`En que difiere cada \'arbol obtenido?
+
+?`En que consiste el m\'etodo de FICHT y el m\'etodo de SANKOFF?
+
+?`Que hacen los algoritmos de agrupamiento UPGMA,  WPGMA,  NJ y UNJ?
+
+?`En que consiste el m\'etodo de construcción de \'arboles de random.addition?
+
+
+\item{Parsimonia y optimización}
+ 
+A partir de la matriz de dataos primtes.nex y las topologías construidas,  calcule la longitud  de los \'arboles y obtenga el \'arbol de menor costo o score.
+\Cmd{parsimony (treeUPGMA,  primates)}
+\Cmd{parsimony (treeNJ,  primates)}
+\Cmd{parsimony(treeRAM, primates)}
+
+La funci\'on \Rfunc{parsimony()} permite obtener el \'arbol de menor longitud utilizando el algoritmo del m\'etodo SANKOFF o de FITCH,  en este caso es una busqueda por omisi\'on dado que no se especifican los argumentos.
+ 
+
+Optimice cada topolog\'ia obtenida en el punto C,  utilizando el m\'etodo de optimización por omisión,  optimización por SPR y optimización por NNI. Registre sus resultados en el Ap\'endice 2.
+
+\item Optimización por omisión
+
+
+\Cmd{optParsUPGMA <- optim.parsimony (treeUPGMA,  primates)}
+
+
+\Cmd{optParsNJ <- optim.parsimony (treeNJ,  primates)}
+
+
+\Cmd{optParsRAM <- optim.parsimony (treeRAM,  primates)}
+
+
+\item Optimización con rearreglo de ramas espec\'ifico
+
+
+\Cmd{optParsUPGMA\_SPR <- optim.parsimony (treeUPGMA,  primates, rearrangements="SPR")}
+
+
+\Cmd{optParsUPGMA\_NNI <- optim.parsimony (treeUPGMA,  primates, rearrangements="NNI")}
+
+%\normalsize
+
+La funci\'on optim.parsimony() intenta encontrar el o los \'arboles mas parsimoniosos utilizando los m\'etodos de rearreglos NNI y SPR.
+
+%\subsubsection*
+
+{Preguntas}
+
+?`En que difieren los m\'etodos de rearreglos NNI,  SPR y TBR?
+
+?`Cuales  son los argumentos por omisi\'on de las funciones parsimony () y optim.parsimony ()?\\
+
+\item{Parsimonia usando Rachet} 
+
+
+
+Utilice el m\'etodo Rachet en parsimonia para hacer las b\'usquedas del o los \'arboles de menor costo. Complete la tabla del Ap\'endice 3 creando nuevas l\'ineas de c\'odigo para hacer las b\'usquedas con los \'arboles obtenidos en el proceso anterior,  use los siguientes par\'ametros para las  b\'usquedas.
+
+\item B\'usqueda con Rachet utilizando los \'arboles iniciales y optimizando con el m\'etodo de rearreglos NNI
+
+
+\Cmd{pratchet(primates,  start=treeUPGMA,  method="fitch",  maxit=100,  k=5,  trace=1,  all=FALSE, rearrangements="NNI")}
+
+\item B\'usqueda con Rachet utilizando los \'arboles iniciales y optimizando con el m\'etodo de rearreglos SPR
+
+
+\Cmd{pratchet(primates,  start=treeUPGMA,  method="fitch",  maxit=100,  k=5,  trace=1,  all=FALSE, rearrangements="SPR")}
+
+\item B\'usqueda con Rachet utilizando los \'arboles optimizados con NNI y optimizando con el m\'etodo de rearreglos NNI
+
+
+\Cmd{pratchet(primates,  start=optParsUPGMA\_NNI,  method="fitch",  maxit=100,  k=5,  trace=1,  all=FALSE, rearrangements="NNI")}
+
+
+\item B\'usqueda con Rachet utilizando los \'arboles optimizados con NNI y optimizando con el m\'etodo de rearreglos SPR
+
+
+\Cmd{pratchet(primates,  start=optParsUPGMA\_NNI,  method="fitch",  maxit=100,  k=5,  trace=1,  all=FALSE,  rearrangements="SPR")}
+
+
+
+\item B\'usqueda con Rachet utilizando los \'arboles optimizados con SPR y optimizando con el m\'etodo de rearreglos NNI
+
+
+\Cmd{pratchet(primates,  start=optParsUPGMA\_SPR,  method="fitch",  maxit=100,  k=5,  trace=1,  all=FALSE, rearrangements="NNI")}
+
+
+\item B\'usqueda con Rachet utilizando los \'arboles optimizados con SPR y optimizando con el m\'etodo de rearreglos SPR
+
+
+\Cmd{pratchet(primates,  start=optParsUPGMA\_SPR,  method="fitch", maxit=100,  k=5,  trace=1,  all=FALSE, rearrangements="SPR")}
+
+
+
+\Rfunc{pratchet()} hace b\'usquedas usando el m\'etodo de Rachet, estas b\'usquedas son hechas a partir de un \'arbol inicial ya sea optimizado o no,  aunque es preferible partir de un \'optimo ya dado. Tambi\'en puede iniciar haciendo una b\'usqueda para obtener el \'arbol o los \'arboles de partida, aplicar el m\'etodo de rachet y \'optimizar.
+
+
+%\subsubsection*
+
+{Preguntas02}
+
+?`Hay diferencias entre las b\'usquedas con rachet en t\'erminos de costos o tiempo?
+
+Escriba y ejecute la l\'inea de c\'odigo que le permitir\'ia realizar una b\'usqueda con:
+ 
+70 iteraciones en Rachet 
+
+Metodo SANKOFF
+
+rearreglo SPR
+
+Sin especificar el \'arbol inicial
+
+\end{enumerate}
+
+%\subsubsection*
+
+{PREGUNTAS GENERALES}
+
+De los diferentes programas usados,  ?`C\'ual estima usted que es el \'optimo? Explique las razones de su selecci\'on.\\
+?`C\'ual cree usted que ser\'ia(n) el(los) criterio(s) para seleccionar entre los diferentes programas?\\ 
+
+Elabore una tabla usando sus resultados y los de sus compa\~neros.  Para cada matriz,  ?`En qu\'e clase de b\'usqueda se obtuvo el mejor resultado?,  ?`c\'ual fue el tiempo en que se obtuvo dicho resultado?
+
+Dado que con una t\'ecnica heur\'istica existe el riesgo de no obtener el \'arbol m\'as corto ?`C\'omo justificar\'ia usted la b\'usqueda realizada?\\
+
+En este laboratorio solo se utilizaron algunos tipos de b\'usquedas posibles y algunos de los posibles comandos para cada programa. Trate de encontrar otros comandos de b\'usqueda en estos programas u otros par\'ametros para los comandos usados en la pr\'actica.
+
+\end{itemize}
+
+

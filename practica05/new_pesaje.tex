@@ -1,0 +1,55 @@
+\chapter{Pesaje de caracteres}
+\section*{Introducci'on}
+\index{Caract\'er!pesaje!t\'ecnicas} 
+Cuando se habla de pesaje de caracteres en clad'istica, se refiere a que algunos caracteres tienen m'as informaci'on que otros. El tema es controversial; algunos autores (por ejemplo, Kluge, 1997) argumentan que el pesado de caracteres es regresar a la subjetividad de la 'epoca de la taxonom'ia cl'asica (imponer a la filogenia un prejuicio de c'omo es la evoluci'on), y que en general los argumentos dados para el pesado diferencial, como incrementar la precisi'on y disminuir ambiguedad, son cubiertos por los an'alisis bajo pesos iguales; otros autores (por ejemplo, Goloboff, 1993, 1995) defienden el uso de pesado, argumentando que es claro tras un an'alisis filogen'etico que diferentes caracteres ofrecen una calidad informativa diferente; esto se puede observar, por ejemplo, al multiplicar la homoplasia de car'acter por el peso inicial que se le asign'o.\\
+Existen dos formas de hacer pesado de caracteres y una tercera que es un criterio de b\'usqueda y que no son excluyente del pesaje de caracteres. El primero es el pesado \textit{a priori}, antes de empezar el an'alisis.\index{Caract\'er!pesaje!a priori} 
+En la actualidad su forma m'as com'un es disminuir el peso del tercer codon en los an'alisis moleculares. Aunque se han propuesto muchas formas de encontrar a partir de los caracteres un peso inicial, quienes practican pesado del tercer codon no est'an muy preocupados en el asunto e insisten que lo importante es diferenciar un tipo de codon de los otros (Swofford et al., 1996).\\
+En el pesado \textit{a posteriori} el peso se asigna bas'andose en un an'alisis inicial de los datos;\index{Caract\'er!pesaje!a posteriori} se estima la \textit{confianza} del car'acter, usando por ejemplo, el 'indice de consistencia, o el de retenci'on, y con base en esos pesos se reinicia el an'alisis (Farris, 1969). En general es el esquema de pesaje m\'as usado. El pregunta clave aqu'i es: ?`c\'omo se hace este primer an\'alisis? Y despu'es, ?`c'omo se termina?. Otro de los problemas de esta forma de pesado radica en la comparaci'on de los cladogramas, puesto que diferentes juegos de pesos pueden producir diferentes respuestas que no son comparables (a nivel de los estad'isticos de ajuste, como longitud).\\
+La tercera forma de ''pesado'' no es ni \textit{a priori}, ni \textit{a posteriori}, ya que en realidad es un criterio de b\'usqueda. Esta forma es conocida como pesado impl'icito (Goloboff, 1993). Este procedimiento utiliza la confianza del car'acter (con una funci'on c'oncava de homoplasia) y utiliza ese valor como criterio 'optimo (en vez de la longitud pesada); el problema de este m'etodo, de hecho el de cualquier m\'etodo, es c'omo escoger entre las diferentes funciones.
+\section*{T'ecnicas}
+\index{Caract\'er!pesaje!sucesivo}
+El pesado sucesivo es muy popular para ''reducir'' la cantidad de 'arboles m'as parsimoniosos (Carpenter, 1988), aplicaci'on que no es correcta. Es importante insistir que es una metodolog'ia con su propia l'ogica, y que los resultados no tienen que coincidir con los de pesos iguales, ni en topolog'ia ni en n'umero de soluciones (impl'icito en Goloboff, 1995).\\
+Para iniciar las rondas de pesado, Farris (1969) propuso comenzar bas'andose en la compatibilidad de caracteres (caracteres que no se contradicen entre s'i). En la actualidad la forma m'as com'un es iniciar con un 'arbol de pesos iguales. Kjer et al. (2001, 2002) propusieron comenzar con el mejor resultado de varios 'arboles producto de \textit{bootstrap}
+\index{Remuestreo!bootstrap} (u otro m'etodo que produzca pseudor'eplicas).  Para detener el procedimiento, Farris (1969) propuso esperar hasta que los resultados fueran autoconsistentes, es decir que se produjeran los mismos 'arboles (y por lo tanto los mismos pesos). Como la autoconsistencia puede verse afectada por el hecho de tener gran cantidad de 'arboles 'optimos, es importante asegurarse de limitar el n'umero de iteraciones. Kjer et al. (2001, 2002) proponen no iterar y solo mantener los pesos dados por los 'arboles de las pseudor'eplicas.\\
+Farris (2001) trat'o de solucionar simultaneamente ambos problemas. Propuso comenzar con un 'arbol donde se ha hecho \textit{jackknife} con probalidad de 0.5, restaurar luego todos los caracteres y comenzar a partir de los estad'isticos del 'arbol producto de la permutaci'on e iterar;\index{Remuestreo!jackknife} el proceso se repite varias veces. Farris argumenta que si los pesos son independientes del punto inicial, las diferentes r'eplicas producir'an aproximadamente los mismos resultados (los resultados se muestran como un 'arbol consenso de la mayor'ia de las diferentes r'eplicas).\\
+El m'etodo de Goloboff es pr'acticamente igual a parsimonia tradicional. Es importante recalcar que aunque Goloboff ve'ia su m'etodo como un refinamiento de pesado sucesivo, este pesaje se puede usar igualmente en coordinaci'on con pesado impl'icito. La forma com'un de pesado impl'icito es usar una funci'on c'oncava de la forma $\frac{k}{k + h}$, donde $k$ es la constante de concavidad y $h$ la homoplasia del car'acter. Cuanto mayor sea la constante de concavidad, menos diferencia habr'a entre los caracteres muy homopl'asicos y los poco o no homopl'asicos.\index{B\'usqueda!funciones concavas}
+
+\section{Materiales}
+\noindent
+Matriz de datos (datos.pesado.dat).
+
+\section{M'etodos}
+\noindent
+\textbf{En \Pname{PAUP*}:}\\
+(1) Abra la matriz en \Pname{PAUP*} y realice una b'usqueda.\\
+(2) Repita la b'usqueda pesando diferencialmente el tercer codon.\\
+Compare los resultados con los de la matriz sin pesado diferencial.\\
+(3) Coloque todos los pesos iguales y realice una b'usqueda con pesado sucesivo, itere un m'aximo de 10 veces. Chequee si los pesos se estabilizaron revisando la longitud de los arboles usando \Cmd{pscores;}.\\
+\textbf{Tanto en \Pname{TNT} (o \Pname{PIWE}) como en \Pname{PAUP*}:}\\
+(4) Con los caracteres con pesos iguales, active los pesos impl'icados con k=1, y haga una b'usqueda.\\
+(5) Revise el soporte de los nodos usando \textit{jackknife} (use pocas r\'eplicas, m'aximo 100).\\
+(6) Repita desde (4) con valores de k de 3, 6 y 10.
+\subsection{Programas}
+\noindent
+\Pname{PAUP*}, \Pname{TNT}, \Pname{PIWE}.\\
+\subsection{Comandos}
+En \Pname{PAUP*} se pueden definir juegos de caracteres usando el c'odigo X - .$\backslash$ N, donde X es el n'umero del car'acter donde se empieza y N el n'umero de posiciones en los que se vuelve a aplicar la opci'on. Por lo tanto la instrucci'on \Cmd{weights 3:all;} todos los caracteres tendr'an peso de 3 y con \Cmd{weights 1: 3 - .$\backslash$ 3;} cada tercer car'acter, a partir del car'acter 3 ser'a pesado con 1. Usted puede chequear esto usando \Cmd{cstatus full=yes;} que le mostrar'a el peso de todos los caracteres y deben verse en la secuencia 3 3 1 3 3 1...\\
+\Pname{PAUP*} tambi'en tiene implementado una opci'on para tomar pesos a partir de los 'arboles en memoria. Esa opci'on es \Cmd{reweight}, en la que se pueden modificar el tipo de pesado, qu'e valor se va a utilizar y la escala de los pesos. !`Use la ayuda en l'inea para manipular estos valores!\\
+En \Pname{TNT} el pesado impl'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N'otese que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t'ecnicamente es como comenzar desde 1). \Pname{PIWE} usa directamente pesado impl'icito, y se cambia el valor de concavidad con la instrucci'on \Cmd{conc N;}. Tanto en \Pname{TNT} como en \Pname{PAUP*} el l'imite es de 32000 (lo cual es pr'acticamente equivalente a parsimonia lineal); en PIWE el valor m'aximo es 6. Adem'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci'on. A diferencia de \Pname{PIWE} y \Pname{PAUP*}, \Pname{TNT} usa una funci'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste de los dados en \Pname{PIWE} y \Pname{PAUP*}, pida el ajuste usando \Cmd{fit*;}.  En \Pname{PIWE} simplemente escriba \Cmd{fit;} y en \Pname{PAUP*} \Cmd{pscores gfit=yes;}.\\
+Adem'as, \Pname{TNT} permite definir su propia funci'on de concavidad usando \Cmd{piwe [A B C...];}, donde A es el fit para 0 pasos extra, B para 1, C para 2, etc.
+\section{Preguntas}
+\subsection{Pr'actica}
+\noindent
+Compare sus resultados (topolog\'ias y caracteres en los nodos) con todos los m'etodos de pesado utilizados. ?`En qu'e se parecen y en qu'e se diferencian los resultados?\\
+Usted debi'o definir una forma de pesado del tercer codon. Defienda su esquema de pesado y comp'arelo con el de sus compa~neros.\\
+Dados los resultados que encontr'o al medir el soporte de los nodos, ?`cree usted que hay sobreresoluci'on en los datos usados?\\
+\subsection{Generales}
+\noindent
+Escriba un ensayo corto (de media p'agina) donde presente su posici'on con respecto al pesado de caracteres. ?`Esta a favor o en contra? ?`por qu'e? ?`Cu\'ales son las ventajas y problemas que ofrece su posici'on?, ?`El pesaje contradice la l\'ogica de agrupamiento por homolog\'ias?\\
+
+\section{Literatura recomendada}
+\noindent
+Farris, 1969 [La idea original de pesar usando informaci'on de los cladogramas].\\
+Goloboff, 1995 [Una defensa de pesado impl'icito].\\
+Goloboff, 1997 [Aunque es solo una peque~na parte del art'iculo, es una de las pocas publicaciones donde se muestra una comparaci'on directa entre diferentes formas de pesaje usando matrices reales].\\
+Kluge, 1997 [Un ataque a todas las formas de pesado].

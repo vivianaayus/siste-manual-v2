@@ -1,0 +1,16 @@
+\subsection{TNT}
+\noindent
+Autor: Goloboff et al., 2007.\\
+Plataforma: MS-DOS, Windows, MacOS, Unix.\\
+Disponibilidad: es posible descargar un demo funcional, para 10 corridas. 
+El programa tiene un costo de US80.00.\\
+http://www.zmuc.dk/public/phylogeny/TNT/.
+\\
+Para parsimonia, es el programa m'as r'apido que se ha desarrollado; incluye varios tipos de b'usquedas especializadas, como la deriva y la fusi'on de 'arboles.\\
+\\
+Al igual que \Pname{NONA}, \Cmd{proc} le permite abrir la matriz de datos o archivos de instrucciones. Para las b'usquedas puede configurar los diferentes m'etodos usando \Cmd{ratchet}, \Cmd{drift} y \Cmd{mult}; al usar \Cmd{?} puede ver c'uales son los parametros, y con \Cmd{=} puede modificarlos.\\ \Cmd{Mult} puede usarse como la ''central de b'usqueda'', definiendo un n'umero de r'eplicas para una b'usqueda de Wagner y las posteriores mejoras con ratchet y drift (seg'un como est'en configurados). Para correr simplemente escriba \Cmd{mult: replic X;} para ejecutar el n'umero de r\'eplicas que desee (X).\\
+Con \Cmd{tsave* nombre} se abre el archivo ''nombre'' para guardar 'arboles. Gu'ardelos con \Cmd{save} y al final no olvide cerrar el archivo: \Cmd{tsave/;}\\
+El programa cuenta con ayuda en l'inea que puede ser consultada usando \Cmd{help} o escribiendo \Cmd{help comando} para un comando espec'ifico.\\
+Este es 'unico programa que tiene directamente implementado el remuestreo sim'etrico. Adem'as tiene implementado el soporte de Bremer, el soporte relativo de Bremer, el soporte de Brtemer dentro de los l'imites del Bremer absoluto y puede calcular la cantidad de grupos soportados-contradichos (FC). Con \Cmd{resample} usted puede configurar como quiere la permutaci'on. Con \Cmd{subop} (tambi'en en \Pname{NONA}) usted puede indicar la longitud de los sub'optimos, en diferencia de pasos con respecto al 'arbol 'optimo. \Cmd{Bsupport} hace el c'alculo del 'indice de Bremer, con un \Cmd{*} calcula el valor relativo, o puede usar \Cmd{Bsupport ]} para calcular el soporte relativo dentro de los l'imites del absoluto. Infortunadamente los resultados no se almacenan en ninguna parte, por lo que debe generar una salida (en formato de texto) de la interfaz del programa.\\
+Usted puede encontrar un manual para el lenguaje de macros en la direcci\'on:\\ 
+\href{}http://www.zmuc.dk/public/phylogeny/TNT/scripts/

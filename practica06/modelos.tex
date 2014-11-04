@@ -1,33 +1,38 @@
+%
+% modificado a nov 3 de 2014
+% inclute paup*
+% se elimina modeltest
+%
 \chapter{Modelos de evoluci\'on}
 \section*{Introducci\'on}
 \label{ch:molecular}
-Los sistem\'aticos moleculares se enfrentan ante un conjunto de datos distinto en algunos aspectos del que enfrentan los morf\'ologos:  un mismo tipo de estados (ACGT) se encuentra repetido a lo largo de toda la matriz de datos. En general, las ideas desarrolladas para analizar los datos moleculares tienen una aproximaci\'on estad\'istica, dado el origen de muchos de los an\'alisis moleculares en biolog\'ia molecular o en gen\'etica de poblaciones. Bajo la estimaci\'on estad\'istica se asume un modelo que genera las secuencias de ADN y con base en el modelo se estima qu\'e tanto se ajustan las hip\'otesis filogen\'eticas a los datos. A ese procedimiento se la conoce como \textbf{m\'axima verosimilitud} (\textit{maximum likelihood} en la literatura en ingl\'es).
+En sistem\'atica molecular se enfrenta un conjunto de datos distinto  a los caracteres morfol\'ogicos:  un mismo tipo de estados (ACGT/GAP) se encuentra repetido a lo largo de toda la matriz de datos, paraeste tipode datos moleculares, existen aproximaciones estad\'isticas, dado que el origen de muchos de los an\'alisis filogen\'eticos moleculares se originan en biolog\'ia molecular o en gen\'etica de poblaciones. Bajo la estimaci\'on estad\'istica se asume que un modelo genera las secuencias de ADN y a partir de tal modelo se estima qu\'e tanto se ajustan los datos a las hip\'otesis filogen\'eticas. Este procedimiento se conoce como \textbf{m\'axima verosimilitud} (\textit{maximum likelihood} en la literatura en ingl\'es).
 
-Los modelos moleculares se basan en la asignaci\'on de la probabilidad de transformar una base cualquiera en otra base, incluida esa misma base. El c\'alculo de esas probabilidades est\'a influenciado por diferentes par\'ametros, que, en principio, deber\'ian ser estimados de los datos, pero tambi\'en se han usado par\'ametros predefinidos, que quiz\'as no la mejor opci\'on.
+En los modelos moleculares se asigna tanto la probabilidad de transformar una base cualquiera en otra base, incluida esa misma base, como las frecuencias de bases en el equilibrio. El c\'alculo de esas probabilidades est\'a influenciado por diferentes par\'ametros como por los criterios de selecci\'on; en principio, los par\'ametros deber\'ian ser estimados a partir de losdatos de los datos, aunque algunos autores usaron en un inicio par\'ametros predefinidos.
 
-El modelo con el n\'umero de par\'ametros es conocido como JC o JC69, por los autores y el a\~no en que fue propuesto (Jukes y Cantor, 1969); se asume que la probabilidad de una base para transformarse en otra es siempre igual y que la frecuencia de las bases es igual (al menos al inicio de la evoluci\'on de los organismos). De ah\'i en adelante pueden agregarse m\'as par\'ametros que hacen m\'as complejo el modelo en diferentes direcciones. Puede asumirse diferencia entre cada tipo de base (ya sea qu\'imicamente AG-CT, o cada una por separado), diferencia de las probabilidades basada en la proporci\'on de cada base, tener en cuenta o no los sitios invariantes, asumir que algunos sitios son m\'as propensos a cambiar que otros (funci\'on $\Gamma$) y, finalmente, si existe o no un reloj molecular.
+El modelo con el menor n\'umero de par\'ametros es conocido como JC o JC69, por los autores y el a\~no en que fue propuesto (Jukes y Cantor, 1969), en este modelo se asume que la probabilidad de una base para transformarse en otra es siempre la misma y que la frecuencia de las bases es igual. A partir de este modelo se pueden agregar m\'as par\'ametros que hacen m\'as complejo el modelo en diferentes direcciones, ya sea al diferenciar entre los tipos de base (ya sea qu\'imicamente AG-CT, o cada una por separado), diferenciar las probabilidades basados en la proporci\'on de cada base, tener o no en cuenta o la variaci\'on dada por cada sitio al asumir que algunos sitios son m\'as propensos a cambiar que otros (funci\'on $\Gamma$) y, finalmente, si existe o no un reloj molecular.
 
+La informaci\'on b\'asica se puede consultar en citar Felsenstein () % citaa libro
 Swofford et al. (1996) es una referencia b\'asica para comprender el desarrollo de los distintos modelos. Page \& Holmes (1998) ofrecen un cap\'itulo ilustrativo sobre el tema. La idea general de modelos tambi\'en se aplica para la evoluci\'on prote\'ica, pero dado que casi siempre se tiene tanto la secuencia de amino\'acidos como la nucleot\'idica, esta \'ultima es la preferida al explotar m\'as directamente la informaci\'on (al menos a nivel de variaci\'on).
 
-Es de notar que las probabilidades de los datos (la verosimilitud) suelen ser muy peque\~nas, por lo que para facilitar los c\'alculos se utiliza el negativo del logaritmo natural de la verosimilitud, que es el valor reportado por los programas as\'i como en la literatura.
+Dado que los valores de las probabilidades de los datos son muy peque\~nas, y que es m\'as f\'acil sumar los logaritmos que multiplicar los n\'umeros iniciales, para facilitar se utiliza el negativo del logaritmo natural de la verosimilitud, que es el valor tradicionalmente reportado por los programas as\'i como en la literatura.
 
-Debido al aumento en el n\'umero de los par\'ametros, los modelos puedan explicar m\'as satisfactoriamente los datos (pero esto no implica que los modelos sean \emph{\textbf{m\'as} realistas}); por lo que la selecci\'on de un modelo no puede basarse en que el modelo mejora la probabilidad de los datos, sino si la mejora es (o no es) estad\'isticamente significativa, dado el n\'umero de par\'ametros usados en el modelo.
+Debido al aumento en el n\'umero de los par\'ametros, los modelos puedan explicar mejor los datos, lo que no implica que los modelos sean \emph{\textbf{m\'as}} realistas, por lo que la selecci\'on de un modelo no puede basarse en el aumento neto dle valor de verosimilitud, sino si la mejora es (o no es) estad\'isticamente significativa, dado el n\'umero de par\'ametros usados en el modelo.
 
 Existen dos aproximaciones b\'asicas para este problema. Dado que la mayor parte de los modelos son una especializaci\'on de otros modelos m\'as sencillos, es decir son modelos anidados, en los cuales el modelo m\'as sencillo es s\'olo un caso especial del modelo m\'as complejo, se puede hacer una prueba jer\'arquica de verosimilitud (hLRT\footnote
 {\begin{equation}
 \delta = -2 ln \frac{Max[L_{0}(modelo-nulo|datos]}{Max[L_{1}(modelo-alternativo|datos]} = 2 (ln L_{0} - ln L_{1}) 
 \end{equation}
-}) que compara la proporci\'on en la que se incrementa la verosimilitud al agregar el par\'ametro; se asume una distribuci\'on $\chi^2$  para la proporci\'on, tomando el n\'umero de par\'ametros extra como los grados de libertad. El problema de esta prueba es que no es claro si la distribuci\'on $\chi^2$ es v\'alida, y solo permite comparar modelos anidados; la prueba  es un tanto conflictiva al comparar GTR con GTR+I o GTR+$\Gamma$; se asume que la forma como se agregan los par\'ametros no sesga el resultado; usted puede revisar esta afirmaci\'on usando programas como \Pname{JModelTest}.
+}) que compara la proporci\'on en la que se incrementa la verosimilitud al agregar el par\'ametro; se asume una distribuci\'on $\chi^2$  para la proporci\'on, tomando el n\'umero de par\'ametros extra como los grados de libertad. El problema de esta prueba es que no es claro si la distribuci\'on $\chi^2$ es v\'alida, y solo permite comparar modelos anidados; la prueba es un tanto conflictiva al comparar GTR con GTR+I o GTR+$\Gamma$; se asume que la forma como se agregan los par\'ametros no sesga el resultado, lo cual no es v\'alido; usted puede revisar esta afirmaci\'on usando programas como \Pname{JModelTest} o \Pname{PAUP*}.
 
-La otra forma est\'a basada en medidas de informaci\'on, como el criterio de Akaike\footnote{AIC= -2lnL + 2N, donde lnL es el ajuste del modelo reportado y N el n\'umero de par\'ametros libres}, 
-o la cantidad de informaci\'on bayesiana\footnote{BIC=-2lnL + Nlnn, donde lnn, es el logaritmo natural de la longitud de la secuencia}. 
-En estos casos se calcula cuanta informaci\'on contiene el modelo dados los par\'ametros de este. La ventaja es que se puede hacer la comparaci\'on entre modelos sin tener que tomar una secuencia particular.
+Otra forma de selecci\'on del modelo \'optimo  est\'a basada en la medida de la informaci\'on, usando el criterio de Akaike\footnote{AIC= -2lnL + 2N, donde lnL es el ajuste del modelo reportado y N el n\'umero de par\'ametros libres}, 
+o la cantidad de informaci\'on bayesiana\footnote{BIC=-2lnL + Nlnn, donde lnn, es el logaritmo natural de la longitud de la secuencia}.  
+En estos casos se calcula cuanta informaci\'on contiene el modelo dados los par\'ametros de este. La ventaja es que se puede hacer la comparaci\'on entre modelos sin tener que tomar una secuencia particular y sin importar si los modelos est\'an anidados.
 
-
-En general se puede usar \Pname{JModeltest} \footnote{Si por alg\'un motivo no desea usar \Pname{Java} o prefiere tener m\'as control sobre los c\'alculos iniciales de los modelos, una alternativa peude ser  \Pname{PAUP* + Modeltest} o \Pname{MrModeltest}, que es una modificaci\'on de \Pname{Modeltest} pero calcula un menor n\'umero de modelos; en caso que de usar \Pname{MrModeltest}, tenga en mente que \textbf{no} ha evaluado todos los modelos.}
-o \Pname{R + ape + PhyML} o \Pname{JModeltest + PhyML}. 
-
-\Pname{JModeltest}  es un programa de \Pname{Java} por lo que funciona de la misma forma en todas las plataformas de computo, la  salida es en modo de texto / tablas dentro del mismo programa; el programa le permite mayor control sobre la forma de iniciar el c\'alculo, tanto desde el \'arbol de inicio hasta loa forma de implementar el test jer\'arquico, desde JC hacia GTR (\textit{forward}) o en sentido contrario  (\textit{backward}); es posible que obtenga distintos modelos dependiendo de la forma como estructure su an\'alisis. \Pname{R} en conjunto con \Pname{PhyML}, \Rlib{ape} puede realizar el c\'alculo del mejor mod\'elo de evoluci\'on molecular y graficar directamente los resultados.
+Para los c\'alculos, se puede usar \Pname{JModeltest}, o \Pname{PAUP*}, o \Pname{R + ape + PhyML} o \Pname{JModeltest + PhyML}. 
+ 
+\Pname{JModeltest} es un programa de \Pname{Java} por lo que funciona de la misma forma en todas las plataformas de computo, la  salida es en modo de texto / tablas dentro del mismo programa; el programa le permite mayor control sobre la forma de iniciar el c\'alculo, tanto desde el \'arbol de inicio hasta la forma de implementar el test jer\'arquico, desde JC hacia GTR (\textit{forward}) o en sentido contrario  (\textit{backward}); 
+puede usar hasta 203 modelos y de manera  autom\'atica corre los an\'alisis en m\'ultiples procesadores, lo que hace m\'as eficiente que \Pname{PAUP*} o \Pname{R}, adem\'as puede ejecutarlo en modo de texto, con modelos diferenciales lo que facilita su uso en clusters de computadores; es posible que obtenga distintos modelos dependiendo de la forma como estructure su an\'alisis. \Pname{R} en conjunto con \Rlib{ape} y \Pname{PhyML} puede realizar el c\'alculo del mejor mod\'elo de evoluci\'on molecular y graficar los resultados.
 
 
 \section*{T\'ecnicas}
@@ -41,30 +46,12 @@ o \Pname{R + ape + PhyML} o \Pname{JModeltest + PhyML}.
 %\textit{model.R}\\ 
 %\section{M\'etodos}
 %\subsection{Modeltest+PAUP}
-%\noindent
-
-
-\Pname{Modeltest} usa par sus c\'alculos de likelihood a \Pname{PAUP*}, el programa se ejecuta a trav\'es de la l\'inea de comandos, o usando un archivo por lotes, tal y como lo hizo en la pr\'actica de alineamiento con POY; %(vea la p\'agina ~\pageref{ch:alinear}); 
-la secuencia b\'asica de instrucciones desde la l\'inea de comandos es:
-\Cmd{modeltest  < model.scores >salida.txt}
+%
 \noindent
-donde \Fname{salida.txt} es su archivo de salida con la terminaci\'on txt (y en formato de texto).\\
 
-En \Pname{PAUP*}, junto con \Pname{modeltest}:
+Par obtener el modelo con programas como \Pname{PAUP*} o \Pname{R} debe tener un archivo de datos con las secuencias alineadas, revise la pr\'actica de alineamiento con POY; %(vea la p\'agina ~\pageref{ch:alinear}); 
 
-\begin{enumerate}		
-	\item Abra la matriz de datos \Datos{DNA1.nex} y ejecute el archivo \textit{modelblock3} en \Pname{PAUP*}.
-
-	\item Use la salida producida por \Pname{PAUP*}: model.scores. como archivo de entrada para \Pname{Modeltest}.
-
-	\item Siga paso a paso el test jer\'arquico presentado. Intente realizar otro test jer\'arquico comenzando con otro juego de par\'ametros (note que la salida de \Pname{ModelTest} incluye los ajustes de los 56 modelos explorados).
-
-	\item Calcule el valor de AIC para 4 diferentes modelos: JC, K80, GTR y uno de su elecci\'on. El valor de AIC ser\'a mejor cuanto m\'as \textbf{peque\~no}.
-
-	\item Para los mismos modelos y el escogido por el hLRT en \Pname{ModelTest}, calcule el criterio de informaci\'on bayesiano. Compare sus resultados, tanto para AIC como para BIC con el de sus compa\~neros, y determine c\'ual es o son los mejores modelos para esos criterios. Ordene los modelos del mejor al peor. 
-\end{enumerate}
-
-
+%la secuencia b\'asica de instrucciones desde la l\'inea de comandos es:
 
 
 En \Pname{JModeltest2 + PhyML}
@@ -77,7 +64,7 @@ En \Pname{JModeltest2 + PhyML}
 	
 	\item\label{itm:jm2} Calcule los valores de likelihood (likelihood scores), a partir de un \'arbol base de \Pname{BIONJ}. 
 	
-	\item Calcule el valor de AIC (criterio de elecci\'on del modelo de mayor ajuste a la matriz). El valor de AIC ser\'a mejor cuanto m\'as \textbf{peque\~no}.
+	\item Calcule el valor de AIC (criterio de elecci\'on del modelo de mayor ajuste a la matriz). El valor de AIC ser\'a mejor cuanto m\'as \textbf{peque\~no} sea.
 	
 	\item Revise la salida de AIC y anote cual es el modelo de mayor ajuste para la matriz de datos, asi como los par\'ametros de este modelo.
 	
@@ -95,42 +82,42 @@ En \Pname{R+ape+PhyML}
 
 \begin{enumerate}
 	
-	\item Abra \Pname{R} y revise si instalada la biblioteca \Rlib{ape}, en caso de no tenerla instalela.
+	\item Abra \Pname{R} y revise si instalada la biblioteca \Rlib{ape}, en caso de no tenerla, instalela.
 	
 	\item Coloque como directorio activo el directorio donde tenga los datos y \Pname{PhyML}
 	
 	\item Cree un archivo con las instrucciones:
 %%%%%%%%
 
-$\#\#${Lectura b\'asica de una matriz (ape)}\\
-$\#\#$
+%$\#\#${Lectura b\'asica de una matriz (ape)}\\
+%$\#\#$
 \\$\#\#$ cargamos la libreria \Rlib{ape}
-\\$\#\#$
+%\\$\#\#$
 \Cmd{library(ape)}
 $\#\#$
 \\$\#\#$ leemos datos alineados en formato tipo \Fname{phylip}
-\\$\#\#$ el alineamiento es solo por el ejercicio de mostrar
-\\$\#\#$ lo que debe hacerse y los comandos respectivos
-\\$\#\#$
+%\\$\#\#$ el alineamiento es solo por el ejercicio de mostrar
+%\\$\#\#$ lo que debe hacerse y los comandos respectivos
+%\\$\#\#$
 \Cmd{DNA <- read.dna(''alineado.phy'')}
-$\#\#$
+%$\#\#$
 \\$\#\#$ listado de tama\~no de las secuencias
-\\$\#\#$
+%\\$\#\#$
 \Cmd{table(unlist(lapply(DNA, length)))}
 
-%\section
+
 $\#\#${Test de modelos de evoluci\'on con \Rlib{ape}}\\
 \label{sec:phytest}
-$\#\#$
-\\$\#\#$ R y modelos via phyml 
-\\$\#\#$
+%$\#\#$
+%\\$\#\#$ R y modelos via phyml 
+%\\$\#\#$
 \\$\#\#$ cargamos la libreria ape
-\\$\#\#$
+%\\$\#\#$
 \Cmd{library(ape)}
-$\#\#$
+%$\#\#$
 \\$\#\#$  con phymltest probamos 28 modelos en phyml
 \\$\#\#$  ape + R hacen todo el proceso
-\\$\#\#$
+%\\$\#\#$
 \\$\#\#$  en linux cambie a
 \\$\#\#$  execname = ''./phyml'', si es local o
 \\$\#\#$
@@ -150,39 +137,74 @@ $\#\#$
 \\$\#\#$ 
 \Cmd{summary(modelo)}
 $\#\#$ 
-\\$\#\#$ grafique con 'plot' los valores de AIC
+\\$\#\#$ grafique con $'$plot$'$ los valores de AIC
 \\$\#\#$ 
-\Cmd{plot(modelo, main = 'test de modelos para ML, usando PhyML')}
+\Cmd{plot(modelo, main = $'$test de modelos para ML, usando PhyML$'$)}
 %%%%%%%%%
 
-	\\ o cargue cada instrucci\'on por l\'inea de comandos desde un editor de texto.
 
-	\item  si tiene todas las instrucciones escritas en un archivo \Datos{modelos.R}, puede usar este archivo y ejecutar todas las instrucciones desde la l\'inea de comandos:
+	\item Compare el modelo sugerido por AIC y por el test jer\'arquico.
+
+	\item Cargue cada instrucci\'on por l\'inea de comandos desde un editor de texto y si tiene todas las instrucciones escritas en un archivo \Datos{modelos.R}, puede usar este archivo y ejecutar todas las instrucciones desde la l\'inea de comandos:
 	\Cmd{R -f modelos.R} 
 	
-	\item Compare el modelo sugerido por AIC y por el test jer\'arquico.
+\end{enumerate}
+
+
+
+\\
+Tanto \Pname{JModeltest} como \Pname{R+ape} usan \Pname{PhyML} para el c\'alculo de los valores de likelihood; los dos programas permiten evaluar el modelo de una manera m\'as amigable que la l\'inea de comandos y tener o una salida gr\'afica (\Pname{R+ape}) o una salida de texto facilmente leible.
+
+
+
+
+En \Pname{PAUP*}:
+
+\begin{enumerate}		
+	\item Abra la matriz de datos \Datos{DNA1.nex}.
+	\item use \Cmd{help automodel;} para obtener ayuda sobre la instrucci\'on  y las opciones en uso.
+	\item  construya un \'arbol tal y como lo hizo en la secci\'on %vinculo a arboles
+	use un \'arbol de NJ con distancia de Jukes -Cantor como inicio:
+	   \Cmd{set criterion=dist;}
+	   \Cmd{dset distance=JC;}
+	   \Cmd{hsearch;}
+	   Este es el \'arbol de inicio para hacer los c\'alculos para la selecci\'on del modelo.
+	    
+	\item use 
+	   \Cmd{ automodel}
+	   para hacer una b\'usqueda por defecto
+	\item use 
+	   \Cmd{ automodel AIC=yes AICc=no BIC=no modelset=j3 lset=AIC invarSites=no gammaRates=no;}
+	   para hacer una b\'usqueda con el equivalente a 3 modelos en \Pname{jmodeltest}, compare los resultados con la b\'usqueda anterior.
+
+	   %\Cmd{}
+	   %\Cmd{
+	  
+	\item Calcule el valor de AIC para 4 diferentes modelos: JC, K80, GTR y uno de su elecci\'on. El valor de AIC ser\'a mejor cuanto m\'as \textbf{peque\~no}.
+
+	\item Para los mismos modelos y el escogido por el hLRT en \Pname{JModelTest}, calcule el criterio de informaci\'on bayesiano. Compare sus resultados, tanto para AIC como para BIC con el de sus compa\~neros, y determine c\'ual es o son los mejores modelos para esos criterios. Ordene los modelos del mejor al peor. 
+
+\pregunta{
+\begin{itemize}
+\item ?`Es el modelo escogido por el criterio de Akaike igual al escogido en el test jer\'arquico? ?`Usted esperar\'ia que lo fuesen?\\
+\item ?`Es igual el resultado en las distintas exploraciones realizadas? ?`Usted esperar\'ia que fuesen iguales \'o desiguales?\\ 
+\item ?`Son iguales los resultados en AIC y BIC?\\
+\item De usar los tres programas ?`usted espera la misma respuesta?
+\end{itemize}
+}
+
 \end{enumerate}
 
 
 
 
-\\
-\noindent
-si todas sus intrucciones estan en el archivo \texit{model.R}.\\
-\\
-Tanto \Pname{JModeltest} como \Pname{R+ape} usan \Pname{PhyML} para el c\'alculo de los valores de likelihood; los dos programas permiten evaluar el modelo de una manera m\'as amigable que la l\'inea de comandos y tener o una salida gr\'afica (\Pname{R+ape}) o una salida de texto facilmente leible.
 
-\section{Preguntas}
-\subsection{Pr\'actica}
-\noindent
-?`Es el modelo escogido por el criterio de Akaike igual al escogido en el test jer\'arquico? ?`Usted esperar\'ia que lo fuesen?\\
-?`Es igual el resultado en las distintas exploraciones realizadas? ?`Usted esperar\'ia que fuesen iguales \'o desiguales?\\ 
-?`Son iguales los resultados en AIC y BIC?\\
-De usar los tres programas ?`usted espera la misma respuesta?
-\subsection{Generales}
-\noindent
-?`C\'omo se relaciona el concepto de caracteres hom\'ologos usado en los primeros laboratorios, con el concepto de los modelos?\\
-?`Prefer\'ia usted usar siempre el mismo modelo (por ejemplo, JC)? Argumente su respuesta
+\preguntaGral{
+\begin{itemize}
+\item ?`C\'omo se relaciona el concepto de caracteres hom\'ologos usado en los primeros laboratorios, con el concepto de los modelos?\\
+\item ?`Prefer\'ia usted usar siempre el mismo modelo (por ejemplo, JC)? Argumente su respuesta
+\end{itemize}
+}
 
 \section{Literatura recomendada}
 \noindent

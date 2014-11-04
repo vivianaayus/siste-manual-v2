@@ -1,0 +1,13 @@
+[! cambia la busqueda a distancia]
+set criterion=dist;
+
+[! cambia JC]
+dset distance=JC;
+
+[! la busqueda]
+hsearch;
+
+[! modelos]
+
+automodel AIC=yes AICc=no BIC=no modelset=j3 lset=AIC invarSites=no gammaRates=no;
+

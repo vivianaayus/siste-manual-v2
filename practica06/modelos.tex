@@ -1,14 +1,14 @@
 %
 % modificado a nov 3 de 2014
-% inclute paup*
-% se elimina modeltest
+% incluye paup*
+% se elimina (mr)modeltest
 %
 \chapter{Modelos de evoluci\'on}
 \section*{Introducci\'on}
 \label{ch:molecular}
 En sistem\'atica molecular se enfrenta un conjunto de datos distinto  a los caracteres morfol\'ogicos:  un mismo tipo de estados (ACGT/GAP) se encuentra repetido a lo largo de toda la matriz de datos, paraeste tipode datos moleculares, existen aproximaciones estad\'isticas, dado que el origen de muchos de los an\'alisis filogen\'eticos moleculares se originan en biolog\'ia molecular o en gen\'etica de poblaciones. Bajo la estimaci\'on estad\'istica se asume que un modelo genera las secuencias de ADN y a partir de tal modelo se estima qu\'e tanto se ajustan los datos a las hip\'otesis filogen\'eticas. Este procedimiento se conoce como \textbf{m\'axima verosimilitud} (\textit{maximum likelihood} en la literatura en ingl\'es).
 
-En los modelos moleculares se asigna tanto la probabilidad de transformar una base cualquiera en otra base, incluida esa misma base, como las frecuencias de bases en el equilibrio. El c\'alculo de esas probabilidades est\'a influenciado por diferentes par\'ametros como por los criterios de selecci\'on; en principio, los par\'ametros deber\'ian ser estimados a partir de losdatos de los datos, aunque algunos autores usaron en un inicio par\'ametros predefinidos.
+En los modelos moleculares se asigna tanto la probabilidad de transformar una base cualquiera en otra base, incluida esa misma base, como las frecuencias de bases en el equilibrio. El c\'alculo de esas probabilidades est\'a influenciado por diferentes par\'ametros como por los criterios de selecci\'on; en principio, los par\'ametros deber\'ian ser estimados a partir  de los datos, aunque algunos autores usaron en un inicio modelos predefinidos de acuerdo a la opini\'on del investigador.
 
 El modelo con el menor n\'umero de par\'ametros es conocido como JC o JC69, por los autores y el a\~no en que fue propuesto (Jukes y Cantor, 1969), en este modelo se asume que la probabilidad de una base para transformarse en otra es siempre la misma y que la frecuencia de las bases es igual. A partir de este modelo se pueden agregar m\'as par\'ametros que hacen m\'as complejo el modelo en diferentes direcciones, ya sea al diferenciar entre los tipos de base (ya sea qu\'imicamente AG-CT, o cada una por separado), diferenciar las probabilidades basados en la proporci\'on de cada base, tener o no en cuenta o la variaci\'on dada por cada sitio al asumir que algunos sitios son m\'as propensos a cambiar que otros (funci\'on $\Gamma$) y, finalmente, si existe o no un reloj molecular.
 

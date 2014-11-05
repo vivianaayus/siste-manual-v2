@@ -40,6 +40,9 @@
 %\includeonly{./practica06/modelos}
 
 
+\usepackage{fontspec}
+%\usepackage{ubuntu}
+
 %%%%%%%%
 %%%%%%%% color in seccion
 %%%%%%%%
@@ -48,16 +51,26 @@
 \usepackage{titlesec}
 
 \titleformat{\section}
-{\color{blue}\normalfont\large\bfseries}
-{\color{blue}\thesection}{1em}{}
+%{\color{black!45}\normalfont\large\bfseries}
+{\color{black!60}\normalfont\large}
+{\color{black!60}\thesection}{1em}{}
 
 \titleformat{\chapter}
-{\color{red}\normalfont\Large\bfseries}
-{\color{red}\theschapter}{1em}{}
+{\color{black!80}\normalfont\Large\bfseries}
+{\color{black!80}{Pr\'actica }\thechapter}{1em}{}
 
+\fontspec{Ubuntu}
 
+\usepackage{setspace} 
 
 \begin{document}
+
+
+\doublespacing
+
+\fontsize{14}{14}\selectfont
+
+
 %
 % 
 \include{portada}

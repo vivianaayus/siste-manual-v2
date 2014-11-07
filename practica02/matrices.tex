@@ -84,13 +84,13 @@ Abra el archivo de datos morfol\'ogicos para vertebrados \Datos{datos.vertebrado
 		\Cmd{library(phangorn)}
 
 		\item En caso de no tenerlas disponibles primero bajelas con la instrucci\'on:
-		\Cmd{install.packages(c(\'\'ape\'\',\'\'phangorn\'\'), dependencies=T)}\footnote{La funci\'on \Rfunc{install.packages("Nombre\_paquete")} permite hacer la descarga de los paquetes directamente del repositorio desde el entorno de R. Tambi\'en es posible hacer la descarga directamente de la pagina web e instalarlo desde cualquier directorio en el ordenador dando directamente la ruta a dicho sitio: 
-		\Cmd{install.packages ("../usuario/R/Packages/Paquete.tar.gz")}
+		\Cmd{install.packages(c($"$ape$"$,$"$phangorn$"$), dependencies=T)}\footnote{La funci\'on \Rfunc{install.packages($"$Nombre\_paquete$"$)} permite hacer la descarga de los paquetes directamente del repositorio desde el entorno de R. Tambi\'en es posible hacer la descarga directamente de la pagina web e instalarlo desde cualquier directorio en el ordenador dando directamente la ruta a dicho sitio: 
+		\Cmd{install.packages ($"$../usuario/R/Packages/Paquete.tar.gz$"$)}
 		
 		Tenga en cuenta que de este modo deberá descargar e instalar todas las dependencias requeridas por el paquete de manera independiente. El comando library() le permitir\'a cargar el paquete en el entorno de R para poder empezar a trabajar con todas sus utilidades.}
 
 		\item Abra la matriz de datos en formato de texto simple y asignela a un objeto de R: 
-		\Cmd{ datos $<-$ read.table(\'\'matriz.txt\'\')}
+		\Cmd{ datos $<-$ read.table($"$matriz.txt$"$)}
 
 		\item Revise los nombres de las variables en la matriz con
 		\Cmd{names(datos)}
@@ -99,10 +99,10 @@ Abra el archivo de datos morfol\'ogicos para vertebrados \Datos{datos.vertebrado
 		\Cmd{row.names(datos)}
 
 		\item Abra la matriz de datos en formato \Fname{phylip} y asignela a un objeto de R: 
-		\Cmd{datos.Phylip $<-$ read.phyDat(\'\'DNA1.phy\'\', format=\'\'phylip\'\', type=\'\'DNA\'\')} 
+		\Cmd{datos.Phylip $<-$ read.phyDat($"$DNA1.phy$"$, format=$"$phylip$"$, type=$"$DNA$"$)} 
 
 		\item Escriba en formato  \Fname{Nexus} la matriz leida anteriomente:
-		\Cmd{write.nexus.data(datos.Phylip,file=\'\'NuevaDNA1.nex\'\')}
+		\Cmd{write.nexus.data(datos.Phylip,file=$"$NuevaDNA1.nex$"$)}
 
 		\item Abra la matriz escrita con \Pname{Winclada} o \Pname{Mesquite} y revise la conversi\'on.
 	\end{itemize}
@@ -149,4 +149,4 @@ Maddison et al., 1997 [Una introducci\'on al formato NEXUS].
 
 cita mesquite y sus bibliotecas
 
-cita a NN? hennig? por que las matrices son importantes
+cita a NN? hennig? por que las matrices son importantes?

@@ -62,42 +62,54 @@ Para iniciar las rondas de pesado, Farris (1969) propuso comenzar bas\'andose en
 Farris (2001) trat\'o de solucionar simultaneamente ambos problemas. Propuso comenzar con un \'arbol donde se ha hecho \textit{jackknife} con probalidad de 0.5, restaurar luego todos los caracteres y comenzar a partir de los estad\'isticos del \'arbol producto de la permutaci\'on e iterar;\index{Remuestreo!jackknife} el proceso se repite varias veces. Farris argumenta que si los pesos son independientes del punto inicial, las diferentes r\'eplicas producir\'an aproximadamente los mismos resultados (los resultados se muestran como un \'arbol consenso de la mayor\'ia de las diferentes r\'eplicas).\\
 El m\'etodo de Goloboff es pr\'acticamente igual a parsimonia tradicional. Es importante recalcar que aunque Goloboff ve\'ia su m\'etodo como un refinamiento de pesado sucesivo, este pesaje se puede usar igualmente en coordinaci\'on con pesado impl\'icito. La forma com\'un de pesado impl\'icito es usar una funci\'on c\'oncava de la forma $\frac{k}{k + h}$, donde $k$ es la constante de concavidad y $h$ la homoplasia del car\'acter. Cuanto mayor sea la constante de concavidad, menos diferencia habr\'a entre los caracteres muy homopl\'asicos y los poco o no homopl\'asicos.\index{B\'usqueda!funciones concavas}
 
-\section{Materiales}
-\noindent
-Matriz de datos (datos.pesado.dat).
+%
+\section*{T\'ecnicas}
 
-\section{M\'etodos}
-\noindent
-\textbf{En \Pname{PAUP*}:}\\
-(1) Abra la matriz en \Pname{PAUP*} y realice una b\'usqueda.\\
-(2) Repita la b\'usqueda pesando diferencialmente el tercer codon.\\
-Compare los resultados con los de la matriz sin pesado diferencial.\\
-(3) Coloque todos los pesos iguales y realice una b\'usqueda con pesado sucesivo, itere un m\'aximo de 10 veces. Chequee si los pesos se estabilizaron revisando la longitud de los arboles usando \Cmd{pscores;}.\\
-\textbf{Tanto en \Pname{TNT} (o \Pname{PIWE}) como en \Pname{PAUP*}:}\\
-(4) Con los caracteres con pesos iguales, active los pesos impl\'icados con k=1, y haga una b\'usqueda.\\
-(5) Revise el soporte de los nodos usando \textit{jackknife} (use pocas r\'eplicas, m\'aximo 100).\\
-(6) Repita desde (4) con valores de k de 3, 6 y 10.
-\subsection{Programas}
-\noindent
+
+Para la matriz de datos (datos.pesado.dat).
+
+\begin{enumerate}
+	\item En \Pname{PAUP*}
+	se pueden definir juegos de caracteres usando el c\'odigo X - .$\backslash$ N, donde X es el n\'umero del car\'acter donde se empieza y N el n\'umero de posiciones en los que se vuelve a aplicar la opci\'on. Por lo tanto la instrucci\'on \Cmd{weights 3:all;} todos los caracteres tendr\'an peso de 3 y con \Cmd{weights 1: 3 - .$\backslash$ 3;}\\ cada tercer car\'acter, a partir del car\'acter 3 ser\'a pesado con 1. Usted puede chequear esto usando \Cmd{cstatus full=yes;} que le mostrar\'a el peso de todos los caracteres y deben verse en la secuencia 3 3 1 3 3 1...,
+	tambi\'en tiene implementado una opci\'on para tomar pesos a partir de los \'arboles en memoria. Esa opci\'on es \Cmd{reweight}\\en la que se pueden modificar el tipo de pesado, qu\'e valor se va a utilizar y la escala de los pesos. !`Use la ayuda en l\'inea para manipular estos valores!
+	\begin{enumerate}
+		\item Abra la matriz y realice una b\'usqueda simple.
+		\item Repita la b\'usqueda pesando diferencialmente el tercer cod\'on (por ejemplo asignandole un peso de 0), primero creamos la partici\'on
+		\Cmd{charset  terceraPosicion=3-.\3;}
+
+		y luego se asigna el peso \Cmd{weight 0 :terceraPosicion;}
+
+		Compare los resultados con los de la matriz sin pesado diferencial.
+
+		\item Coloque todos los pesos iguales y realice una b\'usqueda con pesado sucesivo, itere un m\'aximo de 10 veces. Chequee si los pesos se estabilizaron revisando la longitud de los arboles usando \Cmd{pscores;}.
+	\end{enumerate}
+	
+	\item En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N\'ote que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal). Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste generados en  \Pname{PAUP*}, puede obtener el ajuste usando \Cmd{fit*;}.  En  \Pname{PAUP*} use \Cmd{pscores gfit=yes;,. adem\'as, \Pname{TNT} permite definir su propia funci\'on de concavidad usando \Cmd{piwe [A B C...;}, donde A es el fit para 0 pasos extra, B para 1, C para 2 y asi sucesivamente. Tanto en \Pname{TNT}  como en \Pname{PAUP*}:
+	\begin{enumerate}
+		\item Con los caracteres con pesos iguales, active los pesos impl\'icados con k=1, y haga una b\'usqueda.
+		\item Revise el soporte de los nodos usando \textit{jackknife} (use pocas r\'eplicas, m\'aximo 100).
+		\item Repita los an\'alisis con valores de k de 3, 6 y 10.
+	\end{enumerate}
+
 \Pname{PAUP*}, \Pname{TNT}, \Pname{PIWE}.\\
 \subsection{Comandos}
-En \Pname{PAUP*} se pueden definir juegos de caracteres usando el c\'odigo X - .$\backslash$ N, donde X es el n\'umero del car\'acter donde se empieza y N el n\'umero de posiciones en los que se vuelve a aplicar la opci\'on. Por lo tanto la instrucci\'on \Cmd{weights 3:all;} todos los caracteres tendr\'an peso de 3 y con \Cmd{weights 1: 3 - .$\backslash$ 3;} cada tercer car\'acter, a partir del car\'acter 3 ser\'a pesado con 1. Usted puede chequear esto usando \Cmd{cstatus full=yes;} que le mostrar\'a el peso de todos los caracteres y deben verse en la secuencia 3 3 1 3 3 1...\\
-\Pname{PAUP*} tambi\'en tiene implementado una opci\'on para tomar pesos a partir de los \'arboles en memoria. Esa opci\'on es \Cmd{reweight}, en la que se pueden modificar el tipo de pesado, qu\'e valor se va a utilizar y la escala de los pesos. !`Use la ayuda en l\'inea para manipular estos valores!\\
-En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N\'otese que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). \Pname{PIWE} usa directamente pesado impl\'icito, y se cambia el valor de concavidad con la instrucci\'on \Cmd{conc N;}. Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal); en PIWE el valor m\'aximo es 6. Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PIWE} o \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste de los dados en \Pname{PIWE} y \Pname{PAUP*}, pida el ajuste usando \Cmd{fit*;}.  En \Pname{PIWE} simplemente escriba \Cmd{fit;} y en \Pname{PAUP*} \Cmd{pscores gfit=yes;}.\\
-Adem\'as, \Pname{TNT} permite definir su propia funci\'on de concavidad usando \Cmd{piwe [A B C...;}, donde A es el fit para 0 pasos extra, B para 1, C para 2 y asi sucesivamente.
-\section{Preguntas}
-\subsection{Pr\'actica}
-\noindent
-Compare sus resultados (topolog\'ias y caracteres en los nodos) con todos los m\'etodos de pesado utilizados. ?`En qu\'e se parecen y en qu\'e se diferencian los resultados?\\
-Usted debi\'o definir una forma de pesado del tercer codon. Defienda su esquema de pesado y comp\'arelo con el de sus compa~neros.\\
-Dados los resultados que encontr\'o al medir el soporte de los nodos, ?`cree usted que hay sobreresoluci\'on en los datos usados?\\
-\subsection{Generales}
-\noindent
-Escriba un ensayo corto (de media p\'agina) donde presente su posici\'on con respecto al pesado de caracteres. ?`Esta a favor o en contra? ?`por qu\'e? ?`Cu\'ales son las ventajas y problemas que ofrece su posici\'on?, ?`El pesaje contradice la l\'ogica de agrupamiento por homolog\'ias?\\
 
-\section{Literatura recomendada}
-\noindent
+
+\end{enumerate}
+
+\preguntaGral{
+	\begin{itemize}
+		\item Compare sus resultados (topolog\'ias y caracteres en los nodos) con todos los m\'etodos de pesado utilizados. ?`En qu\'e se parecen y en qu\'e se diferencian los resultados?
+		\item Usted debi\'o definir una forma de pesado del tercer codon. Defienda su esquema de pesado y comp\'arelo con el de sus compa~neros.
+		\item Dados los resultados que encontr\'o al medir el soporte de los nodos, ?`cree usted que hay sobreresoluci\'on en los datos usados?
+		\item Escriba un ensayo corto (de media p\'agina) donde presente su posici\'on con respecto al pesado de caracteres. ?`Esta a favor o en contra? ?`por qu\'e? ?`Cu\'ales son las ventajas y problemas que ofrece su posici\'on?, ?`El pesaje contradice la l\'ogica de agrupamiento por homolog\'ias?
+	\end{itemize}
+
+
+
+\section*{Literatura recomendada}
+
 Farris, 1969 [La idea original de pesar usando la informaci\'on derivada de los cladogramas].\\
 Goloboff, 1995 [Una defensa de pesado impl\'icito].\\
 Goloboff et al., 2008 [Un an\'alsis emp\'irico que muestra que pesaje es un mejor predictor que parsimonia lineal].\\
-Kluge, 1997 [Un ataque a todas las formas de pesado].
+Kluge, 1997 [Un ataque a todas las formas de pesaje].

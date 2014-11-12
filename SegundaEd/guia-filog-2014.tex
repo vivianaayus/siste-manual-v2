@@ -41,6 +41,7 @@
 
 
 %\usepackage{fontspec}
+%\setmainfont{Verdana}
 
 %\fontspec{Ubuntu}
 
@@ -64,6 +65,9 @@
 {\color{black!80}{Pr\'actica }\thechapter}{1em}{}
 
 \usepackage{setspace} 
+
+%% para mono espacio
+\usepackage{inconsolata}
 
 \begin{document}
 
@@ -122,22 +126,26 @@
 %
 \include{./practica04/busquedasPars}
 
- 
+
+%
+\include{./practica08/consenso}
+
+
 %
 \include{./practica05/pesaje2014}
+
+
+
+%
+\include{./practica09/soporteBootJackBremer}
+
 
 %
 \include{./practica06/modelos}
 
 
 %
-%\input{./practica07/soporte_new2013.tex}
-
-%
-\include{./practica08/consenso}
-
-%
-%\input{./practica09/likelihood2009.tex}
+\include{./practica12/likelihood2009a}
 
 
 
@@ -164,9 +172,11 @@
 \renewcommand{\chaptername}{Ap\'endice}
 
 %
-\input{./apendice/programas.tex}
-% 
+\input{./intro/tipografia.tex}
+
 %
+\input{./apendice/programas.tex}
+
 %
 \input{./apendice/formatos.tex}
 

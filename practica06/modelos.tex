@@ -4,7 +4,11 @@
 % se elimina (mr)modeltest
 %
 \chapter{Modelos de evoluci\'on}
+
+
 \section*{Introducci\'on}
+\index{Likelihood!modelos}
+
 \label{ch:molecular}
 En sistem\'atica molecular se enfrenta un conjunto de datos distinto  a los caracteres morfol\'ogicos:  un mismo tipo de estados (ACGT/GAP) se encuentra repetido a lo largo de toda la matriz de datos, paraeste tipode datos moleculares, existen aproximaciones estad\'isticas, dado que el origen de muchos de los an\'alisis filogen\'eticos moleculares se originan en biolog\'ia molecular o en gen\'etica de poblaciones. Bajo la estimaci\'on estad\'istica se asume que un modelo genera las secuencias de ADN y a partir de tal modelo se estima qu\'e tanto se ajustan los datos a las hip\'otesis filogen\'eticas. Este procedimiento se conoce como \textbf{m\'axima verosimilitud} (\textit{maximum likelihood} en la literatura en ingl\'es).
 
@@ -99,7 +103,7 @@ $\#\#$
 %\\$\#\#$ el alineamiento es solo por el ejercicio de mostrar
 %\\$\#\#$ lo que debe hacerse y los comandos respectivos
 %\\$\#\#$
-\Cmd{DNA <- read.dna(''alineado.phy'')}
+\Cmd{DNA <- read.dna($"$alineado.phy$"$)}
 %$\#\#$
 \\$\#\#$ listado de tama\~no de las secuencias
 %\\$\#\#$
@@ -119,15 +123,15 @@ $\#\#${Test de modelos de evoluci\'on con \Rlib{ape}}\\
 \\$\#\#$  ape + R hacen todo el proceso
 %\\$\#\#$
 \\$\#\#$  en linux cambie a
-\\$\#\#$  execname = ''./phyml'', si es local o
+\\$\#\#$  execname = $"$./phyml$"$, si es local o
 \\$\#\#$
-\\$\#\#$  execname = ''phyml'', si es global
+\\$\#\#$  execname = $"$phyml$"$, si es global
 \\$\#\#$
 \\$\#\#$ en windows
 \\$\#\#$
-\Cmd{modelo<-phymltest(''alineado.phy'', format = ''sequential'', itree = NULL,exclude = NULL, execname = ''phyml.exe'', append = FALSE)}
+\Cmd{modelo<-phymltest($"$alineado.phy$"$, format = $"$sequential$"$, itree = NULL,exclude = NULL, execname = $"$phyml.exe$"$, append = FALSE)}
   $\#\#$  
-\\$\#\#$  use format = ''interleaved'' si aplica a su matriz 
+\\$\#\#$  use format = $"$interleaved$"$ si aplica a su matriz 
 \\$\#\#$ 
 \\$\#\#$ con print puede revisar los valores de AIC
 \\$\#\#$
@@ -206,6 +210,6 @@ En \Pname{PAUP*}:
 \end{itemize}
 }
 
-\section{Literatura recomendada}
+\section*{Literatura recomendada}
 \noindent
 Posada \& Crandall, 2001 [presentan de manera completa c\'omo seleccionar modelos bas\'andose en la maximizaci\'on del ajuste].

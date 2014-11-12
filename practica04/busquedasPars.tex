@@ -1,6 +1,7 @@
 
 \chapter{B\'uquedas mediante parsimonia} % (fold)
 \label{cha:parsimonia}
+\index{Parsimonia!b\'uquedas}
 
 \section*{Introducci\'on} 
 
@@ -145,7 +146,7 @@ la mayor parte de los programas actuales tienen esta opci\'on: inician con una \
 
 	En problemas m\'as complejos de 100 o m\'as terminales, se requiere utilizar t\'ecnicas m\'as sofisticadas para obtener resultados satisfactorios. La m\'as sencilla es el rastrillo o pi\~n\'on (\textit{ratchet}\index{B\'usqueda!Ratchet} en ingl'es) {\color{red}(Nixon,  1999; Quickle,  2001)},  la cual es una forma simple de implementar una cristalizaci\'on simulada. El m\'etodo consiste en usar un \'arbol ya elaborado (por ejemplo con Wagner + TBR),  perturbar la matriz de datos (con eliminaci\'on o repesado de caracteres), permutar las ramas del \'arbol para obtener el \'optimo de la nueva matriz,  volver la matriz a su estado original y buscar el \'arbol \'optimo con permutado de ramas (todo ese proceso es una iteraci\'on,  la cual se repite \textbf{n} veces). El rastrillo es eficiente usando solo unos pocos \'arboles por iteraci\'on y permutando una cantidad intermedia de caracteres (entre 10-25\%), en general, mejora dr\'asticamente el ajuste de los cladogramas en las primeras iteraciones (Nixon,  1999).
  
-	Para producir nuevas mejoras en el ajuste de cladogramas con n\'umeros mayores a 500 terminales,  los m\'etodos m\'as eficientes parecen ser la $$"$$deriva de \'arboles$$"$$,  que es una implementaci\'on m\'as expl\'icita de la cristalizaci\'on simulada (es decir aceptar soluciones ligeramente sub\'optimas con una determinada probabilidad,  y a medida que el an\'alisis avanza,  se disminuye la probabilidad de aceptaci\'on de los sub\'optimos),  y la fusi\'on de \'arboles,  que utiliza lo mejor de diferentes soluciones. Una revisi\'on completa de estos m\'etodos se puede consultar en {\color{red} Goloboff (1999)}.
+	Para producir nuevas mejoras en el ajuste de cladogramas con n\'umeros mayores a 500 terminales,  los m\'etodos m\'as eficientes parecen ser la $"$deriva de \'arboles$"$,  que es una implementaci\'on m\'as expl\'icita de la cristalizaci\'on simulada (es decir aceptar soluciones ligeramente sub\'optimas con una determinada probabilidad,  y a medida que el an\'alisis avanza,  se disminuye la probabilidad de aceptaci\'on de los sub\'optimos),  y la fusi\'on de \'arboles,  que utiliza lo mejor de diferentes soluciones. Una revisi\'on completa de estos m\'etodos se puede consultar en {\color{red} Goloboff (1999)}.
   
   
 %\subsubsection*
@@ -168,19 +169,19 @@ la mayor parte de los programas actuales tienen esta opci\'on: inician con una \
 \begin{enumerate}
   \item Instale en su ordenador la versi\'on m\'as reciente de R ($\ge$ 3.00-11). 
   \item Carge, y de ser necesario instale,  la biblioteca \Rlib{phangorn}
-  \Cmd{install.packages ($$"$$phangorn$$"$$, dependencies=TRUE)}
+  \Cmd{install.packages ($"$phangorn$"$, dependencies=TRUE)}
   \Cmd{library (phangorn)}
   \item{Lectura del alineamiento o matriz y formato de escritura}
   \begin{enumerate}
     \item   Cargue el alineamiento o la matriz llamada chars2.txt  y defina los argumentos requeridos para que esta pueda ser le\'ida. 
     \item Escr\'ibala como formato NEXUS utilizando el nombre primates.nex:
-    \Cmd{primates <- read.phyDat ($$"$$chars2.txt$$"$$, format=$$"$$phylip$$"$$,  type=$$"$$DNA$$"$$)}
+    \Cmd{primates $<-$ read.phyDat ($"$chars2.txt$"$, format=$"$phylip$"$,  type=$"$DNA$"$)}
     \Cmd{write.nexus.data (primates, file=$"$primates.nex$"$)}
     \item Revise la matriz primates.nex con un editor de texto,  identifique las particularidades del formato en R y si este archivo es similar al generado por winclada.
   \end{enumerate}
 
 
-La funci\'on \Rfunc{read.phyDat()} permite leer diferentes tipos de caracteres como $$"$$DNA$$"$$,  $$"$$AA$$"$$,  $$"$$CODON$$"$$ o $$"$$USER$$"$$,  este \'ultimo es definido por el usuario. Posteriormente, el vector denominado primates es escrito en otro formato diferente al formato phyDat; la funci\'on \Rfunc{write.nexus.data()} escribe un archivo formato NEXUS a partir de un vector de secuencias. Los argumentos de una funci\'on pueden ser consultados con el comando \Rfunc{args(Nombre\_funci\'on)} o con el comando de ayuda \Rfunc{?Nombre\_funci\'on}.
+La funci\'on \Rfunc{read.phyDat()} permite leer diferentes tipos de caracteres como $"$DNA$"$,  $"$AA$"$,  $"$CODON$"$ o $"$USER$"$,  este \'ultimo es definido por el usuario. Posteriormente, el vector denominado primates es escrito en otro formato diferente al formato phyDat; la funci\'on \Rfunc{write.nexus.data()} escribe un archivo formato NEXUS a partir de un vector de secuencias. Los argumentos de una funci\'on pueden ser consultados con el comando \Rfunc{args(Nombre\_funci\'on)} o con el comando de ayuda \Rfunc{?Nombre\_funci\'on}.
 
 
 %\subsubsection*
@@ -197,16 +198,16 @@ Estime la matriz de distancia,  realice el an\'alisis de agrupamiento y grafique
 \Cmd{dm <- dist.dna (as.DNAbin(primates))} 
 \Cmd{treeUPGMA <- upgma (dm)}
 \Cmd{treeNJ <- NJ(dm) }
-\Cmd{plot (treeUPGMA,  main=$$"$$UPGMA$$"$$,  cex = 0.8)}
-\Cmd{plot (treeNJ,  $$"$$unrooted$$"$$,  main=$$"$$NJ$$"$$,  cex = 0.5) }
+\Cmd{plot (treeUPGMA,  main=$"$UPGMA$"$,  cex = 0.8)}
+\Cmd{plot (treeNJ,  $"$unrooted$"$,  main=$"$NJ$"$,  cex = 0.5) }
 
 
 La funci\'on \Rfunc{dist.dna()} permite obtener una matriz de distancias por pares de secuencias de ADN,  bajo un modelo evolutivo determinado. 
 Actualmente es posible estimar esta matriz bajo 11 modelos evolutivos diferentes,  adem\'as permite estimar la varianza entre distancia y el valor de gamma. Existen varios m\'etodo de agrupamiento por distancia para obtener la topolog\'ia inicial,  entre ellos los algoritmos UPGMA (=Unweighted Pair Group Method with Arithmetic Mean),  WPGMA (=Weighted Pair Group Method with Averaging),  NJ (Neighbor Joining) y UNJ (Unweighted Neighbor Joining); en este caso las funciones \Rfunc{upgma()} y \Rfunc{NJ()} permiten construir \'arboles de distancia bajo sus caracter\'isticas espec\'ificas,  los cuales pueden ser visualizados con la funci\'on \Rfunc{plot()}.
 
 
-\Cmd{treeRAM <- random.addition(primates,  method=$$"$$fitch$$"$$) }
-\Cmd{plot (treeRAM,  main=$$"$$UPGMA$$"$$,  cex = 0.8)}
+\Cmd{treeRAM <- random.addition(primates,  method=$"$fitch$"$) }
+\Cmd{plot (treeRAM,  main=$"$UPGMA$"$,  cex = 0.8)}
 
 La funci\'on  \Rfunc{random.addition()}, permite definir los \'arboles iniciales de los cuales parte el an\'alisis de parsimonia.
 
@@ -252,10 +253,10 @@ Optimice cada topolog\'ia obtenida en el punto C,  utilizando el m\'etodo de opt
 \item Optimizaci\'on con rearreglo de ramas espec\'ifico
 
 
-\Cmd{optParsUPGMA\_SPR <- optim.parsimony (treeUPGMA,  primates, rearrangements=$$"$$SPR$$"$$)}
+\Cmd{optParsUPGMA\_SPR <- optim.parsimony (treeUPGMA,  primates, rearrangements=$"$SPR$"$)}
 
 
-\Cmd{optParsUPGMA\_NNI <- optim.parsimony (treeUPGMA,  primates, rearrangements=$$"$$NNI$$"$$)}
+\Cmd{optParsUPGMA\_NNI <- optim.parsimony (treeUPGMA,  primates, rearrangements=$"$NNI$"$)}
 
 %\normalsize
 

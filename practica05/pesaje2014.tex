@@ -84,17 +84,16 @@ Para la matriz de datos (datos.pesado.dat).
 		\item Coloque todos los pesos iguales y realice una b\'usqueda con pesado sucesivo, itere un m\'aximo de 10 veces. Chequee si los pesos se estabilizaron revisando la longitud de los arboles usando \Cmd{pscores;}.
 	\end{enumerate}
 	
-	\item En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N\'ote que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal). Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste generados en  \Pname{PAUP*}, puede obtener el ajuste usando \Cmd{fit*;}.  En  \Pname{PAUP*} use \Cmd{pscores gfit=yes;,. adem\'as, \Pname{TNT} permite definir su propia funci\'on de concavidad usando \Cmd{piwe [A B C...;}, donde A es el fit para 0 pasos extra, B para 1, C para 2 y asi sucesivamente. Tanto en \Pname{TNT}  como en \Pname{PAUP*}:
+	\item En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N\'ote que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal). Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste generados en  \Pname{PAUP*}, puede obtener el ajuste usando \Cmd{fit*;}.  En  \Pname{PAUP*} use \Cmd{pscores gfit=yes;}
+	\Pname{TNT} permite definir su propia funci\'on de concavidad usando \Cmd{piwe [A B C...;}, donde A es el fit para 0 pasos extra, B para 1, C para 2 y asi sucesivamente. 
+
+	\item Tanto en \Pname{TNT}  como en \Pname{PAUP*}:
 	\begin{enumerate}
 		\item Con los caracteres con pesos iguales, active los pesos impl\'icados con k=1, y haga una b\'usqueda.
 		\item Revise el soporte de los nodos usando \textit{jackknife} (use pocas r\'eplicas, m\'aximo 100).
 		\item Repita los an\'alisis con valores de k de 3, 6 y 10.
 	\end{enumerate}
-
-\Pname{PAUP*}, \Pname{TNT}, \Pname{PIWE}.\\
-\subsection{Comandos}
-
-
+	
 \end{enumerate}
 
 \preguntaGral{

@@ -3,7 +3,7 @@
 \label{ch:likelihood}
 \index{Likelihood!b\'uquedas}
 
-Algunos autores han sugerido que la parsimonia es un modelo de evoluci\'on que asume que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004). Independientemente de si el argumento es o no correcto (vea una posici\'on en contra en Farris, 1983 y la argumentaci\'on de Steel, 2002), estos autores sugieren que deben usarse modelos expl\'icitos de evoluci\'on como los que se vieron en la pr\'actica \ref{ch:molecular} sobre selecci\'on de modelos (ver p\'agina \pageref{ch:molecular}).
+Algunos autores han sugerido que la parsimonia es un modelo de evoluci\'on que asume un modelo, por ejemplo que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004). Independientemente de si el argumento es o no correcto (vea una posici\'on en contra en Farris, 1983 y la argumentaci\'on de Steel, 2002), estos autores sugieren que deben usarse modelos expl\'icitos de evoluci\'on como los que se vieron en la pr\'actica \ref{ch:molecular} sobre selecci\'on de modelos (ver p\'agina \pageref{ch:molecular}).
 
 
 En este caso se estima el \'arbol (la hip\'otesis filogen\'etica) que maximice la probabilidad de los datos actuales dado el modelo evolutivo sugerido para las secuencias a analizar (aunque han habido intentos de generalizar los modelos de evoluci\'on a datos morfol\'ogicos, ver  Lewis (2002)).
@@ -22,9 +22,9 @@ Los m\'etodos para buscar y seleccionar \'arboles usados en verosimilitud son b\
 
 		\pregunta{Argumente qu\'e criterio utiliz\'o para seleccionar el modelo.}
 		
-		\item La b\'usqueda inicial en \Pname{PAUP*} h\'agala bajo el criterio de parsimonia, y posteriormente pase al criterio de ML y haga una \textrm{peque\~na} b\'usqueda sobre los \'arboles producto del an\'alisis con parsimonia; recuerde salvar los \'arboles de cada modelo (incluida la longitud de las ramas). Para las b\'usquedas puede utilizar los mismos comandos que se usaron en parsimonia, con el comando \Cmd{set criterion=likelihood} se coloca a \Pname{PAUP} en modo de verosimilitud; con el comando \cmd{Lset} usted puede modificar los diferentes par\'ametros de los modelos (funci\'on $\Gamma$, distribuci\'on de bases, tipos de cambios, invariantes).Abra la matriz de datos, busque el \'arbol m\'as parsimonioso.
+		\item \label{itm:calc} La b\'usqueda inicial en \Pname{PAUP*} h\'agala bajo el criterio de parsimonia, y posteriormente pase al criterio de ML y haga una \textrm{peque\~na} b\'usqueda sobre los \'arboles producto del an\'alisis con parsimonia; recuerde salvar los \'arboles de cada modelo (incluida la longitud de las ramas). Para las b\'usquedas puede utilizar los mismos comandos que se usaron en parsimonia, con el comando \Cmd{set criterion=likelihood} se coloca a \Pname{PAUP} en modo de verosimilitud; con el comando \cmd{Lset} usted puede modificar los diferentes par\'ametros de los modelos (funci\'on $\Gamma$, distribuci\'on de bases, tipos de cambios, invariantes).Abra la matriz de datos, busque el \'arbol m\'as parsimonioso.
 		\item Permute las ramas de ese \'arbol, usando el modelo obtenido en ~\ref{itm:model}. Anote el valor de la verosimilitud (-lnL) reportado.
-		\item \label{itm:calc} Pruebe alternativamente los siguientes modelos: JC, HKY, F81 y TRM, usando como frecuencia para las bases la estimaci\'on emp\'irica y sin el par\'ametro $\Gamma$. Reporte los valores de verosimilitud para cada modelo.
+		\item  Pruebe alternativamente los siguientes modelos: JC, HKY, F81 y TRM, usando como frecuencia para las bases la estimaci\'on emp\'irica y sin el par\'ametro $\Gamma$. Reporte los valores de verosimilitud para cada modelo.
 
 
 		\pregunta{?`Las topolog\'ias obtenidas son similares?}

@@ -12,46 +12,42 @@ otros autores (por ejemplo, Goloboff, 1993, 1995) defienden el uso de pesado, ar
 Existen dos formas de hacer pesado de caracteres y una tercera que es un criterio de b\'usqueda, que no es  excluyente del pesaje de caracteres. El primero es el pesado \textit{a priori}, antes de empezar el an\'alisis.\index{Caract\'er!pesaje!a priori} 
 En la actualidad su forma m\'as com\'un es disminuir el peso del tercer cod\'on en los an\'alisis moleculares. Aunque se han propuesto muchas formas de encontrar a partir de los caracteres un peso inicial, quienes practican pesado del tercer codon no est\'an muy preocupados e insisten que lo importante es diferenciar un tipo de codon de los otros (Swofford et al., 1996), por ejemplo:
 
-\begin{verbatin}
-$"$Third codon positions of mt protein-coding genes are known tobe saturated, or nearly so, at deep phylogenetic levels ... . We therefore examined the effect of downweighting third positions by either assigning zero weight or employing transversion parsimony.$"$ 
-\end{verbatin}
-cite {Springer2001}
+% \begin{verbatin}
+% $"$Third codon positions of mt protein-coding genes are known tobe saturated, or nearly so, at deep phylogenetic levels ... . We therefore examined the effect of downweighting third positions by either assigning zero weight or employing transversion parsimony.$"$ 
+% \end{verbatin}
+% cite {Springer2001}
 % 
 %Mitochondrial Versus Nuclear Gene Sequences in Deep-Level Mammalian Phylogeny Reconstruction
 
 %Mark S. Springer, Ronald W. DeBry, Christophe Douady, Heather M. Amrine, Ole Madsen, Wilfried W. de Jong and Michael J. Stanhope
 
 
-\begin{verbatin}
-$"$
-Omission of the 3rd codon positions of the protein-
-coding genes from the analysis was justified due to
-significant base composition heterogeneity. Base
-composition heterogeneity can cause species to group
-by compositional similarity rather than evolutionary
-history (Lockhart et al., 1994).
+% \begin{verbatin}
+% $"$
+% Omission of the 3rd codon positions of the protein-
+% coding genes from the analysis was justified due to
+% significant base composition heterogeneity. Base
+% composition heterogeneity can cause species to group
+% by compositional similarity rather than evolutionary
+% history (Lockhart et al., 1994).
 
-In addition, sequence saturation of the 3rd codon
-positions of these genes (as was detected in Guzik
-et al. (2005) and Strugnell et al. (2005) can also
-produce spurious phylogenetic signal (e.g. Phillips &
-Penny, 2003) and therefore removing these data from
-the analyses will have also removed some noise. This
-is likely to be of greater importance in the deeper
-divergences and more distant relationships where
-there has been a greater length of time for saturation to
-accumulate.
-$"$ 
-\end{verbatin}
-cite {Strugnell2014}
+% In addition, sequence saturation of the 3rd codon
+% positions of these genes (as was detected in Guzik
+% et al. (2005) and Strugnell et al. (2005) can also
+% produce spurious phylogenetic signal (e.g. Phillips &
+% Penny, 2003) and therefore removing these data from
+% the analyses will have also removed some noise. This
+% is likely to be of greater importance in the deeper
+% divergences and more distant relationships where
+% there has been a greater length of time for saturation to
+% accumulate.
+% $"$ 
+% \end{verbatin}
+% cite {Strugnell2014}
 % The ink sac clouds octopod evolutionary history
 %Jan M. Strugnell • Mark D. Norman •
 %Michael Vecchione • Michelle Guzik •
 %A. Louise Allcock
-
-
-
-
 
 En el pesado \textit{a posteriori} el peso se asigna bas\'andose en un an\'alisis inicial de los datos;\index{Caract\'er!pesaje!a posteriori} se estima la \textit{confianza} del car\'acter, usando por ejemplo, el \'indice de consistencia, o el de retenci\'on, y con base en esos pesos se reinicia el an\'alisis (Farris, 1969). En general es el esquema de pesaje m\'as usado. El pregunta clave aqu\'i es: ?`c\'omo se hace este primer an\'alisis? Y despu\'es, ?`c\'omo se termina?. Otro de los problemas de esta forma de pesado radica en la comparaci\'on de los cladogramas, puesto que diferentes juegos de pesos pueden producir diferentes respuestas que no son comparables (a nivel de los estad\'isticos de ajuste, como longitud).\\
 La tercera forma de $"$pesado$"$ no es ni \textit{a priori}, ni \textit{a posteriori}, ya que en realidad es un criterio de b\'usqueda. Esta forma es conocida como pesado impl\'icito (Goloboff, 1993). Este procedimiento utiliza la confianza del car\'acter (con una funci\'on c\'oncava de homoplasia) y utiliza ese valor como criterio \'optimo (en vez de la longitud pesada); el problema de este m\'etodo, de hecho el de cualquier m\'etodo, es c\'omo escoger entre las diferentes funciones.
@@ -84,7 +80,7 @@ Para la matriz de datos (datos.pesado.dat).
 		\item Coloque todos los pesos iguales y realice una b\'usqueda con pesado sucesivo, itere un m\'aximo de 10 veces. Chequee si los pesos se estabilizaron revisando la longitud de los arboles usando \Cmd{pscores;}.
 	\end{enumerate}
 	
-	\item En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);}. N\'ote que escribimos N-1, pues \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal). Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar (el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$); para comparar los reportes del ajuste generados en  \Pname{PAUP*}, puede obtener el ajuste usando \Cmd{fit*;}.  En  \Pname{PAUP*} use \Cmd{pscores gfit=yes;}
+	\item En \Pname{TNT} el pesado impl\'icito se activa utilizando \Cmd{piwe=N;} donde N es el valor de concavidad a usar. Con \Pname{PAUP*} se activa usando \Cmd{pset Goloboff=yes gk=(N-1);} La notaci\'on de N-1 es necesaria ya que \Pname{PAUP*} comienza con 0 y suma uno (t\'ecnicamente es como comenzar desde 1). Tanto en \Pname{TNT} como en \Pname{PAUP*} el l\'imite es de 32000 (lo cual es pr\'acticamente equivalente a parsimonia lineal). Adem\'as \Pname{TNT} y \Pname{PAUP*} usan todos los valores decimales, por lo cual es recomendable recurrir a alguna medida de soporte para los nodos, con lo que se evita la sobre-resoluci\'on. A diferencia de \Pname{PAUP*}, \Pname{TNT} usa una funci\'on a minimizar\footnote{el inverso de la usada en \Pname{PIWE}: $\frac{h}{k + h}$}; para comparar los reportes del ajuste generados en \Pname{PAUP*}, puede obtener el ajuste usando \Cmd{fit*;}.  En  \Pname{PAUP*} use \Cmd{pscores gfit=yes;}
 	\Pname{TNT} permite definir su propia funci\'on de concavidad usando \Cmd{piwe [A B C...;}, donde A es el fit para 0 pasos extra, B para 1, C para 2 y asi sucesivamente. 
 
 	\item Tanto en \Pname{TNT}  como en \Pname{PAUP*}:

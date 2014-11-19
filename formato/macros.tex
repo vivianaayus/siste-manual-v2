@@ -1,14 +1,16 @@
-\newcommand{\Cmd}[1]      {\begin{small}
-			\newline 
-			$---------------------------------$
-			\newline 
-			$>$
-		%\begin{verbatim}
-			\color{black!65}\texttt{#1}\\
-		%\end{verbatim}
-			$---------------------------------$
-			\newline 
-		\end{small}}
+\newcommand{\Cmd}[1]      {
+			\begin{framed}
+				\begin{small}
+				$>$ \color{black!65}\texttt{#1}
+				\end{small}
+			\end{framed}}
+
+\newcommand{\Cmdi}[1] {\begin{framed}
+				\begin{small}
+					\color{black!65}\texttt{#1}
+				\end{small}
+			\end{framed}}
+
 
 \newcommand{\cmd}[1]      {\begin{small}\texttt{#1}\end{small}}
 

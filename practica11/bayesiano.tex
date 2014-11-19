@@ -7,11 +7,8 @@ podr\'ian ser biol\'ogicamente imposibles, o algunos nodos pueden no estar sopor
 El an\'alisis bayesiano ofrece la ventaja de examinar casi todas las posibles soluciones que pueden ser obtenidas dados los datos, en tiempos considerablemente cortos con respecto a otras optimizaciones como parsimonia/ML, en las cuales las b\'usquedas heur\'isticas son la \'unica opci\'on cuando se trata de matrices datos con m\'ultiples 30 taxa. Aunque algunas de las ventajas del an\'alisis bayesiano pueden parecer atractivas, se debe tener en cuenta que tanto la asignaci\'on de los priores, la selecci\'on de modelos de evoluci\'on y la selecci\'on final de los \'arboles obliga a hacer afirmaciones muy fuertes acerca de los procesos. Por ejemplo, algunas de las afirmaciones que justifican el uso de MCMCMC como muestreo parecen no cumplirse (e.g., que las probabilidades de cada grupo sean equivalentes a las halladas en un \textit{bootstrap} param\'etrico), una implementaci\'on apropiada contin\'ua siendo tema de discusi\'on dentro del an\'alisis filogen\'etico. Otro argumento en contra del analisis bayesiano es que la consistencia estad\'istica, que argumentan los defensores de maxima verosimilitud, no parece ser aplicable a la estimaci\'on bayesiana (Goloboff \& Pol, 2005).
 \\
 \section*{T\'ecnicas}
-Dado que el an\'alisis bayesiano debe explorar las posibles soluciones de los datos; esto es, calcular las probabilidades posteriores de todos los \'arboles, necesita m\'etodos de c\'alculo muy poderosos. Para resolver esta exigencia, el an\'alisis bayesiano utiliza una cadena de Markov-Montecarlo bajo el algoritmo de
-Metropolis-Hastings (resumido todo como MCMCMC o MCMC). El algoritmo MCMC funciona b\'asicamente seleccionando y desechando 
-soluciones (\'arboles filogen\'eticos), siguiendo una caminata aleatoria; 
-inicialmente, al escoger un \'arbol determinado este es perturbado (modificado)
-azarosamente, lo que genera un nuevo \'arbol, que es rechazado o aceptado dependiendo de su probabilidad, la cual se calcula por medio del algoritmo de Metropolis \& Hastings; si este \'arbol es aceptado, sufre perturbaciones adicionales. Uno de los problemas que enfrenta el m\'etodo de MCMC es que la frecuencia con que se encuentran  determinados \'arboles es dependiente de sus probabilidades posteriores, lo que genera que las cadenas queden estacionadas en determinadas zonas del espacio de soluciones.
+Dado que el an\'alisis bayesiano debe explorar las posibles soluciones de los datos; esto es, calcular las probabilidades posteriores de todos los \'arboles, necesita m\'etodos de c\'alculo muy poderosos. Para resolver esta exigencia, el an\'alisis bayesiano utiliza una cadena de Markov-Montecarlo bajo el algoritmo de Metropolis-Hastings (resumido todo como MCMCMC o MCMC). El algoritmo MCMC funciona b\'asicamente seleccionando y desechando 
+soluciones (\'arboles filogen\'eticos), siguiendo una caminata aleatoria; inicialmente, al escoger un \'arbol determinado este es perturbado (modificado) azarosamente, lo que genera un nuevo \'arbol, que es rechazado o aceptado dependiendo de su probabilidad, la cual se calcula por medio del algoritmo de Metropolis \& Hastings; si este \'arbol es aceptado, sufre perturbaciones adicionales. Uno de los problemas que enfrenta el m\'etodo de MCMC es que la frecuencia con que se encuentran  determinados \'arboles es dependiente de sus probabilidades posteriores, lo que genera que las cadenas queden estacionadas en determinadas zonas del espacio de soluciones.
 
 El ajuste de los priores por omisi\'on es una distribuci\'on plana de \textit{Dirichlet} donde todos los valores son 1.0. Este ajuste es apropiado si se desean estimar los par\'ametros desde los datos sin asumir un conocimiento \textit{a priori} acerca de los valores de estos par\'ametros. Sin embargo,  \Pname{MrBayes} permite ajustar los valores de las frecuencias nucleot\'idicas como iguales; por ejemplo, en el caso de estar usando modelos como JC o SYM, se puede ajustar un prior espec\'ifico que ponga mas \'enfasis sobre la igualdad de las frecuencias nucleot\'idicas de la que est\'a por omisi\'on.
 
@@ -34,16 +31,16 @@ Si desea ajustar un priori espec\'ifico que enfatice la igualdad de las frecuenc
 Con \Cmd{help} se obtiene una lista de los comandos disponibles en \Pname{MrBayes}; al igual que otros de los programas usados con \cmd{help comando}, se obtiene una informaci\'on de ayuda sobre este comando en particular. Con \cmd{help lset} se obtiene una lista similar al obtenido con help, pero al final una tabla muestra los ajustes actuales y predefinidos del modelo molecular. Para ver los ajustes predefinidos de las b\'usquedas use \cmd{help MCMC}. 
 
 
-\begin{enumerate}
+\begin{enumerate} %[1.]
 
-	\item A partir de las secuencias alineadas use \Pname{JModelTest} para evaluar c\'ual es el mejor modelo de evoluci\'on del gen. Debe revisar el modelo propuesto por \Pname{JModelTest} y comparar con las equivalencias para \Pname{MrBayes} en la p\'agina:\url{http://mrbayes.sourceforge.net/}
+	\item A partir de las secuencias alineadas use \Pname{JModelTest} para evaluar c\'ual es el mejor modelo de evoluci\'on del gen\footnote{ver pr\'actica ~\ref{ch:molecular}}, revise el modelo propuesto y busque la equivalencia para \Pname{MrBayes} en la p\'agina:\url{http://mrbayes.sourceforge.net/}
 
 	\item 	Realice una corrida en \Pname{MrBayes} con los modelos JC y con el (los) modelos propuestos por \Pname{JModelTest}, inicialmente con pocas generaciones (1000), pocas cadenas (2) y la $"$temperatura$"$ por defecto.
 	%los valores de los par\'ametros con \Pname{GnuPlot}. Existe un formato automatizado, gnplot.txt, revise el ap\'endice donde existe un ejemplo. Eval\'ue si las corridas llegaron al punto de saturaci\'on.\\
 
 	\item \Pname{MrBayes} produce dos salidas, un archivo .p donde se imprimen los par\'ametros del modelo de evoluci\'on (este archivo est\'a delimitado por tabuladores y es f\'acilmente exportable a programas para gr\'aficas) y un archivo .t donde se reportan los \'arboles y las longitudes de las ramas. Grafique el archivo de salida .p con Tracer:
 
-	\begin{enumerate}
+	\begin{enumerate} %[a.]
 		\item A partir de la gr\'afica decida c\'uantos \'arboles desea eliminar antes de hacer el consenso de la mayor\'ia como resumen.
 
 		\pregunta{?`Cree que el consenso estricto de los \'arboles obtenidos servir\'ia? Argumente su respuesta.}

@@ -74,15 +74,23 @@ En general, la manipulaci\'on de arboles se activa con un men'u (en \Pname{WinCl
 	\begin{enumerate}
 
 		\item Lea el archivo con \'arboles \Datos{arbol.r.tre} use las instrucciones:
-		\Cmd{library(ape); arbol <- read.tree(''arbol.r.tre'')}
+		\Cmd{library(ape); arbol <- read.tree($"$arbol.r.tre$"$)}
 		\item Grafique el objeto \Rdatos{arbol} use las instrucciones, que por defecto dibuja el \'arbol con longitud de ramas o como un filograma:
-		\Cmd{plot(arbol)} o
-		\Cmd{plot.phylo(arbol)}
+		\Cmdi{  
+			\begin{itemize}[label=$>$]
+  				\item plot(arbol) o 
+  				\item plot.phylo(arbol)
+  			\end{itemize}}
+
 		\item Para graficar el \'arbol sin incluir la longitud de ramas  use las instrucciones:
 		\Cmd{plot(arbol,use.edge.length=FALSE)} 
 		\item Para asignar las longitudes de las ramas como r\'otulos de los nodos y graficarlos use las instrucciones:
-		\Cmd{arbol\$node.label<-arbol\$edge.length}
-		\Cmd{plot(arbol,show.node.label=TRUE)}
+		\Cmdi{  
+			\begin{itemize}[label=$>$]
+  				\item arbol\$node.label<-arbol\$edge.length
+  				\item plot(arbol,show.node.label=TRUE)
+  			\end{itemize}
+  			}
 		\item Para graficar el \'arbol con t\'itulo de gr\'afica, colores de ramas y tipo cladograma use las instrucciones:
 		\Cmd{plot(arbol, type="cladogram",main="\'Arbol 1",
 		edge.col=c("red","blue","cyan"))}

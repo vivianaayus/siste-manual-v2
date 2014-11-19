@@ -1,63 +1,73 @@
-\chapter{An'alisis Bayesiano}
-\section*{Introducci'on}
-Aunque tiene una larga tradici'on en an'alisis de probabilidades, el an'alisis bayesiano es la forma m'as reciente de generar filogenias.  El an'alisis bayesiano est'a basado en el teorema de Bayes (1763). Este teorema asigna probabilidades posteriores (probabilidad de que el 'arbol es correcto) a determinadas soluciones de los datos (en este caso hip'otesis filogen'eticas) partiendo de probabilidades asignadas \textit{a priori} y dependiendo de la frecuencia de recuperaci\'on de una soluci'on, la cual es asimilada a la probabilidad posterior en el teorema de Bayes.\\
-A pesar de que la asignaci'on de las probabilidades  \textit{a priori} es un tema cr'itico dentro del c'alculo de las probabilidades posteriores y son dif'iciles de defender, generalmente se asume
-que todos los 'arboles son igualmente posibles (una inferencia dura, dado que algunas soluciones 
-podr'ian ser biol'ogicamente imposibles, o algunos nodos pueden no estar soportados) y la verosimilitud de las soluciones se calcula bajo alg'un modelo de evoluci'on (los mismos modelos que se utilizan en m'axima verosimilitud).\\
-El an'alisis bayesiano ofrece la ventaja de examinar casi todas las posibles soluciones que pueden ser obtenidas dados los datos, en tiempos considerablemente cortos con respecto a otras optimizaciones como parsimonia, en las cuales las b'usquedas heur'isticas son la 'unica opci'on cuando se trata de datos de m'as de 30 taxa. Aunque algunas de las ventajas del an'alisis bayesiano pueden parecer atractivas, se debe tener en cuenta que tanto la asignaci'on de los priores, la selecci'on de modelos de evoluci'on y la selecci'on final de los 'arboles obliga a hacer afirmaciones muy fuertes acerca de los procesos. Por ejemplo, algunas de las afirmaciones que justifican el uso de MCMCMC como muestreo parecen no cumplirse (e.g., que las probabilidades de cada grupo sean equivalentes a las halladas en un \textit{bootstrap} param'etrico), una implementaci'on apropiada contin'ua siendo tema de discusi'on dentro del an'alisis filogen'etico. Otro argumento en contra del analisis bayesiano es que la consistencia estad\'istica, que argumentan los defensores de maxima verosimilitud, no parece ser aplicable a la estimaci\'on bayesiana (Goloboff \& Pol, 2005).
+\chapter{An\'alisis Bayesiano}
+\section*{Introducci\'on}
+Aunque tiene una larga tradici\'on en an\'alisis de probabilidades, el an\'alisis bayesiano es la forma m\'as reciente de generar filogenias.  El an\'alisis est\'a basado en el teorema de Bayes (1763), donde se asignan probabilidades posteriores (en este caso la probabilidad de que el nodo en el \'arbol sea correcto) a determinadas soluciones de los datos (en este caso hip\'otesis filogen\'eticas) partiendo de probabilidades asignadas \textit{a priori} y dependiendo de la frecuencia de recuperaci\'on de una soluci\'on, la cual es asimilada a la probabilidad posterior en el teorema de Bayes.\\
+A pesar de que la asignaci\'on de las probabilidades  \textit{a priori} es un tema cr\'itico dentro del c\'alculo de las probabilidades posteriores y son dif\'iciles de defender, generalmente se asume
+que todos los \'arboles son igualmente posibles (una inferencia dura, dado que algunas soluciones 
+podr\'ian ser biol\'ogicamente imposibles, o algunos nodos pueden no estar soportados) y la verosimilitud de las soluciones se calcula bajo alg\'un modelo de evoluci\'on (los mismos modelos que se utilizan en m\'axima verosimilitud).\\
+El an\'alisis bayesiano ofrece la ventaja de examinar casi todas las posibles soluciones que pueden ser obtenidas dados los datos, en tiempos considerablemente cortos con respecto a otras optimizaciones como parsimonia/ML, en las cuales las b\'usquedas heur\'isticas son la \'unica opci\'on cuando se trata de matrices datos con m\'ultiples 30 taxa. Aunque algunas de las ventajas del an\'alisis bayesiano pueden parecer atractivas, se debe tener en cuenta que tanto la asignaci\'on de los priores, la selecci\'on de modelos de evoluci\'on y la selecci\'on final de los \'arboles obliga a hacer afirmaciones muy fuertes acerca de los procesos. Por ejemplo, algunas de las afirmaciones que justifican el uso de MCMCMC como muestreo parecen no cumplirse (e.g., que las probabilidades de cada grupo sean equivalentes a las halladas en un \textit{bootstrap} param\'etrico), una implementaci\'on apropiada contin\'ua siendo tema de discusi\'on dentro del an\'alisis filogen\'etico. Otro argumento en contra del analisis bayesiano es que la consistencia estad\'istica, que argumentan los defensores de maxima verosimilitud, no parece ser aplicable a la estimaci\'on bayesiana (Goloboff \& Pol, 2005).
 \\
-\section{T'ecnicas}
-Dado que el an'alisis bayesiano debe explorar todas las posibles soluciones de los datos; esto es, calcular las probabilidades posteriores de todos los 'arboles, necesita m'etodos de c'alculo muy poderosos. Para resolver esta exigencia, el an'alisis bayesiano utiliza una cadena de Markov-Montecarlo bajo el algoritmo de
-Metropolis-Hastings (resumido todo como MCMCMC o MCMC). El algoritmo MCMC funciona b'asicamente seleccionando y desechando 
-soluciones ('arboles filogen'eticos), siguiendo una caminata aleatoria; 
-inicialmente, al escoger un 'arbol determinado este es perturbado (modificado)
-azarosamente, lo que genera un nuevo 'arbol, que es rechazado o aceptado dependiendo de su probabilidad, la cual se calcula por medio del algoritmo de Metropolis \& Hastings; si este 'arbol es aceptado, sufre perturbaciones adicionales. Uno de los problemas que enfrenta el m'etodo de MCMC es que la frecuencia con que se encuentran  determinados 'arboles es dependiente de sus probabilidades posteriores, lo que genera que las cadenas queden estacionadas en determinadas zonas del espacio de soluciones.\\
-El ajuste de los priores por omisi'on es una distribuci'on plana de \textit{Dirichlet} donde todos los valores son 1.0. Este ajuste es apropiado si se desean estimar los par'ametros desde los datos sin asumir un conocimiento \textit{a priori} acerca de los valores de estos par'ametros. Sin embargo,  \Pname{MrBayes} permite ajustar los valores de las frecuencias nucleot'idicas como iguales; por ejemplo, en el caso de estar usando modelos como JC o SYM, se puede ajustar un prior espec\'ifico que ponga mas 'enfasis sobre la igualdad de las frecuencias nucleot'idicas de la que est'a por omisi'on.\\
+\section*{T\'ecnicas}
+Dado que el an\'alisis bayesiano debe explorar las posibles soluciones de los datos; esto es, calcular las probabilidades posteriores de todos los \'arboles, necesita m\'etodos de c\'alculo muy poderosos. Para resolver esta exigencia, el an\'alisis bayesiano utiliza una cadena de Markov-Montecarlo bajo el algoritmo de
+Metropolis-Hastings (resumido todo como MCMCMC o MCMC). El algoritmo MCMC funciona b\'asicamente seleccionando y desechando 
+soluciones (\'arboles filogen\'eticos), siguiendo una caminata aleatoria; 
+inicialmente, al escoger un \'arbol determinado este es perturbado (modificado)
+azarosamente, lo que genera un nuevo \'arbol, que es rechazado o aceptado dependiendo de su probabilidad, la cual se calcula por medio del algoritmo de Metropolis \& Hastings; si este \'arbol es aceptado, sufre perturbaciones adicionales. Uno de los problemas que enfrenta el m\'etodo de MCMC es que la frecuencia con que se encuentran  determinados \'arboles es dependiente de sus probabilidades posteriores, lo que genera que las cadenas queden estacionadas en determinadas zonas del espacio de soluciones.
+
+El ajuste de los priores por omisi\'on es una distribuci\'on plana de \textit{Dirichlet} donde todos los valores son 1.0. Este ajuste es apropiado si se desean estimar los par\'ametros desde los datos sin asumir un conocimiento \textit{a priori} acerca de los valores de estos par\'ametros. Sin embargo,  \Pname{MrBayes} permite ajustar los valores de las frecuencias nucleot\'idicas como iguales; por ejemplo, en el caso de estar usando modelos como JC o SYM, se puede ajustar un prior espec\'ifico que ponga mas \'enfasis sobre la igualdad de las frecuencias nucleot\'idicas de la que est\'a por omisi\'on.
+
 Un problema con \Pname{MrBayes} es que durante el muestreo no se examina el soporte de las ramas y dado que la respuesta es un consenso de la mayor\'ia, las ramas que no tienen soporte pueden aparecer con probabilidades posteriores altas (Goloboff \& Pol, 2005).
-\section{Materiales}
-\noindent
-Matriz de datos (datos.bayes.dat).\\
-%Formato de gr'aficas gnuplot.txt.
-\section{M'etodos}
-\noindent
-(0) A partir de las secuencias alineadas use \Pname{JModelTest} para evaluar c'ual es el mejor modelo de evoluci'on del gen.\\
-(1) Realice una corrida en \Pname{MrBayes} con los modelos JC y con el (los) modelos propuestos por \Pname{JModelTest}.
-Realice la b'usqueda con pocas generaciones (1000), pocas cadenas (4) y la ''temperatura'' por defecto.\\
-(2) Grafique el archivo de salida con Tracer 
-%los valores de los par'ametros con \Pname{GnuPlot}. Existe un formato automatizado, gnplot.txt, revise el ap'endice donde existe un ejemplo. Eval'ue si las corridas llegaron al punto de saturaci'on.\\
-(3) A partir de la gr'afica decida c'uantos 'arboles desea eliminar antes de hacer el consenso de la mayor'ia como resumen. Aumente el n'umero de generaciones a 10.000 y repita los pasos (1) y (2).\\
-%(4) Haga el consenso de la mayor'ia y comp'arelo con la salidad de \Pname{PAUP*} para el mismo modelo.\\
-(3) Repita los procesos al menos 3 veces, y compare las topolog'ias resultantes y los valores del consenso de la mayor'ia obtenidos para el an'alisis bayesiano.
-\subsection{Programas}
-\noindent
-\Pname{MrBayes}, \Pname{JModeltest},  \Pname{Tracer}.\\
-\subsection{Comandos}
-Con \Cmd{help} se obtiene una lista de los comandos disponibles en \Pname{MrBayes}; al igual que otros de los programas usados con \Cmd{help comando}, se obtiene una informaci'on de ayuda sobre este comando en particular.\\
-Con \Cmd{help lset} se obtiene una lista similar al obtenido con help, pero al final una tabla muestra los ajustes actuales y predefinidos del modelo molecular. Para ver los ajustes predefinidos de las b'usquedas use \Cmd{help MCMC}.\\
-Para leer los datos \Pname{MrBayes} utiliza \Cmd{execute} y el nombre del archivo, al igual que {PAUP*}. \Pname{Mrbayes} reconoce los comandos con las tres o cuatro primeras letras, por ejemplo, puede abrir los datos s'olo con \Cmd{exe}.\\
-Con \Cmd{MCMC} \Pname{MrBayes} inicia la b'usqueda en autom'atico utilizando los ajustes que est'en predefinidos. Cambie el n'umero de cadenas \Cmd{nchains}, el n'umero de generaciones \Cmd{ngen} y la temperatura \Cmd{temp} seguiendo con el comando \Cmd{mcmcp};
-por ejemplo, \Cmd{mcmcp ngen=1000} para ajustar el n'umero de generaciones a 1.000.\\
-Para ajustar cada cu'anto ser'a muestreada la cadena, use \Cmd{mcmcp samplefreq} por omisi'on; la cadena es muestreada, cada 100 generaciones. Este ser'a tambi'en el mismo n'umero en que se reportar'an los resultados en el archivo de salida.\\
+
+%Matriz de datos (datos.bayes.dat).\\
+%Formato de gr\'aficas gnuplot.txt.
+
+Para leer los datos \Pname{MrBayes} utiliza \Cmd{execute} y el nombre del archivo, al igual que {PAUP*}. \Pname{Mrbayes} reconoce los comandos con las tres o cuatro primeras letras, por ejemplo, puede abrir los datos s\'olo con \cmd{exe}.
+
+Con \cmd{} \Pname{MrBayes} inicia la b\'usqueda en autom\'atico utilizando los ajustes que est\'en predefinidos. Cambie el n\'umero de cadenas \cmd{nchains}, el n\'umero de generaciones \cmd{ngen} y la temperatura \cmd{temp} seguiendo con el comando \cmd{mcmcp};
+por ejemplo, \Cmd{mcmcp ngen=1000} para ajustar el n\'umero de generaciones a 1.000.\\
+Para ajustar cada cu\'anto ser\'a muestreada la cadena, use \Cmd{mcmcp samplefreq}
+Por omisi\'on, la cadena es muestreada, cada 100 generaciones. Este ser\'a tambi\'en el mismo n\'umero en que se reportar\'an los resultados en el archivo de salida.
+
 Si  desea ajustar frecuencias iguales para modelos como  JC o SYM, use el comando \Cmd{prset statefreqpr=fixed (equal)}. 
-Si desea ajustar un priori espec'ifico que enfatice la igualdad de las frecuencias nucleot'idicas,  puede usar \Cmd{prset statefreqpr=dirichlet (10,10,10,10)}, o un mayor 'enfasis a'un con \Cmd{prset statefreqpr=dirichlet (100,100,100,100)}. Con \Cmd{showmodel} puede ver en cualquier momento c'omo esta configurado el modelo de sustituci'on nucleot'idica a usar.\\
-\Pname{MrBayes} produce dos salidas, un archivo .nex.p donde se imprimen los par'ametros del modelo de evoluci'on (este archivo est'a delimitado por tabuladores y es f'acilmente exportable a programas para gr'aficas) y un archivo .nex.t donde se reportan los 'arboles y las longitudes de las ramas.\\
-Para graficar puede usar el programa de su predilecc'ion. 
-%\Pname{GnuPlot} tiene la ventaja de que es gratis, sus im'agenes son de alta calidad y puede automatizar los procesos de graficado; el archivo gnuplot.txt graficar'a las variables 1 y 2.\\
-%Archivo gnuplot.txt:\\
-%\Cmd{plot [:][:] ''MISDATOS.out.p'' using 1:2 title ''lnL'' with lines\\
-%pause -1 ''Enter y bye ...''}
-\section{Preguntas}
-\subsection{Pr'actica}
-\noindent
-?`Cree que el consenso estricto de los 'arboles obtenidos servir'ia? Argumente su respuesta.\\
-?`Puede obtener dos respuestas distintas al usar \Pname{ModelTest} o  \Pname{MrModelTest} junto con los 'arboles de \Pname{PAUP*} o \Pname{MrBayes}?\\
-Debe revisar el modelo propuesto por \Pname{MrModelTest} para \Pname{MrBayes} y comparar con las equivalencias para \Pname{PAUP*} en la p'agina de \Pname{MrBayes}:\\
-http://mrbayes.csit.fsu.edu/.\\
-?`Podr'ia dejar que \Pname{MrBayes} seleccione el mejor modelo a partir de una b'usqueda con JC (o cualquier otro modelo)?\\
-\subsection{Generales}
-\noindent
-Se ha propuesto que en el an'alisis bayesiano se sobreestiman las ramas sin soporte al generar topolog'ias muy resueltas. ?`C'omo solucionar'ia usted tal problema?
-\section{Literatura recomendada}
-\noindent
+
+Si desea ajustar un priori espec\'ifico que enfatice la igualdad de las frecuencias nucleot\'idicas,  puede usar \Cmd{prset statefreqpr=dirichlet (10,10,10,10)}, o un mayor \'enfasis a\'un con \Cmd{prset statefreqpr=dirichlet (100,100,100,100)}. Con \Cmd{showmodel} puede ver en cualquier momento c\'omo esta configurado el modelo de sustituci\'on nucleot\'idica a usar.
+
+Con \Cmd{help} se obtiene una lista de los comandos disponibles en \Pname{MrBayes}; al igual que otros de los programas usados con \cmd{help comando}, se obtiene una informaci\'on de ayuda sobre este comando en particular. Con \cmd{help lset} se obtiene una lista similar al obtenido con help, pero al final una tabla muestra los ajustes actuales y predefinidos del modelo molecular. Para ver los ajustes predefinidos de las b\'usquedas use \cmd{help MCMC}. 
+
+
+\begin{enumerate}
+
+	\item A partir de las secuencias alineadas use \Pname{JModelTest} para evaluar c\'ual es el mejor modelo de evoluci\'on del gen. Debe revisar el modelo propuesto por \Pname{JModelTest} y comparar con las equivalencias para \Pname{MrBayes} en la p\'agina:\url{http://mrbayes.sourceforge.net/}
+
+	\item 	Realice una corrida en \Pname{MrBayes} con los modelos JC y con el (los) modelos propuestos por \Pname{JModelTest}, inicialmente con pocas generaciones (1000), pocas cadenas (2) y la $"$temperatura$"$ por defecto.
+	%los valores de los par\'ametros con \Pname{GnuPlot}. Existe un formato automatizado, gnplot.txt, revise el ap\'endice donde existe un ejemplo. Eval\'ue si las corridas llegaron al punto de saturaci\'on.\\
+
+	\item \Pname{MrBayes} produce dos salidas, un archivo .p donde se imprimen los par\'ametros del modelo de evoluci\'on (este archivo est\'a delimitado por tabuladores y es f\'acilmente exportable a programas para gr\'aficas) y un archivo .t donde se reportan los \'arboles y las longitudes de las ramas. Grafique el archivo de salida .p con Tracer:
+
+	\begin{enumerate}
+		\item A partir de la gr\'afica decida c\'uantos \'arboles desea eliminar antes de hacer el consenso de la mayor\'ia como resumen.
+
+		\pregunta{?`Cree que el consenso estricto de los \'arboles obtenidos servir\'ia? Argumente su respuesta.}
+
+		\item Aumente el n\'umero de generaciones a 100.000 y repita el an\'alisis.
+	\end{enumerate}	
+
+	\item Repita los procesos al menos 3 veces, y compare las topolog\'ias resultantes y los valores del consenso de la mayor\'ia obtenidos para el an\'alisis bayesiano.
+
+\end{enumerate}
+
+
+
+
+
+\preguntaGral{
+	\begin{itemize}
+	\item ?`Podr\'ia dejar que \Pname{MrBayes} seleccione el mejor modelo?
+	\item Se ha propuesto que en el an\'alisis bayesiano se sobreestiman las ramas sin soporte al generar topolog\'ias muy resueltas. ?`C\'omo solucionar\'ia usted tal problema?
+	\enḑ{itemize}
+}
+
+
+\section*{Literatura recomendada}
+
 Goloboff \& Pol, 2005 [Una cr\'itica muy completa al analisis bayesiano].\\
-Huelsenbeck et al., 2002 [Una muy buena presentaci'on del an'alisis bayesiano por sus principales defensores].
+Huelsenbeck et al., 2002 [Una muy buena presentaci\'on del an\'alisis bayesiano por sus principales defensores].

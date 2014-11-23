@@ -1,13 +1,18 @@
 \chapter{Soporte en ML}
 \section*{Introducci'on}
 \index{Soporte!ML}
-Tal y como se hizo para el an'alisis de parsimonia (pr\'actica \ref{ch:soporte.pars}), bajo ML es importante conocer la evidencia de cada nodo, m'axime cuando en ML no hay transformaciones, por lo que los valores de soporte son indicadores de la \textbf{evidencia} del nodo. Los m'etodos para medir el soporte est'an basados en remuestreo de los caracteres; as'i, tanto \textit{bootstrap} \index{Soporte!bootstrap} como \textit{jackknife} \index{Soporte!jackknife} son aplicables a datos moleculares, aunque el m'etodo preferido es el \textit{bootstrap}; dado que no se usa una distribuci'on en particular se denomina \textbf{\textit{bootstrap} no param'etrico} en contraposici'on al \textbf{param'etrico}, que se basa en la simulaci'on de los datos dado un modelo particular. Algunas evaluaciones emp'iricas han mostrado que el an'alisis depende fuertemente del modelo calculado y del 'arbol obtenido a partir de tal modelo (Antezana, 2003; Felsenstein, 2004).\\
+Tal y como se hizo para el an\'alisis de parsimonia (pr\'actica \ref{ch:soporte.pars}), bajo ML es importante conocer la evidencia de cada nodo, m\'axime cuando en ML no hay transformaciones, por lo que los valores de soporte son indicadores de la \textbf{evidencia} del nodo. Los m'etodos para medir el soporte est\'an basados en remuestreo de los caracteres; as\'i, tanto \textit{bootstrap} \index{Soporte!bootstrap} como \textit{jackknife} \index{Soporte!jackknife} son aplicables a datos moleculares, aunque el m'etodo preferido es el \textit{bootstrap}; dado que no se usa una distribuci'on en particular se denomina \textbf{\textit{bootstrap} no param'etrico} en contraposici\'on al \textbf{param\'etrico}, que se basa en la simulaci\'on de los datos dado un modelo particular. Algunas evaluaciones emp\'iricas han mostrado que el an\'alisis depende fuertemente del modelo calculado y del \'arbol obtenido a partir de tal modelo \cite{Felsenstein2004} \cite{Antezana2003}.\\
+
 \section{T'ecnicas}
-La medici'on de soporte usando \textit{boostrap} no param'etrico ya fue discutida en la secci'on de soporte en parsimonia; el \textit{boostrap} param'etrico es una prueba de simulaci'on que es dependiente del modelo encontrado como indicador de la evoluci'on de las mol'eculas, de manera similar a las pruebas jer'arquicas (Felsenstein, 2004); la prueba busca evaluar qu'e pasar'ia si obtenemos m'as datos a partir del mismo modelo, el cual es \textit{cierto}. Con esta idea se simulan datos a partir del 'arbol que se obtiene con los datos \textbf{reales}; a partir de estos datos simulados se estiman los 'arboles, los cuales en conjunto son resumidos con un consenso de la mayor'ia que sirve como estimador de los soportes de los nodos. Las secuencias simuladas se obtienen con los mismos par'ametros y con el mismo modelo que la hip'otesis inicial.
+La medici\'on de soporte usando \textit{boostrap} no param\'etrico ya fue discutida en la secci\'on de soporte en parsimonia; el \textit{boostrap} param'etrico es una prueba de simulaci\'on que es dependiente del modelo encontrado como indicador de la evoluci\'on de las mol\'eculas, de manera similar a las pruebas jer\'arquicas \cite{Felsenstein2004}; la prueba busca evaluar qu\'e pasar\'ia si obtenemos m'as datos a partir del mismo modelo, el cual es \textit{cierto}. Con esta idea se simulan datos a partir del \'arbol que se obtiene con los datos \textbf{reales}; a partir de estos datos simulados se estiman los \'arboles, los cuales en conjunto son resumidos con un consenso de la mayor\'ia que sirve como estimador de los soportes de los nodos. Las secuencias simuladas se obtienen con los mismos par\'ametros y con el mismo modelo que la hip\'otesis inicial.
+
+\bibliographystyle{plain}
+\bibliography{bibfile9}
+
 \section{Materiales}
 \noindent
 Matriz de datos (datos.param.dat).
-\section{M'etodos}
+\section{M\'etodos}
 \noindent
 \textbf{En \Pname{Modeltest} / \Pname{PAUP*}:}\\
 (1) Para la matriz calcule el mejor modelo y obtenga el mejor 'arbol en \Pname{PAUP*}, y s'alvelo en formato Phylip con las longitudes de las ramas.\\
@@ -42,5 +47,5 @@ Repita la comparaci'on pero con los resultados de sus compa\~neros. Dado el n\'u
 Dados los m'etodos de soporte usados, ?`usted qu'e tipo de soporte recomienda?
 \section{Literatura recomendada}
 \noindent
-Antezana, 2003 [Una visi'on cr'itica al uso del boostrap param'etrico].\\
-Felsenstein, 2004 [Tiene un cap'itulo descriptivo de los an'alisis de boostrap muy 'util].
+Antezana, 2003 [Una visi\'on cr'itica al uso del boostrap param\'etrico].\\
+Felsenstein, 2004 [Tiene un cap'itulo descriptivo de los an'alisis de boostrap muy \'util].

@@ -32,30 +32,33 @@ secuencias en los terminales; a partir de este \'arbol se hace el primer alineam
 cercano\footnote{En realidad es el par m\'as similar, ya que se usa una t\'ecnica de distancia para obtener el \'arbol gu\'ia.}, 
 luego optimiza los gaps, posteriormente se alinea con la siguiente terminal que sea la m\'as cercana y el proceso se repite 
 hasta llegar a la base; la idea es parecida a la optimizaci\'on en un an\'alisis filogen\'etico.\\
-Una nueva idea, usada principalmente por cladistas, es la optimizaci\'on directa (Wheeler, 1996), donde el 
+Una nueva idea, usada principalmente por cladistas, es la optimizaci\'on directa \cite{Wheeler1996}(Wheeler, 1996), donde el 
 objetivo no es construir el alineamiento, sino directamente el cladograma; en este caso, se hacen los alineamientos locales 
 (como en el alineamiento m\'ultiple) y los gaps son considerados transformaciones, es decir se colocan temporalmente en 
-los nodos. Wheeler (1996) argumenta que implementa una idea de homolog\'ia din\'amica acorde con el an\'alisis filogen\'etico. 
-En la optimizaci\'on de estados fijos (Wheeler, 1999) se usa la secuencia completa, y la matriz de transformaciones s\'olo 
+los nodos. Wheeler 1996 argumenta que implementa una idea de homolog\'ia din\'amica acorde con el an\'alisis filogen\'etico \cite{Wheeler1996}. 
+En la optimizaci\'on de estados fijos \cite{Wheeler1999} se usa la secuencia completa, y la matriz de transformaciones s\'olo 
 sirve para asignar costos, pero no estados en el nodo. \index{Alineamiento!m\'ultiple} Aunque es intuitivamente muy 
 interesante, no se ha usado en la pr\'actica. Cualquiera que sea la idea para realizar los an\'alisis moleculares, los 
 resultados dependen de la matriz de transformaci\'on inicial; Wheeler (1995) desarroll\'o una metodolog\'ia para comparar 
-los par\'ametros de las transformaciones, conocida como ''an\'alisis de sensibilidad''.
+los par\'ametros de las transformaciones, conocida como ''an\'alisis de sensibilidad'' \cite{Wheeler1995}.
 \index{Alineamiento!an\'alisis de sensibilidad}
 Bajo esta idea, se hacen diferentes an\'alisis con diferentes matrices de transformaci\'on, y se selecciona aquella que 
 maximice alg\'un criterio previamente seleccionado (ya sean las topolog\'ias, como el costo de las transformaciones); hasta 
 ahora, esta idea solo se ha utilizado en el contexto de an\'alisis con m\'ultiples genes o entre genes y morfolog\'ia 
 simult\'aneamente.
+
+\bibliographystyle{plain}
+\bibliography{bibfile10}
 \section{T\'ecnicas}
 Algunos programas (como \Pname{CLUSTAL}) usan un solo \'arbol gu\'ia derivado del c\'alculo de la distancia entre las 
 secuencias; como todos los m\'etodos basados en distancias, es dependiente del orden de entrada de los datos; \Pname{Muscle} aunque parte de un \'arbol gu\'ia de  distancia, revisa el resultado del alineamiento, priemro a nivel goblal y luego a nivel local; otros 
 programas (como \Pname{MALIGN} o \Pname{POY}) construyen distintos \'arboles y prefieren el alineamiento que tenga el menor 
 costo. Aunque sean m\'as lentos, \Pname{POY} y \Pname{MALIGN} producen mejores resultados (en cuanto a la calidad del 
-alineamiento con miras a evaluar la filogenia) que \Pname{CLUSTAL}. Giribet et al. (2002) recomiendan que si se usa 
+alineamiento con miras a evaluar la filogenia) que \Pname{CLUSTAL}. Giribet et al., 2002 recomiendan que si se usa 
 \Pname{CLUSTAL}, se prueben diferentes secuencias de entrada de los datos. Es importante recalcar que el \'arbol usado por 
 \Pname{CLUSTAL} y por \Pname{MALIGN} es s\'olo un \'arbol para optimizar las secuencias, no un \'arbol filogen\'etico como tal; 
 mientras que el \'arbol generado por \Pname{POY} es un \'arbol de alineamiento y a la vez es un \'arbol filogen\'etico. Dado que el objetivo de \Pname{POY} es el an\'alisis simult\'aneo, a lo largo de este libro se usar\'a \Pname{POY} como otro programa m\'as de an\'alisis. Aun as\'i, \Pname{POY} puede producir los alineamientos impl\'icitos de cada \'arbol (as\'i se lo utilizar\'a en esta pr\'actica), es posible usar este resultado como entrada para programas de b\'usquedas que usen secuencias alineadas. Giribet 
-et al. (2002) enfatizan que de usar los alineamientos, los costos usados para el alineamiento deben ser los mismos usados 
+et al., 2002 enfatizan que de usar los alineamientos, los costos usados para el alineamiento deben ser los mismos usados 
 para el an\'alisis filogen\'etico. Al asignar los costos, hay que tener en cuenta la desigualdad triangular. Es decir, que el 
 costo de una transformaci\'on nunca puede ser mayor al de una transformaci\'on equivalente, pero que tome otros estados. 
 Un ejemplo clarifica esto: si las transiciones tienen un costo de 3 y las transversiones de 1, la transformaci\'on 

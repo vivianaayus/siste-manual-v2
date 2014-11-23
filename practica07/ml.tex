@@ -1,17 +1,20 @@
 \chapter{M'axima verosimilitud}
 \section*{Introducci'on}
 \label{ch:likelihood}
-Algunos autores han sugerido que la parsimonia es un modelo de evoluci'on que asume que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004). Independientemente de si el argumento es o no correcto (vea una posici'on en contra en Farris, 1983 y la argumentaci'on de Steel, 2002), estos autores sugieren que deben usarse modelos expl'icitos de evoluci'on como los que se vieron en la pr'actica \ref{ch:molecular} sobre selecci'on de modelos (ver p\'agina \pageref{ch:molecular}).\\
+Algunos autores han sugerido que la parsimonia es un modelo de evoluci'on que asume que la tasa de transformaciones es baja (por ejemplo, Swofford et al., 1996; Felsenstein, 2004) \cite{Swofford1996} \cite{Felsenstein2004}. Independientemente de si el argumento es o no correcto (vea una posici'on en contra en Farris 1983  y la argumentaci'on de Steel, 2002)\cite{Farris1983} \cite{Steel2002}, estos autores sugieren que deben usarse modelos expl'icitos de evoluci'on como los que se vieron en la pr'actica \ref{ch:molecular} sobre selecci'on de modelos (ver p\'agina \pageref{ch:molecular}).\\
 En este caso se estima el 'arbol (la hip'otesis filogen'etica) que 
 maximice la probabilidad de los datos actuales dado el modelo evolutivo 
 sugerido para las secuencias a analizar (aunque han habido intentos de 
 generalizar los modelos de evoluci'on a datos morfol'ogicos, ver  
-Lewis (2002)).\\
-Uno de los principales problemas con la estimaci'on de verosimilitud es que el valor depende de la longitud de las ramas. En la actualidad, se ignora al principio el valor de las diferentes ramas, y luego de encontrar un 'arbol espec'ifico, se calcula el mejor valor de verosimilitud para una rama a la vez. Swofford et al. (1996) ofrecen una explicaci'on extensa de c'omo se hacen los c'alculos relacionados con estos m'etodos.
+Lewis (2002)\cite{Lewis2001}).\\
+Uno de los principales problemas con la estimaci'on de verosimilitud es que el valor depende de la longitud de las ramas. En la actualidad, se ignora al principio el valor de las diferentes ramas, y luego de encontrar un 'arbol espec'ifico, se calcula el mejor valor de verosimilitud para una rama a la vez. Swofford et al. (1996) ofrecen una explicaci'on extensa de c'omo se hacen los c'alculos relacionados con estos m'etodos \cite{Swofford1996}.
 \section{T'ecnicas}
 Los m'etodos para buscar y seleccionar 'arboles usados en verosimilitud son b'asicamente los mismos usados en parsimonia: a un 'arbol inicial se lo mejora con permutaci'on de ramas. Existen diferentes formas de encontrar un 'arbol inicial en verosimilitud. Los sistem'aticos moleculares que usan modelos suelen empezar por un 'arbol de distancias (NJ: neighbor joining). El problema de este inicio es que para una configuraci'on particular, solo existe un 'arbol de NJ\footnote{tal y como lo hemos recalcado previamente para los an\'alisis de distancia el orden de entrada influye en el resultado, la topolog\'ia resultante puede cambiar si se cambia el orden de entrada a la matriz.}. Otra forma es la descomposici'on de estrella, donde se tiene una politom'ia basal y se trata de resolverla desde la ra'iz. Este m'etodo es muy lento, puesto que a diferencia de un 'arbol de Wagner, la magnitud del problema es grande desde el inicio. Una alternativa adicional es comenzar con un 'arbol al azar, pero estos suelen ser sub'optimos, con lo cual la fase de permutaci'on es muy lenta. Una 'ultima forma, es utilizar 'arboles de Wagner, pero basados en verosimilitud, o si se desea una respuesta m'as r'apida, un 'arbol obtenido por parsimonia y luego permutar las ramas usando verosimilitud.
 Actualmente se puede realizar un an\'alisis de evidencia total con DNA 
 usando una evaluaci\'on del ML para un conjunto de datos particionado, donde cada partici\'on puede tener su propio modelo (en realidad variaciones de GTR).
+
+\bibliographystyle{plain}
+\bibliography{bibfile7}
 
 \section{Materiales}
 \noindent

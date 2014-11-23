@@ -5,17 +5,14 @@
 
 Una de las diferencias m\'as importantes entre los trabajos taxon\'omicos con un enfoque \textbf{cl\'asico} y los an\'alisis filogen\'eticos es que estos \'ultimos incluyen expl\'icitamente una matriz de datos donde se puede evidenciar los caracteres examinados, y c\'omo fueron interpretados.\\
 
-B\'asicamente, la matriz de datos es una lista tabulada de las observaciones de los caracteres en los distintos taxa. Para facilitar su lectura y su uso en programas de an\'alisis filogen\'etico, los caracteres y sus estados son codificados como n\'umeros o como letras. Una vez construida, la matriz es el punto de partida para la b\'usqueda de \'arboles y la manera m\'as sencilla con la que otros investigadores pueden recuperar la informaci\'on recopilada durante el \textbf{an\'alisis de caracteres}\footnote{si desea puede ver nuestra visi\'on ampliada en Miranda et al., 2004.}.\\
+B\'asicamente, la matriz de datos es una lista tabulada de las observaciones de los caracteres en los distintos taxa. Para facilitar su lectura y su uso en programas de an\'alisis filogen\'etico, los caracteres y sus estados son codificados como n\'umeros o como letras. Una vez construida, la matriz es el punto de partida para la b\'usqueda de \'arboles y la manera m\'as sencilla con la que otros investigadores pueden recuperar la informaci\'on recopilada durante el \textbf{an\'alisis de caracteres}\footnote{si desea puede ver nuestra visi\'on ampliada en Miranda et al., 2004 }.\\
 
-Tal y como se hizo en la pr\'actica sobre selecci\'on de caracteres, lo que se busca es que el investigador sea consistente en la codificaci\'on de los caracteres, lo cual es importante en el manejo de caracteres inaplicables y no observados. Algunos autores los codifican de diferentes formas en la matriz (usualmente, con \textbf {-} y \textbf {?}) para facilitar la recuperaci\'on de informaci\'on (puede encontrar una discusi\'on m\'as completa en Strong \& Lipscomb, 1999),  otros autores, y en general los programas, no reconocen diferencia entre unos y otros, mientras que programas como \Pname{TNT} o \Pname{Poy} pueden reconocer como un quinto caracter los eventos de inserci\'on -perdida o gaps (Giribet \& Wheeler, 1999).\\
-% Molecular Phylogenetics and Evolution
-%Vol. 13, No. 1, October, pp. 132–143, 1999
-%Article ID mpev.1999.0643, available online
-%
+Tal y como se hizo en la pr\'actica sobre selecci\'on de caracteres, lo que se busca es que el investigador sea consistente en la codificaci\'on de los caracteres, lo cual es importante en el manejo de caracteres inaplicables y no observados. Algunos autores los codifican de diferentes formas en la matriz (usualmente, con \textbf {-} y \textbf {?}) para facilitar la recuperaci\'on de informaci\'on (puede encontrar una discusi\'on m\'as completa en Strong \& Lipscomb, 1999 \cite{Strong1999}),  otros autores, y en general los programas, no reconocen diferencia entre unos y otros, mientras que programas como \Pname{TNT} o \Pname{Poy} pueden reconocer como un quinto caracter los eventos de inserci\'on -perdida o gaps \cite{Giribet1999}.\\
 
 Cuando se usan caracteres con m\'ultiples estados, es necesario clarificar cu\'ales fueron usados como aditivos y cu\'ales como no aditivos, o en el caso de haber sido recodificados, como se hizo esa codificaci\'on. Si se han codificado como aditivos, se debe indicar el ?`por qu\'e? de tal codificaci\'on e incluir los argumentos que muestren que los estados de car\'acter se hallan anidados entre s\'i, la aditividad puede generar al estrucutra en la topolog\'ia fianl, sin que haya relamente transformaciones qeu soporten los nodos.\\
 
-
+\bibliographystyle{plain}
+\bibliography{bibfile2}
 
 \section*{T\'ecnicas}
 
@@ -23,16 +20,11 @@ Existen diferentes programas para manipular matrices de datos y \'arboles. Algun
 \Pname{WinClada}\footnote{\url{www.cladistics.com}}, 
 \Pname{Mesquite}\footnote{\url{www.mesquite.org}}, 
 \Pname{MacClade}\footnote{el programa no corre en versiones de MacOS X superiores a 10.6 (desde Lion en adelante)}, 
-\Pname{R}\footnote{\Pname{R} es uno de los programas para an\'alis estad\'istico m\'as versatiles del momento, adem\'as de ser gratuito permite la implementaci\'on de m\'ultiples procesos de \'alculo, de tal manera que es posible realizar distintos tipos de operaciones y c\'alculos desde estadistica b\'asica hasta an\'alisis en evoluci\'on; sirve de plataforma para \Pname{ape} %faltan citas:
-(Paradis et al., 2008), un m\'odulo que permite distintas acciones con matrices y \'arboles 
+\Pname{R}\footnote{\Pname{R} es uno de los programas para an\'alis estad\'istico m\'as versatiles del momento, adem\'as de ser gratuito permite la implementaci\'on de m\'ultiples procesos de \'alculo, de tal manera que es posible realizar distintos tipos de operaciones y c\'alculos desde estadistica b\'asica hasta an\'alisis en evoluci\'on; sirve de plataforma para \Pname{ape} \cite{paradis2008}, un m\'odulo que permite distintas acciones con matrices y \'arboles 
 \url{cran.r-project.org}}  o 
 \Pname{Seaview}\footnote{\url{doua.prabi.fr/software/seaview}}). En su mayor\'ia estos programas sirven de plataforma para manejar programas que realizan el an\'alisis filogen\'etico como tal. Muchos de los programas que manejan matrices est\'an dise\~nados b\'asicamente para alg\'un tipo particular de datos (por ejemplo, ADN) y aquellos que tienen un marco amplio se quedan cortos para manejar cierta clase de informaci\'on (por ejemplo, no interpretan la codificaci\'on IUPAC para polimorfismos de ADN).
 
-Los programas pueden leer uno o varios formatos de archivos, pero solo algunos programas como \Pname{Mesquite} leen y escriben todos los formatos de datos; es importante revisar la compatibilidad de los programas para el manejo de archivos. En la mayor\'ia de ellos es posible exportar entre los diferentes tipos de datos, o por lo menos entre los m\'as usados. En general, la mayor parte de los programas trabaja bien con el formato NEXUS (Maddison, et al., 1997), 
-%Maddison DR, Swofford DL, Maddison WP (1997). 
-%"NEXUS: An extensible file format for systematic information". 
-%Systematic Biology 46 (4): 590–621. doi:10.1093/sysbio/46.4.590. PMID 11975335.
-tanto para exportar como para importar, aunque el formato es en ocasiones muy diferente y algunos programas pueden no identificarlo correctamente. El otro formato importante es el de Hennig86 o NONA, pero en muchos programas, especialmente moleculares, su uso no est\'a implementado.
+Los programas pueden leer uno o varios formatos de archivos, pero solo algunos programas como \Pname{Mesquite} leen y escriben todos los formatos de datos; es importante revisar la compatibilidad de los programas para el manejo de archivos. En la mayor\'ia de ellos es posible exportar entre los diferentes tipos de datos, o por lo menos entre los m\'as usados. En general, la mayor parte de los programas trabaja bien con el formato NEXUS \cite{Maddison1997}, tanto para exportar como para importar, aunque el formato es en ocasiones muy diferente y algunos programas pueden no identificarlo correctamente. El otro formato importante es el de Hennig86 o NONA, pero en muchos programas, especialmente moleculares, su uso no est\'a implementado.
 
 Revise siempre la documentaci\'on del programa que desea usar y as\'i podr\'a estar seguro si el programa que va a utilizar cumple con los requisitos que usted necesita y cual es el formato de las matrices.
 
@@ -137,9 +129,6 @@ Revise la secci\'on de Programas de c\'omputo para ver los comandos que utilizar
 
 \end{enumerate}
 }
-
-
-
 
 
 \section*{Literatura recomendada}  

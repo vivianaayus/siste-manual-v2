@@ -1,0 +1,14 @@
+
+
+Hen86
+internal 5
+prefdiag
+changecost 1
+leading 5
+trailing 5
+time
+iter
+phylotime
+build
+score 7
+lowmem

@@ -1,0 +1,26 @@
+#NEXUS
+[Data written by write.nexus.data.R, Mon Nov 24 15:35:32 2014]
+BEGIN DATA;
+  DIMENSIONS NTAX=17 NCHAR=12;
+  FORMAT DATATYPE=DNA MISSING=? GAP=- INTERLEAVE=NO;
+  MATRIX
+    Drosophila_adiastola            441111332111
+    Drosophila_adunca               444411332211
+    Engiscaptomyza_crassifemur      441411332141
+    Drosophila_cyrtoloma            444411332111
+    Drosophila_disjuncta            441411332111
+    Drosophila_iki                  444411332111
+    Drosophila_lineosetae           441411332111
+    Drosophila_sp.                  444411332111
+    Drosophila_melanogaster         411111332141
+    Drosophila_mimica               424441332111
+    Drosophila_mulleri              444441332144
+    Drosophila_petalopeza           444411332111
+    Scaptomyza_albovittata          444411332111
+    Drosophila_silvestris           444411332111
+    Drosophila_soonae               444411132111
+    Drosophila_tanythrix            444411332211
+    Drosophila_dasycnemia           444411332111
+  ;
+END;
+

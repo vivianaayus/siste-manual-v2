@@ -1,0 +1,79 @@
+macro=;
+
+/* Bremer particionado
+   Hace primero una busqueda sensilla
+   Luego fuerza cada grupo y compara cada particion
+   El usuario debe indicar el numero de particiones
+*/
+
+if (argnumber<1)
+  quote ERROR: NO SE DEFINIERON PARTICONES!!;
+  p/;
+end;
+if (ntax<0)
+  quote ERROR: NO HAY DATOS!!;
+  p/;
+end;
+
+var=
+ 0 lonSinGrupo
+ + miBremer
+ + lonConGrupo
+;
+
+/* Primero busca el arbol optimo para los datos actuales */
+cc [ .;
+hold 102;
+collapse tbr;
+mult=tbr hold 1 replic 100; bb;
+nelsen *;			/* guarda el consenso que sirve de constriccion */
+tsave* miarb.tre;
+save {strict};
+tsave /;
+
+/* Define los tags */
+keep 0;
+pr miarb.tre;
+ttag -;
+ttag * 0;
+
+hold 25;
+macfloat 2;
+
+/* Recorre cada grupo del cladograma */
+loop (ntax+2) nnodes[0]
+  /* Recorre cada particion.. la busqueda es sensilla para hacerla rapida! */
+  loop 0 %1
+    cc ]. [@#2 .;
+    keep 0;
+    pr miarb.tre;
+    if (numdes [0 #1]==ntax)	/* Evita leer la raiz! */
+      continue;
+    end;
+    force + [@0 #1];
+    const=;
+    mult=replic 20 tbr; bb;
+    set lonConGrupo length[0];
+    keep 0;
+    pr miarb.tre;
+    force - [@0 #1];
+    const=;
+    mult=replic 20 tbr; bb;
+    set lonSinGrupo length[0];
+    set miBremer 'lonSinGrupo'-'lonConGrupo';
+    ttag +#1 #2:'miBremer' ;
+  stop;
+stop;
+
+log BremPart.txt;
+ttag /;
+log /;
+
+zzz;
+proc/;
+
+
+
+
+
+
